@@ -1,0 +1,765 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/Style.css" />
+    <title>DCTE</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="rMenu" class="right-menu">
+            <div class="r-menu-header">
+                <img class="menu-logo" src="~/Images/r-menu-logoT.bmp" />
+                <div class="c-name">Dark Cluster Group</div>
+            </div>
+            <div class="menu-list">
+                <div class="nav-menu-text">SIDEBAR NAVIGATION</div>
+                <ul id="mainMenu" class="menu-ul">
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/homepageIcon.bmp" />
+                            <div class="li-text">Main board</div>
+                            <form asp-action="MainBoard" asp-controller="Board" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons padlock" src="~/Images/padlock.png" />
+                            <div class="li-text">Check privileges</div>
+                            <form asp-action="ShowPrivileges" asp-controller="EmployeeInformation" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/earningsCoin.bmp" />
+                            <div class="li-text">Summary of earnings</div>
+                            <form asp-action="ShowEarnings" asp-controller="EmployeeInformation" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/order.bmp" />
+                            <div class="li-text">Make order</div>
+                            <form asp-action="MakeOrder" asp-controller="Application" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/profileph.png" />
+                            <div class="li-text">Manage employers account</div>
+                            <form asp-action="ManageEmployeesAccount" asp-controller="Application" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li id="presenceId" class="presenceLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/presence.bmp" />
+                            <div class="li-text">Presence confirmation</div>
+                            <img id="presenceIcon" class="arrow-icon-menu" src="~/Images/arrowMenu.bmp" />
+                        </div>
+                        <ul id="s-menu" class="sub-menu">
+                            <li id="lw-btn" class="odd">
+                                <div id="l7d" class="sub-menu-text">Last 7 days</div>
+                                <ul id="lw" class="expand">
+                                    <li id="lwLi1Id" class="lwLi">@Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 0, category = "work" }, new { @class = "defaultActionLink" })</li>
+                                    <li id="lwLi2Id" class="lwLi2">@Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 0, category = "break" }, new { @class = "defaultActionLink" })</li>
+                                </ul>
+                            </li>
+                            <li id="lm-btn" class="lmd">
+                                <div class="sub-menu-text">Last 30 days</div>
+                                <ul id="lm" class="expand">
+                                    <li id="lmLi1Id" class="lwLi">@Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })</li>
+                                    <li id="lmLi2Id" class="lwLi2">@Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 1, category = "break" }, new { @class = "defaultActionLink" })</li>
+                                </ul>
+                            </li>
+                            <li id="yesterday-btn" class="even">
+                                <div class="sub-menu-text">Yesterday</div>
+                                <ul id="yesterday" class="expand">
+                                    <li id="yLi1Id" class="yLi">@Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 2, category = "work" }, new { @class = "defaultActionLink" })</li>
+                                    <li id="yLi2Id" class="yLi2">@Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 2, category = "break" }, new { @class = "defaultActionLink" })</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="invoiceId" class="invoiceLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/invoice.bmp" />
+                            <div class="li-text">Invoice manager</div>
+                            <img id="invoiceIcon" class="arrow-icon-menu" src="~/Images/arrowMenu.bmp" />
+                        </div>
+                        <ul id="sMenuInvoice" class="sub-menu">
+                            <li id="invoiceBtn" class="inv">
+                                <a id="createInvoice" class="invoicea">@Html.ActionLink("Create invoice", "Invoice", "Customer", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })</a>
+                            </li>
+                            <li id="customerBtn" class="cus">
+                                <a id="createCustomer" class="invoicea">@Html.ActionLink("Create customer", "CreateCustomer", "Customer", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })</a>
+                            </li>
+                            <li id="allInvBtn" class="allInv">
+                                <a id="createCustomer" class="invoicea">@Html.ActionLink("Create customer", "MyInvoices", "Customer", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/TasksToDo.bmp" />
+                            <div class="li-text">Task schedule</div>
+                            <form asp-action="TaskSchedule" asp-controller="Schedule" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/ScheduledServiceWork.bmp" />
+                            <div class="li-text">Scheduled service works</div>
+                            <form asp-action="ScheduleServiceWorks" asp-controller="Application" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/acceptance.bmp" />
+                            <div class="li-text">Acceptance of the application</div>
+                            <form asp-action="AcceptanceApplication" asp-controller="Manage" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    <li class="main-menuLi">
+                        <div class="text">
+                            <img class="ul-icons" src="~/Images/reportRev.bmp" />
+                            <div class="li-text">Report emergency case</div>
+                            <form asp-action="ReportEmergencyCase" asp-controller="Application" method="get">
+                                <input class="invisibleI" type="submit" />
+                            </form>
+                        </div>
+                    </li>
+                    @*<li class="main-menuLi">
+                            <div class="text">
+                                <img class="ul-icons" src="~/Images/logout.bmp" />
+                                <div class="li-text">Logout</div>
+                                <form asp-action="Logout" asp-controller="Account" method="post">
+                                    <input class="invisibleI" type="submit" />
+                                </form>
+                            </div>
+                        </li>*@
+                </ul>
+            </div>
+        </div>
+        <div id="nbar" class="navbar">
+            <div id="menuBtn" class="menu-btn"></div>
+            @Html.Partial("BasicInfo")
+        </div>
+        <div id="cont" class="container">
+            <div id="Content-win" class="content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script>
+        var page = location.href.split("/").slice(-1);
+        var presenceMenu = document.getElementById("s-menu");
+        var presenceBtn = document.getElementById("presenceId");
+        var lwBtn = document.getElementById("lw-btn");
+        var lmBtn = document.getElementById("lm-btn");
+        var yesterdayBtn = document.getElementById("yesterday-btn");
+        var menuButton = document.getElementById('menuBtn');
+        var ul1 = document.getElementById('s-menu');
+        var listenerIsFree = true;
+        var subMenuOpen = false;
+        var whatsOpen = -1;
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            markPageMenu();
+            listenerIsFree = false;
+            var blocker = document.getElementById("blockerId");
+            await sleep(800);
+            if (blocker !== null) {
+                blocker.remove();
+            }
+            listenerIsFree = true;
+        });
+
+        function markPageMenu() {
+            var pattern = /[A-Za-z]+\b/;
+            var option = pattern.exec(page[0]);
+            var mark = document.createElement("div");
+            mark.className = "triangle";
+
+            switch (option[0]) {
+                case "MainBoard":
+                    document.getElementById("mainMenu").children.item(0).firstElementChild.appendChild(mark);
+                    whatsOpen = 0;
+                    break;
+                case "ShowPrivileges":
+                    document.getElementById("mainMenu").children.item(1).firstElementChild.appendChild(mark);
+                    whatsOpen = 1;
+                    break;
+                case "ShowEarnings":
+                    document.getElementById("mainMenu").children.item(2).firstElementChild.appendChild(mark);
+                    whatsOpen = 2;
+                    break;
+                case "MakeOrder":
+                    document.getElementById("mainMenu").children.item(3).firstElementChild.appendChild(mark);
+                    whatsOpen = 3;
+                    break;
+                case "ManageEmployeesAccount":
+                    document.getElementById("mainMenu").children.item(4).firstElementChild.appendChild(mark);
+                    whatsOpen = 4;
+                    break;
+                case "PresenceConfirmation":
+                    document.getElementById("mainMenu").children.item(5).firstElementChild.appendChild(mark);
+                    whatsOpen = 5;
+                    break;
+                case "Invoice":
+                    document.getElementById("mainMenu").children.item(6).firstElementChild.appendChild(mark);
+                    whatsOpen = 6;
+                    break;
+                case "CreateCustomer":
+                    document.getElementById("mainMenu").children.item(6).firstElementChild.appendChild(mark);
+                    whatsOpen = 6;
+                    break;
+                case "TaskSchedule":
+                    document.getElementById("mainMenu").children.item(7).firstElementChild.appendChild(mark);
+                    whatsOpen = 7;
+                    break;
+                case "ScheduleServiceWorks":
+                    document.getElementById("mainMenu").children.item(8).firstElementChild.appendChild(mark);
+                    whatsOpen = 8;
+                    break;
+                case "AcceptanceApplication":
+                    document.getElementById("mainMenu").children.item(9).firstElementChild.appendChild(mark);
+                    whatsOpen = 9;
+                    break;
+                case "ReportEmergencyCase":
+                    document.getElementById("mainMenu").children.item(10).firstElementChild.appendChild(mark);
+                    whatsOpen = 10;
+                    break;
+            }
+        }
+
+        menuButton.onclick = async function CloseOrOpenMenu() {
+            var menu = document.getElementById('rMenu');
+            var style = window.getComputedStyle(menu),
+                display = style.getPropertyValue('display');
+            var navbar = document.getElementById('nbar');
+
+            if (listenerIsFree) {
+                listenerIsFree = false;
+
+                if (display == "table") {
+                    nbar.style.width = "calc(100% - 15px)";
+                    menu.classList.remove('right-menu');
+                    menu.classList.add('right-menuOFF');
+                }
+                else {
+                    nbar.style.width = "calc(100% - 275px)";
+                    menu.classList.remove('right-menuOFF');
+                    menu.classList.add('right-menu');
+                }
+
+                await sleep(150);
+                listenerIsFree = true;
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        presenceBtn.onclick = async function ShowOrHide() {
+            var menuClass = lwBtn.classList.contains('odd');
+
+            if (listenerIsFree) {
+                listenerIsFree = false;
+                document.getElementById("presenceIcon").classList.add("rotate");
+                if (menuClass == true) {
+                    presenceMenu.classList.remove('sub-menu');
+                    presenceMenu.classList.add('sub-menu-open');
+
+                    lwBtn.classList.remove('odd');
+                    lwBtn.classList.add('oddA');
+
+                    lmBtn.classList.remove('lmd');
+                    lmBtn.classList.add('lmdA');
+
+                    yesterdayBtn.classList.remove('even');
+                    yesterdayBtn.classList.add('evenA');
+
+                    await sleep(280);
+                    ul1.classList.add('autoHeight');
+                    lwBtn.classList.add('autoHeight');
+                    lmBtn.classList.add('autoHeight');
+                    yesterdayBtn.classList.add('autoHeight');
+                }
+                else {
+                    debugger;
+                    CheckWhatsOpen();
+                    if (subMenuOpen) {
+                        await sleep(450);
+                    }
+
+                    if (document.getElementById("presenceIcon").classList.contains("rotate-static"))
+                        document.getElementById("presenceIcon").classList.remove("rotate-static");
+                    document.getElementById("presenceIcon").classList.remove("rotate");
+                    ul1.classList.remove('autoHeight');
+                    lwBtn.classList.remove('autoHeight');
+                    lmBtn.classList.remove('autoHeight');
+                    yesterdayBtn.classList.remove('autoHeight');
+                    await sleep(10);
+
+                    presenceMenu.classList.remove('sub-menu-open');
+                    presenceMenu.classList.add('sub-menu');
+
+                    lwBtn.classList.remove('oddA');
+                    lwBtn.classList.add('odd');
+
+                    lmBtn.classList.remove('lmdA');
+                    lmBtn.classList.add('lmd');
+
+                    yesterdayBtn.classList.remove('evenA');
+                    yesterdayBtn.classList.add('even');
+                }
+
+                await sleep(300);
+                listenerIsFree = true;
+            }
+
+        }
+
+        async function CheckWhatsOpen() {
+            var y = document.getElementById("yesterday");
+            var yMenu = y.classList.contains('expand');
+
+            var lm = document.getElementById("lm");
+            var lmMenu = lm.classList.contains('expand');
+
+            var lw = document.getElementById('lw');
+            var lwMenu = lw.classList.contains('expand');
+
+            if (!listenerIsFree) {
+                listenerIsFree = false;
+                if (!yMenu) {
+                    subMenuOpen = true;
+                    ExpandForYesterday();
+                }
+                else if (!lmMenu) {
+                    subMenuOpen = true;
+                    ExpandForLM();
+                }
+                else if (!lwMenu) {
+                    subMenuOpen = true;
+                    ExpandForLW();
+                }
+
+                await sleep(300);
+                subMenuOpen = false;
+            }
+        }
+
+        lwBtn.addEventListener("click", async function ExpandLiMenu(e) {
+            debugger;
+            if (e.target.className === 'blocker') {
+                e.stopPropagation();
+            }
+            else {
+                if (listenerIsFree) {
+                    listenerIsFree = false;
+
+                    ExpandForLW();
+
+                    await sleep(300);
+                    listenerIsFree = true;
+                }
+            }
+
+        });
+
+        lmBtn.addEventListener("click", async function ExpandLiMenu(e) {
+            debugger;
+            if (e.target.className === 'blocker') {
+                e.stopPropagation();
+            }
+            else {
+                if (listenerIsFree) {
+                    listenerIsFree = false;
+
+                    ExpandForLM();
+
+                    await sleep(300);
+                    listenerIsFree = true;
+                }
+            }
+
+        });
+
+        yesterdayBtn.addEventListener("click", async function ExpandLiMenu(e) {
+            debugger;
+            if (e.target.className === 'blocker') {
+                e.stopPropagation();
+            }
+            else {
+                if (listenerIsFree) {
+                    listenerIsFree = false;
+
+                    ExpandForYesterday();
+
+                    await sleep(300);
+                    listenerIsFree = true;
+                }
+            }
+
+        });
+
+        window.addEventListener('resize', function (event) {
+            var width = window.innerWidth;
+            var container = document.getElementById("cont");
+            var menu = document.getElementById('rMenu');
+            var style = window.getComputedStyle(menu),
+                display = style.getPropertyValue('display');
+            if (width < 1720 && display == "table") {
+                container.style.cssText = "margin-left: 250px";
+            }
+            else {
+                container.style.cssText = "margin: auto;";
+            }
+        });
+        async function ExpandForYesterday() {
+            var y = document.getElementById("yesterday");
+            var sMenuClass = y.classList.contains('expand');
+            var yLi1 = document.getElementById('yLi1Id');
+            var yLi2 = document.getElementById('yLi2Id');
+
+            if (sMenuClass == true) {
+                CheckWhatsOpen();
+                y.classList.remove('expand');
+                y.classList.add('expandA');
+                yLi1.classList.add('yLiA');
+                yLi2.classList.add('yLiA2');
+
+                await sleep(280);
+                y.classList.add('autoHeight');
+                yLi1.classList.add('autoHeight');
+                yLi2.classList.add('autoHeight');
+            }
+            else {
+                y.classList.remove('autoHeight');
+                yLi1.classList.remove('autoHeight');
+                yLi2.classList.remove('autoHeight');
+                await sleep(10);
+
+                y.classList.remove('expandA');
+                y.classList.add('expand');
+
+                yLi1.classList.remove('yLiA');
+                yLi1.classList.add('yLi');
+
+                yLi2.classList.remove('yLiA2');
+                yLi2.classList.add('yLi2');
+            }
+        };
+        async function ExpandForLM(e) {
+            var lm = document.getElementById("lm");
+            var sMenuClass = lm.classList.contains('expand');
+            var lmLi1 = document.getElementById('lmLi1Id');
+            var lmLi2 = document.getElementById('lmLi2Id');
+
+            if (sMenuClass == true) {
+                CheckWhatsOpen();
+                lm.classList.remove('expand');
+                lm.classList.add('expandA');
+                lmLi1.classList.add('lwLiA');
+                lmLi2.classList.add('lwLiA2');
+
+                await sleep(280);
+                lm.classList.add('autoHeight');
+                lmLi1.classList.add('autoHeight');
+                lmLi2.classList.add('autoHeight');
+            }
+            else {
+                lm.classList.remove('autoHeight');
+                lmLi1.classList.remove('autoHeight');
+                lmLi2.classList.remove('autoHeight');
+                await sleep(10);
+
+                lm.classList.remove('expandA');
+                lm.classList.add('expand');
+
+                lmLi1.classList.remove('lwLiA');
+                lmLi1.classList.add('lwLi');
+
+                lmLi2.classList.remove('lwLiA2');
+                lmLi2.classList.add('lwLi2');
+            }
+        };
+        async function ExpandForLW() {
+            var lw = document.getElementById('lw');
+            var sMenuClass = lw.classList.contains('expand');
+            var lwLi1 = document.getElementById('lwLi1Id');
+            var lwLi2 = document.getElementById('lwLi2Id');
+
+            if (sMenuClass == true) {
+                CheckWhatsOpen();
+                lw.classList.remove('expand');
+                lw.classList.add('expandA');
+                lwLi1.classList.add('lwLiA');
+                lwLi2.classList.add('lwLiA2');
+
+                await sleep(300);
+                lw.classList.add('autoHeight');
+                lwLi1.classList.add('autoHeight');
+                lwLi2.classList.add('autoHeight');
+            }
+            else {
+                lw.classList.remove('autoHeight');
+                lwLi1.classList.remove('autoHeight');
+                lwLi2.classList.remove('autoHeight');
+                await sleep(40);
+
+                lw.classList.remove('expandA');
+                lw.classList.add('expand');
+
+                lwLi1.classList.remove('lwLiA');
+                lwLi1.classList.add('lwLi');
+
+                lwLi2.classList.remove('lwLiA2');
+                lwLi2.classList.add('lwLi2');
+            }
+        };
+        //invoice
+
+        presenceBtn.onclick = async function ShowOrHide() {
+            var menuClass = lwBtn.classList.contains('odd');
+
+            if (listenerIsFree) {
+                listenerIsFree = false;
+                document.getElementById("presenceIcon").classList.add("rotate");
+                if (menuClass == true) {
+                    debugger;
+                    CheckOpensThenClose();
+                    whatsOpen = 5;
+                    presenceMenu.classList.remove('sub-menu');
+                    presenceMenu.classList.add('sub-menu-open');
+
+                    lwBtn.classList.remove('odd');
+                    lwBtn.classList.add('oddA');
+
+                    lmBtn.classList.remove('lmd');
+                    lmBtn.classList.add('lmdA');
+
+                    yesterdayBtn.classList.remove('even');
+                    yesterdayBtn.classList.add('evenA');
+
+                    await sleep(280);
+                    ul1.classList.add('autoHeight');
+                    lwBtn.classList.add('autoHeight');
+                    lmBtn.classList.add('autoHeight');
+                    yesterdayBtn.classList.add('autoHeight');
+                }
+                else {
+                    whatsOpen = -1;
+                    CheckWhatsOpen();
+                    if (subMenuOpen) {
+                        await sleep(450);
+                    }
+
+                    if (document.getElementById("presenceIcon").classList.contains("rotate-static"))
+                        document.getElementById("presenceIcon").classList.remove("rotate-static");
+                    document.getElementById("presenceIcon").classList.remove("rotate");
+                    ul1.classList.remove('autoHeight');
+                    lwBtn.classList.remove('autoHeight');
+                    lmBtn.classList.remove('autoHeight');
+                    yesterdayBtn.classList.remove('autoHeight');
+                    await sleep(10);
+
+                    presenceMenu.classList.remove('sub-menu-open');
+                    presenceMenu.classList.add('sub-menu');
+
+                    lwBtn.classList.remove('oddA');
+                    lwBtn.classList.add('odd');
+
+                    lmBtn.classList.remove('lmdA');
+                    lmBtn.classList.add('lmd');
+
+                    yesterdayBtn.classList.remove('evenA');
+                    yesterdayBtn.classList.add('even');
+                }
+
+                await sleep(300);
+                listenerIsFree = true;
+            }
+
+        }
+        var customerBtn = document.getElementById("customerBtn");
+        var invoiceId = document.getElementById("invoiceId");
+        var invoiceBtn = document.getElementById("invoiceBtn");
+        var invoiceMenu = document.getElementById("sMenuInvoice");
+
+
+        invoiceId.onclick = async function ShowOrHideInvoice() {
+            var menuClass = invoiceBtn.classList.contains('inv');
+
+            if (listenerIsFree) {
+                listenerIsFree = false;
+                document.getElementById("invoiceIcon").classList.add("rotate");
+                if (menuClass == true) {
+                    debugger;
+                    CheckOpensThenClose();
+                    whatsOpen = 6;
+                    invoiceMenu.classList.remove('sub-menu');
+                    invoiceMenu.classList.add('sub-menu-open-inv');
+
+                    invoiceBtn.classList.remove('inv');
+                    invoiceBtn.classList.add('invA');
+
+                    customerBtn.classList.remove('cus');
+                    customerBtn.classList.add('cusA');
+
+                    await sleep(280);
+                    invoiceMenu.classList.add('autoHeight');
+                    invoiceBtn.classList.add('autoHeight');
+                    customerBtn.classList.add('autoHeight');
+                }
+                else {
+                    whatsOpen = -1;
+                    if (document.getElementById("invoiceIcon").classList.contains("rotate-static"))
+                        document.getElementById("invoiceIcon").classList.remove("rotate-static");
+                    document.getElementById("invoiceIcon").classList.remove("rotate");
+                    invoiceMenu.classList.remove('autoHeight');
+                    invoiceBtn.classList.remove('autoHeight');
+                    invoiceBtn.classList.remove('autoHeight');
+                    await sleep(10);
+
+                    invoiceMenu.classList.remove('sub-menu-open-inv');
+                    invoiceMenu.classList.add('sub-menu');
+
+                    invoiceBtn.classList.remove('invA');
+                    invoiceBtn.classList.add('inv');
+
+                    customerBtn.classList.remove('cusA');
+                    customerBtn.classList.add('cus');
+                }
+
+                await sleep(300);
+                listenerIsFree = true;
+            }
+
+        }
+        // close other on open
+
+        function CheckOpensThenClose() {
+            switch (whatsOpen) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    ClosePresence();
+                    break;
+                case 6:
+                    CloseInvoice();
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case -1:
+                    break
+            }
+        }
+
+        async function ClosePresence() {
+            var menuClass = lwBtn.classList.contains('odd');
+
+            if (menuClass != true) {
+                listenerIsFree = false;
+                CheckWhatsOpen();
+                debugger;
+                if (subMenuOpen) {
+                    await sleep(350);
+                }
+                if (document.getElementById("presenceIcon").classList.contains("rotate-static"))
+                    document.getElementById("presenceIcon").classList.remove("rotate-static");
+                document.getElementById("presenceIcon").classList.remove("rotate");
+                ul1.classList.remove('autoHeight');
+                lwBtn.classList.remove('autoHeight');
+                lmBtn.classList.remove('autoHeight');
+                yesterdayBtn.classList.remove('autoHeight');
+                await sleep(100);
+
+                presenceMenu.classList.remove('sub-menu-open');
+                presenceMenu.classList.add('sub-menu');
+
+                lwBtn.classList.remove('oddA');
+                lwBtn.classList.add('odd');
+
+                lmBtn.classList.remove('lmdA');
+                lmBtn.classList.add('lmd');
+
+                yesterdayBtn.classList.remove('evenA');
+                yesterdayBtn.classList.add('even');
+                await sleep(100);
+                listenerIsFree = true;
+            }
+        }
+
+        async function CloseInvoice() {
+            var menuClass = invoiceBtn.classList.contains('inv');
+
+            if (menuClass != true) {
+                listenerIsFree = false;
+                if (document.getElementById("invoiceIcon").classList.contains("rotate-static"))
+                    document.getElementById("invoiceIcon").classList.remove("rotate-static");
+                document.getElementById("invoiceIcon").classList.remove("rotate");
+                invoiceMenu.classList.remove('autoHeight');
+                invoiceBtn.classList.remove('autoHeight');
+                invoiceBtn.classList.remove('autoHeight');
+                await sleep(10);
+
+                invoiceMenu.classList.remove('sub-menu-open-inv');
+                invoiceMenu.classList.add('sub-menu');
+
+                invoiceBtn.classList.remove('invA');
+                invoiceBtn.classList.add('inv');
+
+                customerBtn.classList.remove('cusA');
+                customerBtn.classList.add('cus');
+            }
+
+            await sleep(300);
+            listenerIsFree = true;
+        }
+        function ExpandInvoiceCategory() {
+            var customerBtn = document.getElementById("customerBtn");
+            var invoiceId = document.getElementById("invoiceId");
+            var invoiceBtn = document.getElementById("invoiceBtn");
+            var invoiceMenu = document.getElementById("sMenuInvoice");
+
+            invoiceMenu.classList = "sub-menu-open-inv autoHeight";
+            invoiceBtn.classList = "invA autoHeight";
+            customerBtn.classList = "autoHeight cusA";
+        }
+    </script>
+</body>
+</html>

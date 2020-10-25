@@ -1,0 +1,11 @@
+﻿@model RoleChangerModel
+@{
+    Layout = "_LoggedUserLayout";
+}
+
+    <form asp-action="Edit" asp-controller="RoleAdmin" method="post">
+        <input asp-for="Username" />
+        <input asp-for="RoleName" />
+        <button type="submit">Change role</button>
+    </form>
+

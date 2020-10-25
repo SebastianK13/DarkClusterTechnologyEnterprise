@@ -1,0 +1,40 @@
+﻿@model PrivilegesViewModel
+@{
+    Layout = "_LoggedUserLayout";
+}
+<body>
+    <div class="table-container">
+        <table class="redTable">
+            <thead>
+                <tr>
+                    <th>Login</th>
+                    <th>Privileges</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <div page-model="@Model.PagesInfo" page-action="ShowPrivileges" page-class-enabled="true"
+                             page-class="active" page-clas-normal="active"
+                             page-class-selected="active" class="links"></div>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var m in Model.Employee)
+                {
+                    <tr>
+                        <td>@m.Login</td>
+                        <td>@m.RoleName</td>
+                        <td>@m.Firstname</td>
+                        <td>@m.Lastname</td>
+                        <td>@m.DepartmentName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>

@@ -1,0 +1,36 @@
+﻿@model LoginModel
+@{
+    Layout = "_UnloggedUserLayout";
+}
+<head>
+    <meta charset="utf-8">
+    <title>Dark Cluster Technology Enterprise</title>
+    <meta name="description" content="Dark Cluster Technology Enterprise">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" type="text/css" href="~/Css/Style.css">
+    <script type="text/javascript" src="~/JavaScript/JavaScript.js"></script>
+</head>
+<body>
+    <div id="log" class="log-window">
+        <div class="window-content">
+            <div class="autorize">
+                <p id="wLH" class="window-login-header">Authorize your account<p>
+            </div>
+            <div class="log-win-cont">
+                <form asp-action="Login" asp-controller="Account" method="post">
+                    <div class="username">
+                        <label class="nameL">Username:</label>
+                        <input asp-for="Name" class="nameI" autocomplete="off" spellcheck="false"/>
+                    </div>
+                    <div class="password">
+                        <label class="passwordL">Password:</label>
+                        <input asp-for="Password" class="passwordI" />
+                    </div>
+                    <div id="submitSection">
+                        <input type="submit" value="">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

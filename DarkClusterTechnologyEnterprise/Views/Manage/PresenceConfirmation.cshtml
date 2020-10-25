@@ -1,0 +1,733 @@
+﻿@model PresenceViewModel
+@{
+    Layout = "_LoggedUserLayout";
+    string category = ViewBag.Cat;
+    int option = ViewBag.Opt;
+}
+
+<body>
+    @*<div class="presence-navigation">
+            <div class="navigation">
+                Statistics
+            </div>
+            <div>
+                Break
+            </div>
+        </div>*@
+    <div class="presence-section">
+        <div class="timer">
+            <div id="timer"></div>
+        </div>
+        <form asp-controller="Manage" asp-action="PresenceConfirmation" method="post">
+            <div id="begin" class="begin-btn">
+                Start
+                <input class="presence-btns" type="submit" name="begin" value="true" />
+            </div>
+            <div class="break-btn">
+                <p id="break-Id">Break</p>
+                <input class="presence-btns" type="submit" name="break_w" value="true" />
+            </div>
+            <div id="end" class="stop-btn">
+                End
+                <input class="presence-btns" type="submit" name="stop" value="true" />
+            </div>
+        </form>
+    </div>
+    @*<div class="presence-navigation-section">
+            <div class="navigation">
+                <ul class="presence-menu">
+                    <li id="lw-btn" class="odd">
+                        Last 7 days
+                        <div id="lw" class="expand">
+                            @Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 0, category = "work" }, new { @class = "defaultActionLink" })
+                            @Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 0, category = "break" }, new { @class = "defaultActionLink" })
+                        </div>
+                    </li>
+                    <li id="lm-btn" class="odd">
+                        Last 30 days
+                        <div id="lm" class="expand">
+                            @Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })
+                            @Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 1, category = "break" }, new { @class = "defaultActionLink" })
+                        </div>
+                    </li>
+                    <li id="yesterday-btn" class="even">
+                        Yesterday
+                        <div id="yesterday" class="expand">
+                            @Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 2, category = "work" }, new { @class = "defaultActionLink" })
+                            @Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 2, category = "break" }, new { @class = "defaultActionLink" })
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>*@
+    <div id="graph" class="graph-section">
+        <div class="yaxis">
+            <ul class="yaxis-list">
+                <li>24</li>
+                <li>22</li>
+                <li>20</li>
+                <li>18</li>
+                <li>16</li>
+                <li>14</li>
+                <li>12</li>
+                <li>10</li>
+                <li>8</li>
+                <li>6</li>
+                <li>4</li>
+                <li>2</li>
+                <li>0</li>
+            </ul>
+        </div>
+        <div class="lines">
+            <ul class="lines-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="graph"></div>
+        <div class="xaxis">
+            <ul id="xaxis" class="xaxis-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="arrows">
+            <input id="data-part" type="hidden" value="0" />
+            <div id="left-arrow" class="left-arr"></div>
+            <div id="right-arrow" class="right-arr"></div>
+        </div>
+        <div class="graph-measure">
+            <ul id="measureL" class="measures-list">
+                <li>
+                    <div id="a">
+                    </div>
+                    <div id="a-avg"></div>
+                </li>
+                <li>
+                    <div id="b"></div>
+                    <div id="b-avg"></div>
+                </li>
+                <li>
+                    <div id="c"></div>
+                    <div id="c-avg"></div>
+                </li>
+                <li>
+                    <div id="d"></div>
+                    <div id="d-avg"></div>
+                </li>
+                <li>
+                    <div id="e"></div>
+                    <div id="e-avg"></div>
+                </li>
+                <li>
+                    <div id="f"></div>
+                    <div id="f-avg"></div>
+                </li>
+                <li>
+                    <div id="g"></div>
+                    <div id="g-avg"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+<script>
+    var presence = @Html.Raw(Json.Serialize(Model.DataModel));
+    var avgPresence = @Html.Raw(Json.Serialize(Model.AvgPresences));
+    var avgBreaks = @Html.Raw(Json.Serialize(Model.AvgBreaks));
+    var presenceCount = @Html.Raw(Json.Serialize(Model.Presences.Count()));
+    var worktime = JSON.parse('@Html.Raw(Json.Serialize(Model.Seconds))');
+    var breakActive = JSON.parse('@Html.Raw(Json.Serialize(Model.BreakActive))');
+    var totalSeconds = worktime;
+    var dates = [];
+    var durations = [];
+    var range = presence.length;
+    var category = "work";
+    var index = 0;
+    var option = 0;
+    if (presence != null) {
+
+    }
+    var presenceDiv = document.getElementById("presenceId").children.item(1);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        category = @Html.Raw(Json.Serialize(category));
+        option = @Html.Raw(Json.Serialize(option));
+
+        document.getElementById("presenceIcon").classList.add("rotate-static");
+        ExpandCategory();
+    });
+
+    window.onload = function () {
+        debugger;
+        if (breakActive) {
+            document.getElementById('break-Id').innerHTML = "Stop";
+        }
+        else {
+            document.getElementById('break-Id').innerHTML = "Break";
+        }
+        if (worktime > -1) {
+            if (breakActive) {
+                totalSeconds = JSON.parse('@Html.Raw(Json.Serialize(Model.BreakLength))');
+            }
+            var timerVar = setInterval(countTimer, 1000);
+            document.getElementById('begin').innerHTML = "Start";
+        }
+        else {
+            document.getElementById("timer").innerHTML = "00" + ":" + "00" + ":" + "00";
+            document.getElementById('end').innerHTML = "End";
+        }
+
+        if (option != 2) {
+            UpdateGraph();
+            range = dates.length;
+            BarCreator();
+        }
+        else {
+            UpdateGraph();
+            range = 1;
+            BarCreator();
+        }
+
+        if (option == 1) {
+            document.getElementById("right-arrow").style.display = "block";
+        }
+
+    };
+
+
+
+    function ExpandCategory() {
+        debugger;
+        presenceDiv.classList = ("sub-menu-open autoHeight");
+        var classList = ['oddA autoHeight', 'lmdA autoHeight', 'evenA autoHeight'];
+
+        for (var i = 0; i <= 2; i++) {
+            presenceDiv.children.item(i).className = classList[i];
+        }
+
+        var mark = document.createElement("div");
+        mark.className = "triangle";
+        var elemNum = 0;
+        if (category == "break")
+            elemNum = 1;
+        presenceDiv = presenceDiv.children.item(option).lastElementChild;
+
+        var transparentBlocker = document.createElement("div");
+        transparentBlocker.id = "blockerId";
+        transparentBlocker.className = "blocker";
+
+        presenceDiv.className = "expandA autoHeight";
+        presenceDiv.children.item(0).className = "lwLi lwLiA autoHeight";
+        presenceDiv.children.item(0).appendChild(transparentBlocker);
+        presenceDiv.children.item(1).className = "lwLi2 lwLiA2 autoHeight";
+    }
+
+    //document.getElementById("blockerId").addEventListener("click", shit);
+
+    //document.addEventListener('click', function (e) {
+    //    debugger;
+        //if (e.target.className === 'blocker') {
+        //    e.stopPropagation();
+        //}
+        //else {
+            
+    //    }
+    //}, false);
+
+    var iPart = document.getElementById("data-part");
+    var numberOfParts = parseInt(iPart.getAttribute("value"));
+    var lArr = document.getElementById("left-arrow");
+    var rArr = document.getElementById("right-arrow");
+    //var todayBtn = document.getElementById("today-btn");
+    var a = document.getElementById("a");
+    var aAvg = document.getElementById("a-avg");
+    var b = document.getElementById("b");
+    var bAvg = document.getElementById("b-avg");
+    var c = document.getElementById("c");
+    var cAvg = document.getElementById("c-avg");
+    var d = document.getElementById("d");
+    var dAvg = document.getElementById("d-avg");
+    var e = document.getElementById("e");
+    var eAvg = document.getElementById("e-avg");
+    var f = document.getElementById("f");
+    var fAvg = document.getElementById("f-avg");
+    var g = document.getElementById("g");
+    var gAvg = document.getElementById("g-avg");
+
+    function TransformMinToHours(workTime) {
+        var hour = Math.floor(workTime /3600);
+        var minute = Math.floor((workTime - hour * 3600) / 60);
+        if (hour < 24 && workTime>60) {
+            var time ="Total time: \n" + hour + "h" + minute + "m";
+        }
+        else {
+            var time = "Total time: \n N/a";
+        }
+
+        return time;
+    }
+
+    a.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (presence[0 + index].workTime);
+        }
+        else {
+            workTime = (presence[0 + index].breakTime);
+        }
+
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "aId";
+        info.innerText = result;
+        a.appendChild(info);
+    });
+
+    aAvg.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (avgPresence[0 + index].avgTime);
+        }
+        else {
+            workTime = (avgBreaks[0 + index].avgBreakTime);
+        }
+
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "aAId";
+        info.innerText = result;
+        aAvg.appendChild(info);
+    });
+
+    b.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (presence[1 + index].workTime);
+        }
+        else {
+            workTime = (presence[1 + index].breakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "bId";
+        info.innerText = result;
+        b.appendChild(info);
+    });
+
+    bAvg.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (avgPresence[1 + index].avgTime);
+        }
+        else {
+            workTime = (avgBreaks[1 + index].avgBreakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "bAId";
+        info.innerText = result;
+        bAvg.appendChild(info);
+    });
+
+    c.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (presence[2 + index].workTime);
+        }
+        else {
+            workTime = (presence[2 + index].breakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "cId";
+        info.innerText = result;
+        c.appendChild(info);
+    });
+
+    cAvg.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (avgPresence[2 + index].avgTime);
+        }
+        else {
+            workTime = (avgBreaks[2 + index].avgBreakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "cAId";
+        info.innerText = result;
+        cAvg.appendChild(info);
+    });
+
+    d.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (presence[3 + index].workTime);
+        }
+        else {
+            workTime = (presence[3 + index].breakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "dId";
+        info.innerText = result;
+        d.appendChild(info);
+    });
+
+    dAvg.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (avgPresence[3 + index].avgTime);
+        }
+        else {
+            workTime = (avgBreaks[3 + index].avgBreakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "dAId";
+        info.innerText = result;
+        dAvg.appendChild(info);
+    });
+
+    e.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (presence[4 + index].workTime);
+        }
+        else {
+            workTime = (presence[4 + index].breakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "eId";
+        info.innerText = result;
+        e.appendChild(info);
+    });
+
+    eAvg.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (avgPresence[4 + index].avgTime);
+        }
+        else {
+            workTime = (avgBreaks[4 + index].avgBreakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "eAId";
+        info.innerText = result;
+        eAvg.appendChild(info);
+    });
+
+    f.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (presence[5 + index].workTime);
+        }
+        else {
+            workTime = (presence[5 + index].breakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "fId";
+        info.innerText = result;
+        f.appendChild(info);
+    });
+
+    fAvg.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (avgPresence[5 + index].avgTime);
+        }
+        else {
+            workTime = (avgBreaks[5 + index].avgBreakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "fAId";
+        info.innerText = result;
+        fAvg.appendChild(info);
+    });
+
+    g.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (presence[6 + index].workTime);
+        }
+        else {
+            workTime = (presence[6 + index].breakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "gId";
+        info.innerText = result;
+        g.appendChild(info);
+    });
+
+    gAvg.addEventListener("mouseenter", function () {
+        var workTime = 0;
+        if (category == "work") {
+            workTime = (avgPresence[6 + index].avgTime);
+        }
+        else {
+            workTime = (avgBreaks[6 + index].avgBreakTime);
+        }
+        var result = TransformMinToHours(workTime);
+        var info = document.createElement('div');
+        info.className = "graph-info";
+        info.id = "gAId";
+        info.innerText = result;
+        gAvg.appendChild(info);
+    });
+
+    a.addEventListener("mouseleave", function () {
+        var info = document.getElementById('aId').remove();
+    });
+
+    aAvg.addEventListener("mouseleave", function () {
+        var info = document.getElementById('aAId').remove();
+    });
+
+    b.addEventListener("mouseleave", function () {
+        var info = document.getElementById('bId').remove();
+    });
+
+    bAvg.addEventListener("mouseleave", function () {
+        var info = document.getElementById('bAId').remove();
+    });
+
+    c.addEventListener("mouseleave", function () {
+        var info = document.getElementById('cId').remove();
+    });
+
+    cAvg.addEventListener("mouseleave", function () {
+        var info = document.getElementById('cAId').remove();
+    });
+
+    d.addEventListener("mouseleave", function () {
+        var info = document.getElementById('dId').remove();
+    });
+
+    dAvg.addEventListener("mouseleave", function () {
+        var info = document.getElementById('dAId').remove();
+    });
+
+    e.addEventListener("mouseleave", function () {
+        var info = document.getElementById('eId').remove();
+    });
+
+    eAvg.addEventListener("mouseleave", function () {
+        var info = document.getElementById('eAId').remove();
+    });
+
+    f.addEventListener("mouseleave", function () {
+        var info = document.getElementById('fId').remove();
+    });
+
+    fAvg.addEventListener("mouseleave", function () {
+        var info = document.getElementById('fAId').remove();
+    });
+
+    g.addEventListener("mouseleave", function () {
+        var info = document.getElementById('gId').remove();
+    });
+
+    gAvg.addEventListener("mouseleave", function () {
+        var info = document.getElementById('gAId').remove();
+    });
+
+    lArr.onclick = function PrevoiusPart() {
+        if (numberOfParts > 0) {
+            numberOfParts -= 1;
+            iPart.setAttribute("value", numberOfParts);
+            if (numberOfParts >= 0) {
+                rArr.style.display = "block";
+            }
+            if (numberOfParts <= 0) {
+                lArr.style.display = "none";
+            }
+            BarCreator();
+        }
+    };
+
+    rArr.onclick = function NextPart() {
+        if (numberOfParts < 4) {
+            numberOfParts += 1;
+            iPart.setAttribute("value", numberOfParts);
+            if (numberOfParts >= 4) {
+                rArr.style.display = "none";
+            }
+            if (numberOfParts >= 0) {
+                lArr.style.display = "block";
+            }
+            BarCreator();
+        }
+    };
+
+    //todayBtn.onmouseenter = function ExpandLiMenu() {
+    //    var li = document.getElementById("today").style.display = "block";
+    //};
+
+    //lmBtn.onmouseleave = function CloseMenuLi() {
+    //    var li = document.getElementById("lm").style.display = "none";
+    //};
+
+    //lwBtn.onmouseleave = function CloseMenuLi() {
+    //    var li = document.getElementById("lw").style.display = "none";
+    //};
+
+    //yesterdayBtn.onmouseleave = function CloseMenuLi() {
+    //    var li = document.getElementById("yesterday").style.display = "none";
+    //};
+
+    //todayBtn.onmouseleave = function CloseMenuLi() {
+    //    var li = document.getElementById("today").style.display = "none";
+    //};
+
+    function BarCreator() {
+        CountPart();
+        if (category == "work") {
+            CreateWorkTimeBars();
+        }
+        else if (category == "break") {
+            CreateBreakBars();
+        }
+    }
+    function countTimer() {
+        ++totalSeconds;
+        var hour = Math.floor(totalSeconds /3600);
+        var minute = Math.floor((totalSeconds - hour*3600)/60);
+        var seconds = totalSeconds - (hour*3600 + minute*60);
+        if(hour < 10)
+           hour = "0"+hour;
+        if(minute < 10)
+           minute = "0"+minute;
+        if(seconds < 10)
+           seconds = "0"+seconds;
+        document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+    }
+    function UpdateGraph() {
+        var i = 0;
+        for (var p of presence) {
+            var hour = Math.floor(p.workTime /3600);
+            var minute = Math.floor((p.workTime - hour * 3600) / 60);
+            var time = hour+"h"+minute+"m";
+            var date = p.workBeginTime;
+            var arr = JSON.stringify(date).split('T');
+            dates[i] = arr[0].toString().replace('"', '');
+            durations[i] = time;
+            i++;
+        }
+    }
+    function CreateWorkTimeBars() {
+        var ids = ["a", "b", "c", "d", "e", "f", "g"];
+        var idsAvg = ["a-avg", "b-avg", "c-avg", "d-avg", "e-avg", "f-avg", "g-avg"];
+        if (range > 6)
+            range = 7;
+        for (i = 0; i < range; i++) {
+            var heightBar = (presence[i + index].workTime) / 864;
+            var heightBarAvg = (avgPresence[i + index].avgTime) / 864;
+            var nodeXaxis = document.getElementById('xaxis').children.item(i).textContent = dates[i + index];
+            if (heightBar <= 0 || heightBar > 100) {
+                var nodeXBars = document.getElementById(ids[i]).textContent = "N/a";
+                var nodeXBars = document.getElementById(ids[i]).style.height = "18px";
+            }
+            else
+            {
+                var nodeXBars = document.getElementById(ids[i]).style.transition = "1s height";
+                var nodeXBars = document.getElementById(ids[i]).style.height = heightBar + "%";
+                var nodeXBars = document.getElementById(ids[i]).textContent = "";
+            }
+            if (heightBarAvg <= 0 || heightBarAvg > 100) {
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).textContent = "N/a";
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).style.height = "18px";
+            }
+            else {
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).style.transition = "1s height";
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).style.height = heightBarAvg + "%";
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).textContent = "";
+            }
+        }
+    }
+    function CreateBreakBars() {
+
+        var ids = ["a", "b", "c", "d", "e", "f", "g"];
+        var idsAvg = ["a-avg", "b-avg", "c-avg", "d-avg", "e-avg", "f-avg", "g-avg"];
+            if (range > 6)
+                range = 7;
+        for (i = 0; i < range; i++) {
+            var heightBar = (presence[i + index].breakTime) / 864;
+            var heightBarAvg = (avgBreaks[i + index].avgBreakTime) / 864;
+            var nodeXaxis = document.getElementById('xaxis').children.item(i).textContent = dates[i + index];
+            if (heightBar <= 0 || heightBar > 100) {
+                var nodeXBars = document.getElementById(ids[i]).textContent = "N/a";
+                var nodeXBars = document.getElementById(ids[i]).style.height = "18px";
+            }
+            else
+            {
+                var nodeXBars = document.getElementById(ids[i]).style.transition = "1s height";
+                var nodeXBars = document.getElementById(ids[i]).style.height = heightBar + "%";
+                var nodeXBars = document.getElementById(ids[i]).textContent = "";
+            }
+            if (heightBarAvg <= 0 || heightBarAvg > 100) {
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).textContent = "N/a";
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).style.height = "18px";
+            }
+            else {
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).style.transition = "1s height";
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).style.height = heightBarAvg + "%";
+                var nodeXBarsAvg = document.getElementById(idsAvg[i]).textContent = "";
+            }
+        }
+    }
+    function CountPart() {
+        switch (numberOfParts) {
+            case 0:
+                index = 1;
+                break;
+            case 1:
+                index = 8;
+                break;
+            case 2:
+                index = 15;
+                break;
+            case 3:
+                index = 22;
+                break;
+            case 4:
+                index = 24;
+                break;
+        }
+    }
+</script>

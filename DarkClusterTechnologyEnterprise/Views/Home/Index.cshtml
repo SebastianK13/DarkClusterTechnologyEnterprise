@@ -1,0 +1,74 @@
+﻿@model LoginModel
+@{
+    Layout = "_UnloggedUserLayout";
+}
+<head>
+    <meta charset="utf-8">
+    <title>Dark Cluster Technology Enterprise</title>
+    <meta name="description" content="Dark Cluster Technology Enterprise">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" type="text/css" href="~/Css/Style.css">
+    <script type="text/javascript" src="~/JavaScript/JavaScript.js"></script>
+</head>
+<body>
+    <div id="log" class="log-window-hide">
+        <div class="window-content">
+            <div class="autorize">
+                <p id="wLH" class="window-login-header">Account veryfication
+                <p>
+            </div>
+            <div id="progress" class="progress-bar">
+                <div id="progress-counter" class="progression"></div>
+            </div>
+            <div id="percent" class="percentage"></div>
+        </div>
+    </div>
+    <script>
+        var isLogged = @User.Identity.IsAuthenticated.ToString().ToLower();
+        document.addEventListener('DOMContentLoaded', function () {
+            var logNode = document.getElementById("log");
+            logNode.className = "log-window";
+            var timeleft = 0;
+            var progression = setInterval(function(){
+              if(timeleft >= 99){
+                clearInterval(progression);
+              }
+              document.getElementById("percent").textContent = timeleft+1+'%' ;
+                timeleft += 1;
+                if (timeleft == 100)
+                    CheckAutorization();
+            }, 19);
+
+
+            function CheckAutorization() {
+                if (!isLogged) {
+                    RemoveProgressBar();
+                    var progressNode = document.getElementById("progress");
+                    var loginHeaderNode = document.getElementById("wLH");
+                    progressNode.className = "information-auth";
+                    progressNode.textContent = "Failed";
+                    loginHeaderNode.classList.add("Alert");
+                    document.getElementById("logo").style.backgroundImage = "url(../Images/DCTELogoUnver.bmp)";
+                }
+                else {
+                    RemoveProgressBar();
+                    var progressNode = document.getElementById("progress");
+                    var loginHeaderNode = document.getElementById("wLH");
+                    progressNode.className = "information-auth-success";
+                    progressNode.textContent = "Access granted";
+                    loginHeaderNode.classList.add("Passed");
+                    document.getElementById("logo").style.backgroundImage = "url(../Images/DCTELogo.bmp)";
+                }
+                window.setTimeout(function () {
+                    window.location.href = "/Board/MainBoard";
+                }, 2000);
+            }
+        }, false);
+        function RemoveProgressBar() {
+            var barNode = document.getElementById("progress-counter");
+            var percentNode = document.getElementById("percent");
+            barNode.remove();
+            percentNode.remove();
+        }
+    </script>
+</body>

@@ -1,0 +1,76 @@
+﻿@model DarkClusterTechnologyEnterprise.Models.ViewModels.CustomerInfo
+
+@{
+    Layout = "_LoggedUserLayout";
+}
+<body>
+    <div class="invoice-section">
+        <div class="invoice-section-header">
+            <img class="invoice-section-img" src="~/Images/invoiceIconGray.bmp" />
+            <div class="text-invoice">Create customer</div>
+        </div>
+        <div class="invoice-data">
+            <div class="customer border-off">
+                <form asp-action="CreateCustomer" asp-controller="Customer" method="post">
+                    <div class="create-name">
+                        <div class="customer-email-text">Customer name:</div>
+                        <div class="errMsg">
+                            @Html.ValidationMessageFor(x => x.CustomerName)
+                            <input asp-for="CustomerName" class="customer-email-field active-field" name="CustomerName" />
+                        </div>
+                    </div>
+                    <div class="customer-email">
+                        <div class="customer-email-text">Email address:</div>
+                        <div class="errMsg">
+                            @Html.ValidationMessageFor(x => x.Email)
+                            <input asp-for="Email" class="customer-email-field active-field" name="Email" />
+                        </div>
+                    </div>
+                    <div class="customer-address">
+                        <div class="address-line">
+                            <div class="customer-address-text">Address:</div>
+                            <div class="errMsg">
+                                @Html.ValidationMessageFor(x => x.StreetAddress)
+                                <input asp-for="StreetAddress" class="customer-address-field active-field" name="StreetAddress" />
+                            </div>
+                        </div>
+                        <div class="address-line">
+                            <div class="customer-address-text">Country:</div>
+                            <div class="errMsg">
+                                @Html.ValidationMessageFor(x => x.Country)
+                                <input asp-for="Country" class="customer-address-field active-field" name="Country" />
+                            </div>
+                        </div>
+                        <div class="address-line">
+                            <div class="customer-address-text">City:</div>
+                            <div class="errMsg">
+                                @Html.ValidationMessageFor(x => x.City)
+                                <input asp-for="City" class="customer-address-field active-field" name="City" />
+                            </div>
+                        </div>
+                        <div class="address-line">
+                            <div class="customer-address-text">Zip code:</div>
+                            <div class="errMsg">
+                                @Html.ValidationMessageFor(x => x.ZipCode)
+                                <input asp-for="ZipCode" class="customer-address-field active-field" name="ZipCode" />
+                            </div>
+                        </div>
+                        <div class="customer-btns-section">
+                            <div class="new-customer-btn">
+                                <input id="createCustomerBtn" class="submitCreate" type="submit" />
+                                Create
+                            </div>
+                            <btn id="clearFormBtn" class="clear-form">Cancel</btn>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("invoiceIcon").classList.add("rotate-static");
+        ExpandInvoiceCategory();
+    });
+</script>

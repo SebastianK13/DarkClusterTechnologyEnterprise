@@ -1,0 +1,13 @@
+﻿
+
+<div class="pocket-profile-bar">
+    <img class="notifications" src="~/Images/notificationIcon.bmp"/>
+    <img class="messages" src="~/Images/messageIcon.bmp"/>
+    <div class="profile-photo"></div>
+    <div class="pocket-menu">
+        <img class="logoutIco" src="~/Images/logout2.bmp" />
+        <form asp-action="Logout" asp-controller="Account" method="post">
+            <input class="logoutInputInv" type="submit" />
+        </form>
+    </div>
+</div>

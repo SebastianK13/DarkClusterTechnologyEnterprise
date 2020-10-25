@@ -1,0 +1,45 @@
+﻿@model EarningsViewModel
+@{
+    Layout = "_LoggedUserLayout";
+}
+
+<body>
+    <div class="table-container">
+        <table class="redTable">
+            <thead>
+                <tr>
+                    <th>Login</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Premium</th>
+                    <th>Currency</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div page-model="@Model.PagesInfo" page-action="ShowEarnings" page-class-enabled="true"
+                             page-class="active" page-clas-normal="active"
+                             page-class-selected="active" class="links"></div>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var m in Model.employeesEarnings)
+                {
+                    <tr>
+                        <td>@m.Login</td>
+                        <td>@m.Firstname</td>
+                        <td>@m.Lastname</td>
+                        <td>@m.DepartmentName</td>
+                        <td>@m.Salary</td>
+                        <td>@m.Premium</td>
+                        <td>@m.Currency</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>

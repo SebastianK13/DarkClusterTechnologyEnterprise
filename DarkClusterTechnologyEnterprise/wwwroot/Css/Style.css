@@ -675,7 +675,7 @@ div#submitSection input {
     list-style: none;
 }
 .sub-menu-open-inv {
-    height: 82px;
+    height: 123px;
     transition: .3s;
     padding: 0;
     list-style: none;
@@ -985,7 +985,7 @@ table.redTable {
 .inv {
     width: 100%;
     height: 0 !important;
-    transition-delay: .1s;
+    transition-delay: .15s;
     visibility: hidden;
     border-top: 1px solid rgba(250,250,250,.1);
 }
@@ -999,7 +999,7 @@ table.redTable {
 .cus {
     width: 100%;
     height: 0 !important;
-    transition-delay: .05s;
+    transition-delay: .1s;
     visibility: hidden;
     border-bottom: none !important;
 }
@@ -1876,7 +1876,22 @@ table.redTable {
     float: left;
     background-color: rgba(230,230,230,1);
 }
-#removeRow{
+.allInv {
+    width: 100%;
+    height: 0 !important;
+    transition-delay: .05s;
+    visibility: hidden;
+    border-bottom: none !important;
+}
+.allInvA {
+    width: 100%;
+    height: 40px;
+    transition-delay: .15s;
+    visibility: visible;
+    border-top: 1px solid rgba(250,250,250,.1);
+    border-bottom: none!important;
+}
+#removeRow {
     width: 20px;
 }
 .invoice-data {

@@ -105,7 +105,7 @@
                                 <a id="createCustomer" class="invoicea">@Html.ActionLink("Create customer", "CreateCustomer", "Customer", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })</a>
                             </li>
                             <li id="allInvBtn" class="allInv">
-                                <a id="createCustomer" class="invoicea">@Html.ActionLink("Create customer", "MyInvoices", "Customer", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })</a>
+                                <a id="createCustomer" class="invoicea">@Html.ActionLink("My invoices", "MyInvoices", "Customer", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })</a>
                             </li>
                         </ul>
                     </li>
@@ -601,10 +601,11 @@
             }
 
         }
-        var customerBtn = document.getElementById("customerBtn");
+        var invoiceMenu = document.getElementById("sMenuInvoice");
         var invoiceId = document.getElementById("invoiceId");
         var invoiceBtn = document.getElementById("invoiceBtn");
-        var invoiceMenu = document.getElementById("sMenuInvoice");
+        var customerBtn = document.getElementById("customerBtn");
+        var allInvBtn = document.getElementById("allInvBtn");
 
 
         invoiceId.onclick = async function ShowOrHideInvoice() {
@@ -614,7 +615,6 @@
                 listenerIsFree = false;
                 document.getElementById("invoiceIcon").classList.add("rotate");
                 if (menuClass == true) {
-                    debugger;
                     CheckOpensThenClose();
                     whatsOpen = 6;
                     invoiceMenu.classList.remove('sub-menu');
@@ -626,10 +626,14 @@
                     customerBtn.classList.remove('cus');
                     customerBtn.classList.add('cusA');
 
+                    allInvBtn.classList.remove('allInv');
+                    allInvBtn.classList.add('allInvA');
+
                     await sleep(280);
                     invoiceMenu.classList.add('autoHeight');
                     invoiceBtn.classList.add('autoHeight');
                     customerBtn.classList.add('autoHeight');
+                    allInvBtn.classList.add('autoHeight');
                 }
                 else {
                     whatsOpen = -1;
@@ -638,7 +642,8 @@
                     document.getElementById("invoiceIcon").classList.remove("rotate");
                     invoiceMenu.classList.remove('autoHeight');
                     invoiceBtn.classList.remove('autoHeight');
-                    invoiceBtn.classList.remove('autoHeight');
+                    customerBtn.classList.remove('autoHeight');
+                    allInvBtn.classList.remove('autoHeight');
                     await sleep(10);
 
                     invoiceMenu.classList.remove('sub-menu-open-inv');
@@ -649,6 +654,9 @@
 
                     customerBtn.classList.remove('cusA');
                     customerBtn.classList.add('cus');
+
+                    allInvBtn.classList.remove('allInvA');
+                    allInvBtn.classList.add('allInv');
                 }
 
                 await sleep(300);
@@ -745,20 +753,28 @@
 
                 customerBtn.classList.remove('cusA');
                 customerBtn.classList.add('cus');
+
+                allInvBtn.classList.remove('allInvA');
+                allInvBtn.classList.add('allInv');
             }
 
             await sleep(300);
             listenerIsFree = true;
         }
-        function ExpandInvoiceCategory() {
+        async function ExpandInvoiceCategory() {
             var customerBtn = document.getElementById("customerBtn");
             var invoiceId = document.getElementById("invoiceId");
             var invoiceBtn = document.getElementById("invoiceBtn");
+            var allInvBtn = document.getElementById("allInvBtn");
             var invoiceMenu = document.getElementById("sMenuInvoice");
 
             invoiceMenu.classList = "sub-menu-open-inv autoHeight";
             invoiceBtn.classList = "invA autoHeight";
             customerBtn.classList = "autoHeight cusA";
+            allInvBtn.classList = "autoHeight allInvA";
+
+            await sleep(300);
+            listenerIsFree = true;
         }
     </script>
 </body>

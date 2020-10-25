@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "_LoggedUserLayout";
 }
 
 <!DOCTYPE html>
@@ -13,3 +13,9 @@
 <body>
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("invoiceIcon").classList.add("rotate-static");
+        ExpandInvoiceCategory();
+    });
+</script>

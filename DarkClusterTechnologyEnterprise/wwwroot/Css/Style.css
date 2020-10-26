@@ -2028,8 +2028,13 @@ th, td {
     margin-top: 5px;
 }
 /*MyInvoices*/
-.all-invoices{
-    border:none;
+.myinvoces-table-header {
+    background-color: rgba(27, 38, 44, .85);
+    border:none!important;
+    color: whitesmoke;
+}
+.all-invoices {
+    border: none;
 }
 .all-invoices td{
     border: none;
@@ -2057,5 +2062,16 @@ th, td {
     border-left:none;
 }
 .right-border-off{
-
+    border-right: none;
+}
+table.all-invoices tfoot .links a {
+    display: inline-block;
+    border: 1px solid #ddd;
+    padding: 2px 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+}
+.links{
+    margin: auto;
 }

@@ -1,4 +1,4 @@
-﻿@model List<Invoice>
+﻿@model InvoicesViewModel
 @{
     Layout = "_LoggedUserLayout";
 }
@@ -11,24 +11,36 @@
         </div>
         <div class="invoice-data border-off">
             <table class="all-invoices">
-                <tr>
-                    <th class="left-border-off">Invoice ID</th>
-                    <th>Date</th>
-                    <th>Expire</th>
-                    <th>Customer</th>
-                    <th class="right-border-off">Created by</th>
-                </tr>
-
-                @foreach (var i in Model)
-                {
-                    <tr>
-                        <td>@i.InvoiceId</td>
-                        <td>@i.Date</td>
-                        <td>@i.ExpiresDate</td>
-                        <td>@i.Customer.CustomerName</td>
-                        <td>@i.ResponsibleEmployee</td>
+                <thead>
+                    <tr class="myinvoces-table-header">
+                        <th class="left-border-off">Invoice ID</th>
+                        <th>Date</th>
+                        <th>Expire</th>
+                        <th>Customer</th>
+                        <th class="right-border-off">Created by</th>
                     </tr>
-                }
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <div page-model="@Model.PagesInfo" page-action="MyInvoices" page-class-enabled="true"
+                                 page-class="active" page-clas-normal="active"
+                                 page-class-selected="active" class="links"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var i in Model.Invoices)
+                    {
+                        <tr>
+                            <td>@i.InvoiceID</td>
+                            <td>@i.Date</td>
+                            <td>@i.Expire</td>
+                            <td>@i.CustomerName</td>
+                            <td>@i.ResponsibleEmployee</td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>

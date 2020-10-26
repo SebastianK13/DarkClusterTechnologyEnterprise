@@ -11,6 +11,8 @@ namespace DarkClusterTechnologyEnterprise.Controllers
     public class CustomerController : Controller
     {
         private ICustomerRepository repository;
+        private int PageSize;
+
         public CustomerController(ICustomerRepository repository)
         {
             this.repository = repository;
@@ -56,12 +58,28 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             
         }
-        public IActionResult MyInvoices()
+        public IActionResult MyInvoices(int page = 1)
         {
-            string responsibleEmployee = HttpContext.User.Identity.Name;
+            string? responsibleEmployee = HttpContext.User.Identity.Name;
             var model = repository.GetInvoices(responsibleEmployee);
+            PageSize = 2;
 
-            return View(model);
+            InvoiceDetail invD = new InvoiceDetail(model);
+
+            PageInfo pages = new PageInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = model.Count()
+            };
+
+            InvoicesViewModel iVm = new InvoicesViewModel
+            {
+                Invoices = invD.Invoices.Skip((page - 1) * PageSize).Take(PageSize),
+                PagesInfo = pages
+            };
+
+            return View(iVm);
         }
     }
 }

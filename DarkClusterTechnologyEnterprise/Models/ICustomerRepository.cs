@@ -9,8 +9,8 @@ namespace DarkClusterTechnologyEnterprise.Models
     public interface ICustomerRepository
     {
         List<CustomerInfo> Customer(string type);
-        void CreateCustomer(Customer customer, CustomerLocation location);
-        Task<bool> CreateInvoice(InvoiceReceive invoice);
-       
+        void CreateCustomer(Customer customer, CustomerLocation location, string responsibleEmployee);
+        Task<bool> CreateInvoice(InvoiceReceive invoice, string responsibleEmployee);
+        List<Invoice> GetInvoices(string responsibleEmployee);
     }
 }

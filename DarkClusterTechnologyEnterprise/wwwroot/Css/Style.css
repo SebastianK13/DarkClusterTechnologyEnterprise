@@ -1949,7 +1949,7 @@ th, td {
     padding-right: 20px;
     margin-left: 1px;
 }
-}
+
 .new-customer-btn {
     position: relative;
     width: 45px;
@@ -2026,4 +2026,36 @@ th, td {
     float: left;
     padding-left: 15px;
     margin-top: 5px;
+}
+/*MyInvoices*/
+.all-invoices{
+    border:none;
+}
+.all-invoices td{
+    border: none;
+}
+    .all-invoices th {
+        border: 1px solid #ddd;
+    }
+.all-invoices td, th {
+    text-align: left;
+}
+    .all-invoices tr {
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+    }
+
+.all-invoices {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .all-invoices th, td {
+        padding: 10px;
+    }
+.left-border-off{
+    border-left:none;
+}
+.right-border-off{
+
 }

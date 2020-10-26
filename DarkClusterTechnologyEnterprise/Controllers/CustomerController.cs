@@ -28,7 +28,8 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         [HttpPost]
         public async Task<bool> Invoice([FromBody]InvoiceReceive postData)
         {
-            bool result = await repository.CreateInvoice(postData);
+            string responsibleEmployee = HttpContext.User.Identity.Name;
+            bool result = await repository.CreateInvoice(postData, responsibleEmployee);
 
             return result;
         }
@@ -42,7 +43,8 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.CreateCustomer(customer, location);
+                string responsibleEmployee = HttpContext.User.Identity.Name;
+                repository.CreateCustomer(customer, location, responsibleEmployee);
                 return View();
             }
             else
@@ -56,8 +58,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         }
         public IActionResult MyInvoices()
         {
+            string responsibleEmployee = HttpContext.User.Identity.Name;
+            var model = repository.GetInvoices(responsibleEmployee);
 
-            return View();
+            return View(model);
         }
     }
 }

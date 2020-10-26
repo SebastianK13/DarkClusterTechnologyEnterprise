@@ -23,23 +23,25 @@ namespace DarkClusterTechnologyEnterprise.Models
             var searchResult = context.Customers.Where(x => x.CustomerName.Contains(type)).Take(5).ToList();
 
             CustomerInfo ci = new CustomerInfo(searchResult);
-            
+
             return ci.customers;
         }
-        public void CreateCustomer(Customer customer, CustomerLocation location)
+        public void CreateCustomer(Customer customer, CustomerLocation location, string responsibleEmployee)
         {
             context.CustomersLocation.Add(location);
             customer.CLocationId = location.LocationId;
+            customer.ResponsibleEmployee = responsibleEmployee;
             context.Customers.Add(customer);
 
             context.SaveChanges();
         }
-        public async Task<bool> CreateInvoice(InvoiceReceive invoice)
+        public async Task<bool> CreateInvoice(InvoiceReceive invoice, string responsibleEmployee)
         {
-           
-            Invoice inv = new Invoice() 
+
+            Invoice inv = new Invoice()
             {
                 CustomerId = invoice.CustomerId,
+                ResponsibleEmployee = responsibleEmployee,
                 Date = invoice.InvoiceDate,
                 ExpiresDate = invoice.InvoiceExpires,
                 InvoiceId = invoice.InvoiceId
@@ -52,7 +54,7 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             services.ForEach(s => context.Services.Add(s));
 
-            return context.SaveChangesAsync().Result > 0;            
+            return context.SaveChangesAsync().Result > 0;
         }
         public List<Service> CreateServicesForInv(List<string>? invServices, string? invoiceId)
         {
@@ -88,5 +90,9 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             return invD.DetailsId;
         }
+        public List<Invoice> GetInvoices(string responsibleEmployee) =>
+            context.Invoices
+            .Where(r => r.ResponsibleEmployee == responsibleEmployee)
+            .ToList();
     }
 }

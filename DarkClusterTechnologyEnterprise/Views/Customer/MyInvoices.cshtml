@@ -1,18 +1,38 @@
-﻿
+﻿@model List<Invoice>
 @{
     Layout = "_LoggedUserLayout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>MyInvoices</title>
-</head>
 <body>
+    <div class="invoice-section">
+        <div class="invoice-section-header border-off">
+            <img class="invoice-section-img" src="~/Images/invoiceIconGray.bmp" />
+            <div class="text-invoice">My invoices</div>
+        </div>
+        <div class="invoice-data border-off">
+            <table class="all-invoices">
+                <tr>
+                    <th class="left-border-off">Invoice ID</th>
+                    <th>Date</th>
+                    <th>Expire</th>
+                    <th>Customer</th>
+                    <th class="right-border-off">Created by</th>
+                </tr>
+
+                @foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@i.InvoiceId</td>
+                        <td>@i.Date</td>
+                        <td>@i.ExpiresDate</td>
+                        <td>@i.Customer.CustomerName</td>
+                        <td>@i.ResponsibleEmployee</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
 </body>
-</html>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("invoiceIcon").classList.add("rotate-static");

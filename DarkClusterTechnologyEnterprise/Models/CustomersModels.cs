@@ -13,6 +13,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int CustomerId { get; set; }
+        public string? ResponsibleEmployee { get; set; }
         [Required(ErrorMessage = "Customer name is required")]
         public string? CustomerName { get; set; }
         [Required(ErrorMessage = "Email is required")]
@@ -41,6 +42,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         public string? InvoiceId { get; set; }
         public DateTime Date { get; set; }
         public DateTime ExpiresDate { get; set; }
+        public string? ResponsibleEmployee { get; set; }
         [ForeignKey("InvoiceDetails")]
         public int InvoiceDetailsId { get; set; }
         public virtual InvoiceDetails? InvoiceDetails { get; set; }

@@ -44,6 +44,8 @@ namespace DarkClusterTechnologyEnterprise.Infrastructure
                 {
                     TagBuilder btns = AddNavBtnsNext();
                     TagBuilder result = FirstPage();
+                    var parentClass = output.Attributes.FirstOrDefault(c => c.Name == "class")?.Value;
+                    output.Attributes.SetAttribute("class", $"standard links");
                     output.Content.AppendHtml(result.InnerHtml);
                     output.Content.AppendHtml(btns.InnerHtml);
                 }
@@ -54,6 +56,8 @@ namespace DarkClusterTechnologyEnterprise.Infrastructure
                 {
                     TagBuilder result = LastPage();
                     TagBuilder btns = AddNavBtnsPrev();
+                    var parentClass = output.Attributes.FirstOrDefault(c => c.Name == "class")?.Value;
+                    output.Attributes.SetAttribute("class", $"standard links");
                     output.Content.AppendHtml(btns.InnerHtml);
                     output.Content.AppendHtml(result.InnerHtml);
                 }
@@ -65,6 +69,8 @@ namespace DarkClusterTechnologyEnterprise.Infrastructure
                     TagBuilder btns = AddNavBtnsNext();
                     TagBuilder btnsF = AddNavBtnsPrev();
                     TagBuilder result = OtherPage();
+                    var parentClass = output.Attributes.FirstOrDefault(c => c.Name == "class")?.Value;
+                    output.Attributes.SetAttribute("class", $"bigger links");
                     output.Content.AppendHtml(btnsF.InnerHtml);
                     output.Content.AppendHtml(result.InnerHtml);
                     output.Content.AppendHtml(btns.InnerHtml);
@@ -151,13 +157,13 @@ namespace DarkClusterTechnologyEnterprise.Infrastructure
             TagBuilder tag2 = new TagBuilder("a");
             PageUrlValues["page"] = 1;
             tag2.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
-            tag2.InnerHtml.Append("First");
+            tag2.AddCssClass("first");
             result.InnerHtml.AppendHtml(tag2);
 
             TagBuilder tag = new TagBuilder("a");
             PageUrlValues["page"] = PageModel.CurrentPage - 1;
             tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
-            tag.InnerHtml.Append("Previous");
+            tag.AddCssClass("prev");
             result.InnerHtml.AppendHtml(tag);
 
             return result;
@@ -170,13 +176,13 @@ namespace DarkClusterTechnologyEnterprise.Infrastructure
             TagBuilder tag = new TagBuilder("a");
             PageUrlValues["page"] = PageModel.CurrentPage + 1;
             tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
-            tag.InnerHtml.Append("Next");
+            tag.AddCssClass("next");
             result.InnerHtml.AppendHtml(tag);
 
             TagBuilder tag2 = new TagBuilder("a");
             PageUrlValues["page"] = PageModel.TotalPages;
             tag2.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
-            tag2.InnerHtml.Append("Last");
+            tag2.AddCssClass("last");
             result.InnerHtml.AppendHtml(tag2);
 
             return result;

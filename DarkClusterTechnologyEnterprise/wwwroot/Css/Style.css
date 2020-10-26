@@ -2074,4 +2074,47 @@ table.all-invoices tfoot .links a {
 }
 .links{
     margin: auto;
+    height:26px;
+}
+.next {
+    background-image: url(../Images/next.bmp);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 8px;
+    height: 18px;
+    vertical-align: bottom;
+}
+.prev {
+    background-image: url(../Images/prev.bmp);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 8px;
+    height: 18px;
+    vertical-align: bottom;
+}
+.last {
+    background-image: url(../Images/last.bmp);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 8px;
+    height: 18px;
+    vertical-align: bottom;
+}
+.first {
+    background-image: url(../Images/first.bmp);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 8px;
+    height: 18px;
+    vertical-align:bottom;
+}
+.bigger{
+    width:196px;
+}
+.standard{
+    width:148px;
 }

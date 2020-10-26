@@ -29,7 +29,7 @@
                         </td>
                     </tr>
                 </tfoot>
-                <tbody>
+                <tbody id="tbodyID">
                     @foreach (var i in Model.Invoices)
                     {
                         <tr>
@@ -46,8 +46,16 @@
     </div>
 </body>
 <script>
+    var table = document.getElementById("tbodyID");
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("invoiceIcon").classList.add("rotate-static");
         ExpandInvoiceCategory();
+    });
+    table.addEventListener("click", function (e) {
+        debugger;
+        if (e.target.nodeName === "TD" && e.target.cellIndex === 0) {
+            var id = e.target.innerHTML;
+            location.href = "/Customer/DisplayInvoice?invID="+id;
+        }
     });
 </script>

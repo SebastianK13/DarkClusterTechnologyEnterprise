@@ -7,6 +7,31 @@ using System.Threading.Tasks;
 
 namespace DarkClusterTechnologyEnterprise.Models.ViewModels
 {
+    public class InvoiceView
+    {
+        public InvoiceView(Invoice inv)
+        {
+            InvoiceId = inv.InvoiceId;
+            CustomerName = inv.Customer?.CustomerName;
+            Email = inv.Customer?.Email;
+            Country = inv.Customer?.CustomerLocation?.Country;
+            City = inv.Customer?.CustomerLocation?.City;
+            StreetAddress = inv.Customer?.CustomerLocation?.StreetAddress;
+            ZipCode = inv.Customer?.CustomerLocation?.ZipCode;
+            InvoiceDate = inv.Date;
+            InvoiceExpires = inv.ExpiresDate;
+        }
+        public string? InvoiceId { get; set; }
+        public string? CustomerName { get; set; }
+        public string? Email { get; set; }
+        public string? Country { get; set; }
+        public string? City { get; set; }
+        public string? StreetAddress { get; set; }
+        public string? ZipCode { get; set; }
+        public DateTime? InvoiceDate { get; set; }
+        public DateTime? InvoiceExpires { get; set; }
+        public List<Service> Services { get; set; }
+    }
     public class CustomerInfo
     {
         public CustomerInfo() { }

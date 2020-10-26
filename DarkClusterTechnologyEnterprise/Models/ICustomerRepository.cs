@@ -12,5 +12,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         void CreateCustomer(Customer customer, CustomerLocation location, string responsibleEmployee);
         Task<bool> CreateInvoice(InvoiceReceive invoice, string responsibleEmployee);
         List<Invoice> GetInvoices(string responsibleEmployee);
+        Invoice GetInvoice(string invID);
+        List<Service> GetServices(string invID);
     }
 }

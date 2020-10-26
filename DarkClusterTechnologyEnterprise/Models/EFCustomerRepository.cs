@@ -94,5 +94,15 @@ namespace DarkClusterTechnologyEnterprise.Models
             context.Invoices
             .Where(r => r.ResponsibleEmployee == responsibleEmployee)
             .ToList();
+
+        public Invoice GetInvoice(string invID) => 
+            context.Invoices
+            .Where(i => i.InvoiceId == invID)
+            .FirstOrDefault();
+
+        public List<Service> GetServices(string invID) => 
+            context.Services
+            .Where(i => i.InvoiceId == invID)
+            .ToList();
     }
 }

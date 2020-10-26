@@ -62,7 +62,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             string? responsibleEmployee = HttpContext.User.Identity.Name;
             var model = repository.GetInvoices(responsibleEmployee);
-            PageSize = 2;
+            PageSize = 10;
 
             InvoiceDetail invD = new InvoiceDetail(model);
 
@@ -81,5 +81,14 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return View(iVm);
         }
+        public IActionResult DisplayInvoice(string invID)
+        {
+            var invoice = repository.GetInvoice(invID);
+            InvoiceView iv = new InvoiceView(invoice);
+            iv.Services = repository.GetServices(invID);
+
+            return View(iv);
+        }
+
     }
 }

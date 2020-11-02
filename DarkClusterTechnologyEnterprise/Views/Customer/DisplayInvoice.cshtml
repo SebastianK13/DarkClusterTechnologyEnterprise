@@ -4,5 +4,96 @@
 }
 
 <body>
-
+    <div class="invoice-section">
+        <div class="invoice-section-header">
+            <img class="invoice-section-img" src="~/Images/invoiceIconGray.bmp" />
+            <div class="text-invoice">Create invoice</div>
+        </div>
+        <div class="invoice-data">
+            <div class="customer">
+                <div class="customer-name">
+                    <div class="customer-name-text">Customer:</div>
+                    <div class="customer-select">
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search..." id="myInput" onkeyup="filterFunction()" autocomplete="off" value=@Model.CustomerName>
+                            <a></a>
+                            <a></a>
+                            <a></a>
+                            <a></a>
+                            <a></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="customer-email">
+                    <div class="customer-email-text">Email address:</div>
+                    <input id="emailF" class="customer-email-field" value=@Model.Email />
+                </div>
+                <div class="customer-address">
+                    <div class="address-line">
+                        <div class="customer-address-text">Address:</div>
+                        <input id="addressF" class="customer-address-field" value=@Model.StreetAddress />
+                    </div>
+                    <div class="address-line">
+                        <div class="customer-address-text">Country:</div>
+                        <input id="countryF" class="customer-address-field" value=@Model.Country />
+                    </div>
+                    <div class="address-line">
+                        <div class="customer-address-text">City:</div>
+                        <input id="cityF" class="customer-address-field" value=@Model.City />
+                    </div>
+                    <div class="address-line">
+                        <div class="customer-address-text">Zip code:</div>
+                        <input id="zcodeF" class="customer-address-field" value=@Model.ZipCode />
+                    </div>
+                </div>
+            </div>
+            <div class="tableErrors">
+                <ul id="customerErr"></ul>
+            </div>
+            <div class="invoice-details">
+                <div class="invoice-details-section">
+                    <div class="invoice-line">
+                        <div class="invoice-text">Invoice:</div>
+                    </div>
+                    <div class="invoice-line">
+                        <div class="invoice-text-small">Invoice ID:</div>
+                        <input id="invoiceF" class="invoice-field-small" value=@Model.InvoiceId />
+                    </div>
+                    <div class="invoice-line">
+                        <div class="invoice-text-small">Invoice date:</div>
+                        <input id="startDate" type="date" class="invoice-field-small editable" value=@Model.InvoiceDate />
+                    </div>
+                    <div class="invoice-line">
+                        <div class="invoice-text-small">Invoice expires:</div>
+                        <input id="endDate" type="date" class="invoice-field-small editable" value=@Model.InvoiceExpires />
+                    </div>
+                    <div class="tableErrors">
+                        <ul id="dateErrors"></ul>
+                    </div>
+                    <div class="services-table">
+                        <table id="invoiceTable">
+                            <tr>
+                                <th>Service</th>
+                                <th>Quantity</th>
+                                <th>Gross value</th>
+                            </tr>
+                            <tbody>
+                                @foreach (var s in Model.Services)
+                                {
+                                    <tr>
+                                        <th>@s.ServiceName</th>
+                                        <th>@s.Quantity</th>
+                                        <th>@s.ServicePrice</th>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tableErrors">
+                        <ul id="rowError"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>

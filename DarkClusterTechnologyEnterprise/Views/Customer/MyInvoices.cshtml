@@ -20,7 +20,7 @@
                         <th class="right-border-off">Created by</th>
                     </tr>
                 </thead>
-                <tfoot>
+                <tfoot id="pagesBar" class="display">
                     <tr>
                         <td colspan="5">
                             <div page-model="@Model.PagesInfo" page-action="MyInvoices" page-class-enabled="true"
@@ -50,12 +50,20 @@
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("invoiceIcon").classList.add("rotate-static");
         ExpandInvoiceCategory();
+        PagesBarVisibility();
     });
     table.addEventListener("click", function (e) {
-        debugger;
-        if (e.target.nodeName === "TD" && e.target.cellIndex === 0) {
-            var id = e.target.innerHTML;
+        if (e.target.nodeName === "TD") {
+            var id = e.target.parentElement.cells[0].innerHTML;
             location.href = "/Customer/DisplayInvoice?invID="+id;
         }
     });
+    function PagesBarVisibility() {
+        var body = document.getElementById("tbodyID");
+        debugger;
+        var pBar = document.getElementById("pagesBar");
+        if (body.childElementCount <= 10) {
+            pBar.className = "display-none";
+        }
+    }
 </script>

@@ -2032,6 +2032,7 @@ th, td {
     background-color: rgba(27, 38, 44, .85);
     border:none!important;
     color: whitesmoke;
+    cursor: auto;
 }
 .all-invoices {
     border: none;
@@ -2053,6 +2054,7 @@ th, td {
 .all-invoices {
     border-collapse: collapse;
     width: 100%;
+    cursor: pointer;
 }
 
     .all-invoices th, td {
@@ -2117,4 +2119,10 @@ table.all-invoices tfoot .links a {
 }
 .standard{
     width:148px;
+}
+.display {
+    display: table-footer-group;
+}
+.display-none{
+    display: none;
 }

@@ -88,12 +88,13 @@ function CheckStartDate() {
     var expire = null;
     var today = new Date();
 
-    var d = today.getDate();
-    var m = today.getMonth() + 1;
+    var d = modifyDay(today);
+    var m = modifyMonth(today);
     var y = today.getFullYear();
+    var d1 = modifyD1(today);
 
     start = y + '-' + m + '-' + d;
-    expire = y + '-' + m + '-' + (d + 1);
+    expire = y + '-' + m + '-' + d1;
 
     if ((startDate < start || (startDate instanceof Date) || startDate === endDate)) {
         if (startDErr === null) {
@@ -117,12 +118,13 @@ function CheckEndDate() {
     var expire = null;
     var today = new Date();
 
-    var d = today.getDate();
-    var m = today.getMonth() + 1;
+    var d = modifyDay(today);
+    var m = modifyMonth(today);
     var y = today.getFullYear();
+    var d1 = modifyD1(today);
 
     start = y + '-' + m + '-' + d;
-    expire = y + '-' + m + '-' + (d + 1);
+    expire = y + '-' + m + '-' + d1;
 
     if ((endDate <= expire || (endDate instanceof Date) || endDate < startDate)) {
         if (endDErr === null) {
@@ -148,14 +150,23 @@ function CheckInvoiceDates() {
     var expire = null;
     var today = new Date();
 
-    var d = today.getDate();
-    var m = today.getMonth() + 1;
+    debugger;
+
+    var d = modifyDay(today);
+    var m = modifyMonth(today);
     var y = today.getFullYear();
+    var d1 = modifyD1(today);
+
+    //if (d < 10)
+    //    d = "0" + d;
+
+    //if (m < 10)
+    //    m = "0" + m;
 
     start = y + '-' + m + '-' + d;
-    expire = y + '-' + m + '-' + (d + 1);
+    expire = y + '-' + m + '-' + d1;
 
-    debugger;
+
         if ((startDate < start || (startDate instanceof Date) || startDate === endDate)) {
             if (startDErr === null) {
                 var li = document.createElement("li");
@@ -292,14 +303,36 @@ function SetDateInvoice() {
     //var today = new Date().toISOString().slice(0,10);
     var today = new Date();
 
-    var d = today.getDate();
-    var m = today.getMonth() + 1;
+    var d = modifyDay(today);
+    var m = modifyMonth(today);
     var y = today.getFullYear();
+    var d1 = modifyD1(today);
 
     startDate.min = y + '-' + m + '-' + d;
     startDate.value = y + '-' + m + '-' + d;
-    endDate.min = y + '-' + m + '-' + (d + 1);
-    endDate.value = y + '-' + m + '-' + (d + 1);
+    endDate.min = y + '-' + m + '-' + d1;
+    endDate.value = y + '-' + m + '-' + d1;
+}
+function modifyMonth(today) {
+    var m = today.getMonth() + 1;
+    if (m<10) {
+        m = "0" + m;
+    }
+    return m;
+}
+function modifyDay(today) {
+    var d = today.getDate();
+    if (d<10) {
+        d = "0" + d;
+    }
+    return d;
+}
+function modifyD1(today) {
+    var d1 = today.getDate() + 1;
+    if (d1<10) {
+        d1 = "0" + d1;
+    }
+    return d1;
 }
 addServiceBtn.onclick = function AddNewService() {
     var newService = document.getElementById("newLine");

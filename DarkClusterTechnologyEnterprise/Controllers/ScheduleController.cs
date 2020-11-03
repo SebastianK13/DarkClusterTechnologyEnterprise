@@ -12,5 +12,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult NewTask()
+        {
+            return RedirectToAction("TaskSchedule");
+        }
     }
 }

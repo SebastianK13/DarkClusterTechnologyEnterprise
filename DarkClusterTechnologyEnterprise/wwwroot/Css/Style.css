@@ -1748,9 +1748,11 @@ table.redTable {
 }
 .customer-name-text {
     position: relative;
-    width: 200px;
+    width: 120px;
     height: 100%;
     float: left;
+    padding-right: 80px;
+    text-align: right;
 }
 .customer-select {
     position: relative;
@@ -2125,4 +2127,24 @@ table.all-invoices tfoot .links a {
 }
 .display-none{
     display: none;
+}
+#myInputInactive {
+    box-sizing: border-box;
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 8px 20px 8px 14px;
+    border: 1px solid rgba(210,210,210,1);
+    pointer-events: none;
+    background-color: rgba(235,235,235, 1);
+    float: left;
+}
+.border-none{
+    border:none;
+}
+.gray-table {
+    background-color: rgba(235,235,235, 1);
+}
+.read-only{
+    pointer-events:none;
 }

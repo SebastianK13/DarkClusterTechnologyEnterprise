@@ -63,7 +63,8 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             string? responsibleEmployee = HttpContext.User.Identity.Name;
             var model = repository.GetInvoices(responsibleEmployee);
             PageSize = 10;
-
+            int invCount = model.Count();
+            ViewData["Count"] = invCount;
             InvoiceDetail invD = new InvoiceDetail(model);
 
             PageInfo pages = new PageInfo

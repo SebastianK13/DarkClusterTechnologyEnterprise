@@ -14,8 +14,8 @@
                 <div class="customer-name">
                     <div class="customer-name-text">Customer:</div>
                     <div class="customer-select">
-                        <div id="myDropdown" class="dropdown-content">
-                            <input type="text" placeholder="Search..." id="myInput" onkeyup="filterFunction()" autocomplete="off" value=@Model.CustomerName>
+                        <div id="myDropdown" class="dropdown-content border-none">
+                            <input type="text" id="myInputInactive" autocomplete="off" value=@Model.CustomerName>
                             <a></a>
                             <a></a>
                             <a></a>
@@ -61,17 +61,17 @@
                     </div>
                     <div class="invoice-line">
                         <div class="invoice-text-small">Invoice date:</div>
-                        <input id="startDate" type="date" class="invoice-field-small editable" value=@Model.InvoiceDate />
+                        <input id="startDate" type="date" class="invoice-field-small read-only" />
                     </div>
                     <div class="invoice-line">
                         <div class="invoice-text-small">Invoice expires:</div>
-                        <input id="endDate" type="date" class="invoice-field-small editable" value=@Model.InvoiceExpires />
+                        <input id="endDate" type="date" class="invoice-field-small read-only" />
                     </div>
                     <div class="tableErrors">
                         <ul id="dateErrors"></ul>
                     </div>
                     <div class="services-table">
-                        <table id="invoiceTable">
+                        <table class="gray-table">
                             <tr>
                                 <th>Service</th>
                                 <th>Quantity</th>
@@ -97,3 +97,13 @@
         </div>
     </div>
 </body>
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var date = @Html.Raw(Json.Serialize(Model.InvoiceDate));
+        var dateExpire = @Html.Raw(Json.Serialize(Model.InvoiceExpires));
+        document.getElementById("startDate").value = date.substring(0, 10);
+        document.getElementById("endDate").value = dateExpire.substring(0,10);
+    });
+
+</script>

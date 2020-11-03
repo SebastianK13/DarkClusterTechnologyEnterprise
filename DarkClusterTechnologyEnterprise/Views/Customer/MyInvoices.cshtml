@@ -1,6 +1,7 @@
 ﻿@model InvoicesViewModel
 @{
     Layout = "_LoggedUserLayout";
+    int invCount = Convert.ToInt32(ViewData["Count"]);
 }
 
 <body>
@@ -46,6 +47,7 @@
     </div>
 </body>
 <script>
+    var invoicesCount = @Html.Raw(Json.Serialize(invCount));
     var table = document.getElementById("tbodyID");
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("invoiceIcon").classList.add("rotate-static");
@@ -62,7 +64,7 @@
         var body = document.getElementById("tbodyID");
         debugger;
         var pBar = document.getElementById("pagesBar");
-        if (body.childElementCount <= 10) {
+        if (invoicesCount <= 10) {
             pBar.className = "display-none";
         }
     }

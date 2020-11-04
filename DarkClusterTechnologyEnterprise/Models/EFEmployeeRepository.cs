@@ -309,5 +309,12 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             return time.TotalSeconds;
         }
+
+        public void CreateTasks(NewTask task, int eId)
+        {
+            
+            TaskSchedule newTask = new TaskSchedule(task, eId);
+            context.TaskSchedules.Add(newTask);
+        }
     }
 }

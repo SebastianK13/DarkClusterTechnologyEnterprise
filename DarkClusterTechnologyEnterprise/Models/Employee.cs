@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkClusterTechnologyEnterprise.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -96,6 +97,14 @@ namespace DarkClusterTechnologyEnterprise.Models
 
     public class TaskSchedule
     {
+        public TaskSchedule(NewTask newTask, int eId)
+        {
+            Task = newTask.Task;
+            TaskDesc = newTask.TaskDesc;
+            TaskBegin = newTask.TaskBeginDate + newTask.TaskBeginTime;
+            TaskDeadline = newTask.TaskEndDate + newTask.TaskEndTime;
+            EmployeeId
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string TaskId { get; set; }

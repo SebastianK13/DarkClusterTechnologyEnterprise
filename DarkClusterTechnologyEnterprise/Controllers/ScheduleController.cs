@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DarkClusterTechnologyEnterprise.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DarkClusterTechnologyEnterprise.Controllers
@@ -13,8 +14,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult NewTask()
+        public IActionResult NewTask(NewTask newTask)
         {
+
+
             return RedirectToAction("TaskSchedule");
         }
     }

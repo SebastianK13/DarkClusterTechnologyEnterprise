@@ -2288,17 +2288,20 @@ table.all-invoices tfoot .links a {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
-    border-radius:1px;
+    border-radius:4px;
+    color: black;
 }
 .new-task-window-header {
     position: relative;
     width: 100%;
     height: 30px;
-    background: linear-gradient(40deg, rgba(241, 28,94,.8),rgba(255,99,0,.8));
+    background: linear-gradient(40deg, rgba(241, 28,94,1),rgba(255,99,0,1));
     text-align: center;
-    font-size:16px;
+    font-size: 16px;
     line-height: 30px;
     color: white;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 .new-task-desc{
     position:relative;
@@ -2310,24 +2313,51 @@ table.all-invoices tfoot .links a {
 }
 .new-task-start {
     position: relative;
-    width: 100%;
-    height: 40px;
+    width: calc(100% - 20px);
+    height: auto;
     margin-bottom: 15px;
+    padding: 0 10px 0 10px;
 }
 .new-task-end {
     position: relative;
-    width: 100%;
-    height: 40px;
-    margin-bottom: 15px;
+    width: calc(100% - 20px);
+    height: auto;
+    margin: 0 0 15px 110px;
+    padding: 0 10px 0 10px;
 }
 .new-task-btn-section{
     position:absolute;
     bottom: 0;
     left:0;
-    width:100%;
+    width:calc(100% - 20px);
     height: 50px;
     margin-bottom: 5px;
+    padding: 0 10px 0 10px;
 }
+    .new-task-btn-section btn {
+        width: 80px;
+        height: 30px;
+        background: rgba(255,99,0,.9);
+        float: right;
+        text-align: center;
+        margin-right: 5px;
+        line-height: 30px;
+        color: white;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+    .new-task-btn-section input {
+        width: 80px;
+        height: 30px;
+        background: rgba(255,99,0,.9);
+        float: right;
+        text-align: center;
+        margin-right: 5px;
+        line-height: 30px;
+        color: white;
+        border-radius: 2px;
+        cursor: pointer;
+    }
 .desc-label{
     position:relative;
     width:110px;
@@ -2340,7 +2370,29 @@ table.all-invoices tfoot .links a {
     height: 100%;
     float:left;
 }
+.new-task-name {
+    position: relative;
+    width: calc(100% - 20px);
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 0 10px 0 10px;
+}
 .task-desc-field {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: auto;
+    resize: none;
+    border: 1px solid rgba(0,0,0,.1);
+    color: rgba(0,0,0,.8);
+    box-sizing: border-box;
+    padding: 4px 0 0 8px;
+    outline: 0 !important;
+    line-height: 20px;
+    font-family: inherit;
+}
+.task-name-field {
     height: 100%;
     width: 100%;
     background-color: #fff;
@@ -2390,18 +2442,18 @@ table.all-invoices tfoot .links a {
     position: relative;
     width: 100%;
     float: left;
-    height: 30px;
-    color: white;
-    background-color: rgba(50,50,50, .4);
+    height: 40px;
+    color: black;
+    border-bottom: 1px solid rgba(184,184,184, .8);
     text-align: center;
     font-size: 25px;
-    line-height:30px;
+    line-height: 40px;
 }
 .top-header {
     position: relative;
     width: 100%;
     float: left;
-    height: calc(100% - 50px);
+    height: calc(100% - 60px);
     color: black;
 }
 
@@ -2491,5 +2543,5 @@ table.all-invoices tfoot .links a {
     width:260px;
     height:100%;
     font-size: 25px;
-    line-height:60px;
+    line-height:50px;
 }

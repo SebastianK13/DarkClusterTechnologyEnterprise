@@ -6,23 +6,37 @@
 <body>
     <div class="scheduled-section">
         <div class="schedule-container">
-            <div class="new-task-cover @*display-none*@">
-                <div class="new-task-window">
-                    <div class="new-task-window-header">New task</div>
-                    <div class="new-task-desc">
-                        <div class="desc-label">Description</div>
-                        <div class="desc-section">
-                            <textarea class="task-desc-field"></textarea>
+            <div id="cover" class="new-task-cover display-none">
+                <form asp-action="NewTask" asp-controller="Schedule" method="post">
+                    <div class="new-task-window">
+                        <div class="new-task-window-header">New task</div>
+                        <div class="new-task-desc">
+                            <div class="desc-label">Description</div>
+                            <div class="desc-section">
+                                <textarea class="task-desc-field" name="TaskDesc"></textarea>
+                            </div>
+                        </div>
+                        <div class="new-task-name">
+                            <div class="desc-label">Name</div>
+                            <div class="desc-section">
+                                <textarea class="task-desc-field" name="Task"></textarea>
+                            </div>
+                        </div>
+                        <div class="new-task-start">
+                            <div class="desc-label">Duration</div>
+                            <input id="startTime" type="time" name="TaskBeginTime">
+                            <input id="startDate" type="date" name="TaskBeginDate">
+                        </div>
+                        <div class="new-task-end">
+                            <input id="endTime" type="time" name="TaskEndTime">
+                            <input id="endDate" type="date" name="TaskEndDate">
+                        </div>
+                        <div class="new-task-btn-section">
+                            <btn id="newTaskCancell">Cancell</btn>
+                            <input id="newTaskSave" value="Save" type="submit" />
                         </div>
                     </div>
-                    <div class="new-task-start">
-                        <div class="desc-label">Time</div>
-                    </div>
-                    <div class="new-task-end">
-                        <div class="desc-label"> </div>
-                    </div>
-                    <div class="new-task-btn-section"></div>
-                </div>
+                </form>
             </div>
             <div class="schedule-header">
                 <div class="schedule-name">Task schedule</div>
@@ -40,8 +54,8 @@
                 </div>
             </div>
             <div class="schedule-box-shadow">
+                <div id="addNewTask">+</div>
                 <div class="schedule">
-                    <div id="addNewTask">+</div>
                     <div class="hours">
                         <div>06:00</div>
                         <div>07:00</div>
@@ -82,3 +96,4 @@
         </div>
     </div>
 </body>
+<script src="~/JavaScript/ScheduleScript.js"></script>

@@ -1,4 +1,4 @@
-﻿
+﻿@model TaskViewModel
 @{
     Layout = "_LoggedUserLayout";
 }
@@ -97,3 +97,11 @@
     </div>
 </body>
 <script src="~/JavaScript/ScheduleScript.js"></script>
+<script>
+    var tasks = @Html.Raw(Json.Serialize(Model.Tasks));
+    var dates = @Html.Raw(Json.Serialize(Model.Dates));
+
+    document.addEventListener("DOMContentLoaded", function () {
+        SetTaskModel(tasks, dates);
+    });
+</script>

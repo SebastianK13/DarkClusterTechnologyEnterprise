@@ -41,9 +41,8 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         public async Task<IActionResult> PresenceConfirmation(int opt = 0, string category = "work", string clientTimeZone = "")
         {
             
-            string name = HttpContext.User.Identity.Name;
-            IdentityUser user = await userManager.FindByNameAsync(name);
-            int eId = repository.GetEmployeeId(user.Id);
+            string? name = HttpContext.User.Identity.Name;
+            int eId = await repository.GetEmployeeID(name);
             Presence model = repository.GetPresences(eId);
             PresenceViewModel presenceModel = new PresenceViewModel();
             var allPresences = repository.GetAllPresences(eId);
@@ -210,8 +209,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         public async Task<IActionResult> PresenceConfirmation(TimerViewModel timer)
         {
             string name = HttpContext.User.Identity.Name;
-            IdentityUser user = await userManager.FindByNameAsync(name);
-            int eId = repository.GetEmployeeId(user.Id);
+            int eId = await repository.GetEmployeeID(name);
             if (timer.begin)
             {
                 repository.CreatePresence(eId);

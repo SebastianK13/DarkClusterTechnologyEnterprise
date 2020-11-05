@@ -10,22 +10,38 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 {
     public class ScheduleController : Controller
     {
+        List<DateTime> month = new List<DateTime>();
+        private void createMonth(ref List<DateTime> month)
+        {
+            for (int i = 1; i <= 31; i++)
+            {
+                month.Add(DateTime.Now.ToUniversalTime().AddDays(+i).Date + new TimeSpan(0, 0, 0));
+            }
+        }
+
         IEmployeeRepository repository;
         public ScheduleController(IEmployeeRepository repo)
         {
             repository = repo;
+            createMonth(ref month);
         }
-        public IActionResult TaskSchedule()
+        public async Task<IActionResult> TaskSchedule()
         {
-            return View();
+            string? username = User.Identity.Name;
+            int eId = await repository.GetEmployeeID(username);
+            SingleTask task = new SingleTask(repository.GetAllTasks(eId));
+            TaskViewModel model = new TaskViewModel(task.Tasks, month);
+
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> NewTask(NewTask newTask)
         {
-            string? username = HttpContext.User.Identity.Name;
+            string? username = User.Identity.Name;
             await repository.CreateTasks(newTask, username);
 
             return RedirectToAction("TaskSchedule");
         }
+
     }
 }

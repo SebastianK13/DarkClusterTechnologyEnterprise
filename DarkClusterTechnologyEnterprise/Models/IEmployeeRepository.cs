@@ -9,7 +9,7 @@ namespace DarkClusterTechnologyEnterprise.Models
 {
     public interface IEmployeeRepository
     {
-        int GetEmployeeId(string id);
+        Task<int> GetEmployeeID(string username);
         int GetLastEmployeeId();
         Employee CreateEmployee(Employee employee);
         void CreateEarnings(Earnings earnings);
@@ -34,6 +34,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         double GetActiveBreakTime(int eId);
         DateTime CheckIfDaylight(int eId);
         Task<bool> CreateTasks(NewTask task, string username);
+        List<TaskSchedule> GetAllTasks(int eId);
 
         //Profile Controller
     }

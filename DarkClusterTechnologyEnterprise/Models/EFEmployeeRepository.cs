@@ -129,11 +129,6 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             return earningsEmployees;
         }
-        public int GetEmployeeId(string uId) =>
-            context.Employees
-            .Where(u => u.UserId == uId)
-            .Select(e => e.EmployeeId)
-            .FirstOrDefault();
         public Presence GetPresences(int eId)
         {
             var model = context.Presences
@@ -316,16 +311,28 @@ namespace DarkClusterTechnologyEnterprise.Models
 
         public async Task<bool> CreateTasks(NewTask task, string username)
         {
-            int eId = await GetUserID(username);
+            int eId = await GetEmployeeID(username);
             TaskSchedule newTask = new TaskSchedule(task, eId);
             context.TaskSchedules.Add(newTask);
 
             return context.SaveChangesAsync().Result > 0;
         }
-        private async Task<int> GetUserID(string username)
+        public async Task<int> GetEmployeeID(string username) => 
+            FindEmployeeId(await GetUserID(username));
+        public int FindEmployeeId(string uId) =>
+            context.Employees
+            .Where(u => u.UserId == uId)
+            .Select(e => e.EmployeeId)
+            .FirstOrDefault();
+        private async Task<string> GetUserID(string username)
         {
             IdentityUser user = await userManager.FindByNameAsync(username);
-            return GetEmployeeId(user.Id);
+            return user.Id;
         }
+        public List<TaskSchedule> GetAllTasks(int eId) => 
+            context.TaskSchedules
+            .Where(e => (e.EmployeeId == eId) 
+            && e.TaskBegin > DateTime.Now)
+            .ToList();
     }
 }

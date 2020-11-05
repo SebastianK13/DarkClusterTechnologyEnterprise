@@ -24,4 +24,39 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public DateTime TaskBeginDate { get; set; }
         public DateTime TaskEndDate { get; set; }
     }
+    public class TaskViewModel
+    {
+        public TaskViewModel(List<SingleTask> tasks, List<DateTime> dates)
+        {
+            Tasks = tasks;
+            Dates = dates;
+        }
+        public List<SingleTask>? Tasks { get; set; }
+        public List<DateTime>? Dates { get; set; }
+    }
+    public class SingleTask
+    {
+        public SingleTask() { }
+        public SingleTask(List<TaskSchedule> tasks)
+        {
+            Tasks = new List<SingleTask>();
+
+            foreach(var t in tasks)
+            {
+                Tasks.Add(new SingleTask() { 
+                    Task = t.Task,
+                    TaskId = t.TaskId,
+                    TaskDesc = t.TaskDesc,
+                    TaskBegin = t.TaskBegin,
+                    TaskDeadline = t.TaskDeadline
+                });
+            }
+        }
+        public string TaskId { get; set; }
+        public string Task { get; set; }
+        public string TaskDesc { get; set; }
+        public DateTime TaskBegin { get; set; }
+        public DateTime TaskDeadline { get; set; }
+        public List<SingleTask> Tasks { get; set; }
+    }
 }

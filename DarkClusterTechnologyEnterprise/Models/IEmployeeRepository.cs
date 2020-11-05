@@ -33,7 +33,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         bool FindActiveBreak(int eId);
         double GetActiveBreakTime(int eId);
         DateTime CheckIfDaylight(int eId);
-        void CreateTasks(NewTask task, int eId);
+        Task<bool> CreateTasks(NewTask task, string username);
 
         //Profile Controller
     }

@@ -97,13 +97,14 @@ namespace DarkClusterTechnologyEnterprise.Models
 
     public class TaskSchedule
     {
+        public TaskSchedule() { }
         public TaskSchedule(NewTask newTask, int eId)
         {
             Task = newTask.Task;
             TaskDesc = newTask.TaskDesc;
             TaskBegin = newTask.TaskBeginDate + newTask.TaskBeginTime;
             TaskDeadline = newTask.TaskEndDate + newTask.TaskEndTime;
-            EmployeeId
+            EmployeeId = eId;
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]

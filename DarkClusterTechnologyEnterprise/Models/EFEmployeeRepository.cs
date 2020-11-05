@@ -1,4 +1,5 @@
 ﻿using DarkClusterTechnologyEnterprise.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,9 +11,12 @@ namespace DarkClusterTechnologyEnterprise.Models
     public class EFEmployeeRepository : IEmployeeRepository
     {
         private AppIdentityDbContext context;
-        public EFEmployeeRepository(AppIdentityDbContext context)
+        private UserManager<IdentityUser> userManager;
+        public EFEmployeeRepository(AppIdentityDbContext context,
+            UserManager<IdentityUser> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
         public Employee CreateEmployee([Required]Employee employee)
         {
@@ -310,11 +314,18 @@ namespace DarkClusterTechnologyEnterprise.Models
             return time.TotalSeconds;
         }
 
-        public void CreateTasks(NewTask task, int eId)
+        public async Task<bool> CreateTasks(NewTask task, string username)
         {
-            
+            int eId = await GetUserID(username);
             TaskSchedule newTask = new TaskSchedule(task, eId);
             context.TaskSchedules.Add(newTask);
+
+            return context.SaveChangesAsync().Result > 0;
+        }
+        private async Task<int> GetUserID(string username)
+        {
+            IdentityUser user = await userManager.FindByNameAsync(username);
+            return GetEmployeeId(user.Id);
         }
     }
 }

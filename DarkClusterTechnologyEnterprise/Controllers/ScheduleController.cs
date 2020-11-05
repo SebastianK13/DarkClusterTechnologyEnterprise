@@ -11,7 +11,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
     public class ScheduleController : Controller
     {
         IEmployeeRepository repository;
-        ScheduleController(IEmployeeRepository repo)
+        public ScheduleController(IEmployeeRepository repo)
         {
             repository = repo;
         }
@@ -20,10 +20,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult NewTask(NewTask newTask)
+        public async Task<IActionResult> NewTask(NewTask newTask)
         {
-            int eId = Convert.ToInt32(HttpContext.User.Identity.Name);
-            repository.CreateTasks(newTask, eId);
+            string? username = HttpContext.User.Identity.Name;
+            await repository.CreateTasks(newTask, username);
 
             return RedirectToAction("TaskSchedule");
         }

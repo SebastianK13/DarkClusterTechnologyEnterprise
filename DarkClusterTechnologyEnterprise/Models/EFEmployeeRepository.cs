@@ -315,7 +315,7 @@ namespace DarkClusterTechnologyEnterprise.Models
             TaskSchedule newTask = new TaskSchedule(task, eId);
             context.TaskSchedules.Add(newTask);
 
-            return context.SaveChangesAsync().Result > 0;
+            return await context.SaveChangesAsync() > 0;
         }
         public async Task<int> GetEmployeeID(string username) => 
             FindEmployeeId(await GetUserID(username));
@@ -332,7 +332,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         public List<TaskSchedule> GetAllTasks(int eId) => 
             context.TaskSchedules
             .Where(e => (e.EmployeeId == eId) 
-            && e.TaskBegin > DateTime.Now)
+            && e.TaskBegin.Date > DateTime.Now.Date)
             .ToList();
     }
 }

@@ -2335,6 +2335,7 @@ table.all-invoices tfoot .links a {
     padding: 0 10px 0 10px;
 }
     .new-task-btn-section btn {
+        position:relative;
         width: 80px;
         height: 30px;
         background: rgba(255,99,0,.9);
@@ -2346,23 +2347,27 @@ table.all-invoices tfoot .links a {
         border-radius: 2px;
         cursor: pointer;
     }
-    .new-task-btn-section input {
-        width: 80px;
-        height: 30px;
-        background: rgba(255,99,0,.9);
-        float: right;
-        text-align: center;
-        margin-right: 5px;
-        line-height: 30px;
-        color: white;
-        border-radius: 2px;
-        cursor: pointer;
-    }
-.desc-label{
-    position:relative;
-    width:110px;
+#newTaskSave {
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+    width: 80px;
+    height: 30px;
+    background: rgba(255,99,0,.9);
+    float: right;
+    text-align: center;
+    margin-right: 5px;
+    line-height: 30px;
+    color: white;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.desc-label {
+    position: relative;
+    width: 110px;
     height: 100%;
-    float:left;
+    float: left;
 }
 .desc-section{
     position:relative;
@@ -2437,6 +2442,11 @@ table.all-invoices tfoot .links a {
     height: 110px;
     background-color: white;
     z-index: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .schedule-name {
     position: relative;
@@ -2448,13 +2458,6 @@ table.all-invoices tfoot .links a {
     text-align: center;
     font-size: 25px;
     line-height: 40px;
-}
-.top-header {
-    position: relative;
-    width: 100%;
-    float: left;
-    height: calc(100% - 60px);
-    color: black;
 }
 
 .bottom-header-dates {
@@ -2511,16 +2514,73 @@ table.all-invoices tfoot .links a {
     float: left;
 }
 
-    .days div {
+    /*.days div {
         border-right: 1px solid rgba(184,184,184, 1);
         background-image: url(../Images/calendarBorder.bmp);
         position: relative;
         width: 155px;
         height: 100%;
         float: left;
-    }
+    }*/
 
+.mon-col {
+    border-right: 1px solid rgba(184,184,184, 1);
+    background-image: url(../Images/calendarBorder.bmp);
+    position: relative;
+    width: 155px;
+    height: 100%;
+    float: left;
+}
+.tue-col {
+    border-right: 1px solid rgba(184,184,184, 1);
+    background-image: url(../Images/calendarBorder.bmp);
+    position: relative;
+    width: 155px;
+    height: 100%;
+    float: left;
+}
+
+.wed-col {
+    border-right: 1px solid rgba(184,184,184, 1);
+    background-image: url(../Images/calendarBorder.bmp);
+    position: relative;
+    width: 155px;
+    height: 100%;
+    float: left;
+}
+
+.thu-col {
+    border-right: 1px solid rgba(184,184,184, 1);
+    background-image: url(../Images/calendarBorder.bmp);
+    position: relative;
+    width: 155px;
+    height: 100%;
+    float: left;
+}
+
+.fri-col {
+    border-right: 1px solid rgba(184,184,184, 1);
+    background-image: url(../Images/calendarBorder.bmp);
+    position: relative;
+    width: 155px;
+    height: 100%;
+    float: left;
+}
+
+.sat-col {
+    border-right: 1px solid rgba(184,184,184, 1);
+    background-image: url(../Images/calendarBorder.bmp);
+    position: relative;
+    width: 155px;
+    height: 100%;
+    float: left;
+}
 .sun-col {
+    background-image: url(../Images/calendarBorder.bmp);
+    position: relative;
+    width: 155px;
+    height: 100%;
+    float: left;
     border-right: none !important;
 }
 #addNewTask {
@@ -2538,10 +2598,68 @@ table.all-invoices tfoot .links a {
     line-height: 50px;
     cursor: pointer;
 }
+.top-header {
+    position: relative;
+    width: 100%;
+    float: left;
+    height: calc(100% - 60px);
+    color: black;
+
+}
 .date-range-section{
-    margin:auto;
-    width:260px;
+    position:relative;
+    float:left;
+    width:33.3%;
     height:100%;
     font-size: 25px;
     line-height:50px;
+    text-align: center;
+}
+#leftArrowCallendar {
+    position: relative;
+    float: left;
+    width: calc(33.3% - 15px);
+    height: 100%;
+    font-size: 25px;
+    line-height: 50px;
+    padding-left: 15px;
+}
+
+#rightArrowCallendar {
+    position: relative;
+    float: left;
+    width: calc(33.3% - 15px);
+    height: 100%;
+    font-size: 25px;
+    line-height: 50px;
+    padding-right: 15px;
+}
+#rightArrowT{
+    position:absolute;
+    background-image: url(../Images/graph-arr-r.png);
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    top:0;
+    bottom:0;
+    right: 15px;
+    margin:auto;
+    cursor:pointer;
+}
+#leftArrowT {
+    position: absolute;
+    background-image: url(../Images/graph-arr-l.png);
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    margin: auto;
+    cursor:pointer;
+}
+.new-task{
+    position: absolute;
+    width: 100%;
+    background-color: brown;
 }

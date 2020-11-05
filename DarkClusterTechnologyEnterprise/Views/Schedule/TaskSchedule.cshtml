@@ -33,7 +33,9 @@
                         </div>
                         <div class="new-task-btn-section">
                             <btn id="newTaskCancell">Cancell</btn>
-                            <input id="newTaskSave" value="Save" type="submit" />
+                            <btn> Save
+                                <input id="newTaskSave" value="Save" type="submit" />
+                            </btn>
                         </div>
                     </div>
                 </form>
@@ -41,9 +43,15 @@
             <div class="schedule-header">
                 <div class="schedule-name">Task schedule</div>
                 <div class="top-header">
+                    <div id="leftArrowCallendar">
+                        <div id="leftArrowT" class="display-none"></div>
+                    </div>
                     <div class="date-range-section">20 apr 2020 - 26 apr 2020</div>
+                    <div id="rightArrowCallendar">
+                        <div id="rightArrowT"></div>
+                    </div>
                 </div>
-                <div class="bottom-header-dates">
+                <div id="headerDates" class="bottom-header-dates">
                     <div id="monDate"></div>
                     <div id="tueDate"></div>
                     <div id="wednDate"></div>
@@ -57,6 +65,11 @@
                 <div id="addNewTask">+</div>
                 <div class="schedule">
                     <div class="hours">
+                        <div>01:00</div>
+                        <div>02:00</div>
+                        <div>03:00</div>
+                        <div>04:00</div>
+                        <div>05:00</div>
                         <div>06:00</div>
                         <div>07:00</div>
                         <div>08:00</div>
@@ -76,13 +89,8 @@
                         <div>22:00</div>
                         <div>23:00</div>
                         <div>00:00</div>
-                        <div>01:00</div>
-                        <div>02:00</div>
-                        <div>03:00</div>
-                        <div>04:00</div>
-                        <div>05:00</div>
                     </div>
-                    <div class="days">
+                    <div id="days" class="days">
                         <div class="mon-col"></div>
                         <div class="tue-col"></div>
                         <div class="wed-col"></div>
@@ -103,5 +111,8 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         SetTaskModel(tasks, dates);
+        SetDates();
+        ChangeHeaderDates();
+        GenerateTasks();
     });
 </script>

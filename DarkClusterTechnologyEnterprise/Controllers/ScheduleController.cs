@@ -83,6 +83,8 @@ namespace DarkClusterTechnologyEnterprise.Controllers
                     
                 }
             }
+            tasksSplit.Sort((x,y) => DateTime.Compare(x.TaskBegin,y.TaskBegin));
+
             return tasksSplit;
         }
 

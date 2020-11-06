@@ -2288,9 +2288,10 @@ table.all-invoices tfoot .links a {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
-    border-radius:4px;
+    border-radius: 4px;
     color: black;
 }
+
 .new-task-window-header {
     position: relative;
     width: 100%;
@@ -2303,14 +2304,16 @@ table.all-invoices tfoot .links a {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
-.new-task-desc{
-    position:relative;
+
+.new-task-desc {
+    position: relative;
     width: calc(100% - 20px);
     height: 60px;
     margin-top: 15px;
-    margin-bottom:15px;
+    margin-bottom: 15px;
     padding: 0 10px 0 10px;
 }
+
 .new-task-start {
     position: relative;
     width: calc(100% - 20px);
@@ -2318,6 +2321,7 @@ table.all-invoices tfoot .links a {
     margin-bottom: 15px;
     padding: 0 10px 0 10px;
 }
+
 .new-task-end {
     position: relative;
     width: calc(100% - 20px);
@@ -2325,17 +2329,19 @@ table.all-invoices tfoot .links a {
     margin: 0 0 15px 110px;
     padding: 0 10px 0 10px;
 }
-.new-task-btn-section{
-    position:absolute;
+
+.new-task-btn-section {
+    position: absolute;
     bottom: 0;
-    left:0;
-    width:calc(100% - 20px);
+    left: 0;
+    width: calc(100% - 20px);
     height: 50px;
     margin-bottom: 5px;
     padding: 0 10px 0 10px;
 }
+
     .new-task-btn-section btn {
-        position:relative;
+        position: relative;
         width: 80px;
         height: 30px;
         background: rgba(255,99,0,.9);
@@ -2347,10 +2353,11 @@ table.all-invoices tfoot .links a {
         border-radius: 2px;
         cursor: pointer;
     }
+
 #newTaskSave {
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     opacity: 0;
     width: 80px;
     height: 30px;
@@ -2363,18 +2370,21 @@ table.all-invoices tfoot .links a {
     border-radius: 2px;
     cursor: pointer;
 }
+
 .desc-label {
     position: relative;
     width: 110px;
     height: 100%;
     float: left;
 }
-.desc-section{
-    position:relative;
+
+.desc-section {
+    position: relative;
     width: calc(100% - 112px);
     height: 100%;
-    float:left;
+    float: left;
 }
+
 .new-task-name {
     position: relative;
     width: calc(100% - 20px);
@@ -2383,6 +2393,7 @@ table.all-invoices tfoot .links a {
     margin-bottom: 15px;
     padding: 0 10px 0 10px;
 }
+
 .task-desc-field {
     height: 100%;
     width: 100%;
@@ -2397,6 +2408,7 @@ table.all-invoices tfoot .links a {
     line-height: 20px;
     font-family: inherit;
 }
+
 .task-name-field {
     height: 100%;
     width: 100%;
@@ -2411,6 +2423,7 @@ table.all-invoices tfoot .links a {
     line-height: 20px;
     font-family: inherit;
 }
+
 .new-task-cover {
     position: absolute;
     top: 0;
@@ -2420,6 +2433,7 @@ table.all-invoices tfoot .links a {
     background-color: rgba(0,0,0,.5);
     z-index: 3;
 }
+
 .scheduled-section {
     position: relative;
     width: calc(100% - 20px);
@@ -2448,6 +2462,7 @@ table.all-invoices tfoot .links a {
     -ms-user-select: none;
     user-select: none;
 }
+
 .schedule-name {
     position: relative;
     width: 100%;
@@ -2470,10 +2485,10 @@ table.all-invoices tfoot .links a {
 }
 
     .bottom-header-dates div {
-        width:156px;
-        float:left;
+        width: 156px;
+        float: left;
         height: 100%;
-        text-align:center;
+        text-align: center;
     }
 
 .schedule {
@@ -2513,7 +2528,7 @@ table.all-invoices tfoot .links a {
     height: 1055px;
     float: left;
 }
-    /*.days div {
+/*.days div {
         border-right: 1px solid rgba(184,184,184, 1);
         background-image: url(../Images/calendarBorder.bmp);
         position: relative;
@@ -2530,6 +2545,7 @@ table.all-invoices tfoot .links a {
     height: 100%;
     float: left;
 }
+
 .tue-col {
     border-right: 1px solid rgba(184,184,184, 1);
     background-image: url(../Images/calendarBorder.bmp);
@@ -2574,6 +2590,7 @@ table.all-invoices tfoot .links a {
     height: 100%;
     float: left;
 }
+
 .sun-col {
     background-image: url(../Images/calendarBorder.bmp);
     position: relative;
@@ -2582,6 +2599,7 @@ table.all-invoices tfoot .links a {
     float: left;
     border-right: none !important;
 }
+
 #addNewTask {
     position: absolute;
     bottom: 30px;
@@ -2591,29 +2609,31 @@ table.all-invoices tfoot .links a {
     height: 50px;
     background: linear-gradient(40deg, rgba(241, 28,94,1),rgba(255,99,0,1));
     z-index: 2;
-    text-align:center;
+    text-align: center;
     color: white;
     font-size: 35px;
     line-height: 50px;
     cursor: pointer;
 }
+
 .top-header {
     position: relative;
     width: 100%;
     float: left;
     height: calc(100% - 60px);
     color: black;
-
 }
-.date-range-section{
-    position:relative;
-    float:left;
-    width:33.3%;
-    height:100%;
+
+.date-range-section {
+    position: relative;
+    float: left;
+    width: 33.3%;
+    height: 100%;
     font-size: 25px;
-    line-height:50px;
+    line-height: 50px;
     text-align: center;
 }
+
 #leftArrowCallendar {
     position: relative;
     float: left;
@@ -2633,18 +2653,20 @@ table.all-invoices tfoot .links a {
     line-height: 50px;
     padding-right: 15px;
 }
-#rightArrowT{
-    position:absolute;
+
+#rightArrowT {
+    position: absolute;
     background-image: url(../Images/graph-arr-r.png);
     width: 30px;
     height: 30px;
     background-size: cover;
-    top:0;
-    bottom:0;
+    top: 0;
+    bottom: 0;
     right: 15px;
-    margin:auto;
-    cursor:pointer;
+    margin: auto;
+    cursor: pointer;
 }
+
 #leftArrowT {
     position: absolute;
     background-image: url(../Images/graph-arr-l.png);
@@ -2655,21 +2677,28 @@ table.all-invoices tfoot .links a {
     bottom: 0;
     left: 15px;
     margin: auto;
-    cursor:pointer;
+    cursor: pointer;
 }
-.new-task{
+
+.new-task {
     position: absolute;
     width: calc(100% - 20px);
     background-color: brown;
     padding: 0px 10px 0px 10px;
     color: white;
-    text-align:center;
+    text-align: center;
+    cursor: pointer;
 }
+
 .title {
     position: relative;
     height: 20px;
     width: 100%;
-    float:left;
+    float: left;
+}
+
+.autoHeight {
+    height: auto;
 }
 
 .desc {
@@ -2677,7 +2706,7 @@ table.all-invoices tfoot .links a {
     height: auto;
     width: 100%;
     overflow: hidden;
-    float:left;
+    float: left;
     min-height: 20px;
 }
 
@@ -2685,5 +2714,21 @@ table.all-invoices tfoot .links a {
     position: relative;
     height: 20px;
     width: 100%;
-    float:left;
+    float: left;
+}
+
+.background-first {
+    background: linear-gradient(40deg, rgba(19, 221,223,1),rgba(90,128,237,1));
+}
+
+.background-second {
+    background: linear-gradient(40deg, rgba(246, 81,158,1),rgba(254,116,116,1));
+}
+
+.background-third {
+    background: linear-gradient(40deg, rgba(64, 226,153,1),rgba(52,185,180,1));
+}
+
+.background-fourth {
+    background: linear-gradient(40deg, rgba(255, 209,64,1),rgba(251,142,83,1));
 }

@@ -2513,7 +2513,6 @@ table.all-invoices tfoot .links a {
     height: 1055px;
     float: left;
 }
-
     /*.days div {
         border-right: 1px solid rgba(184,184,184, 1);
         background-image: url(../Images/calendarBorder.bmp);
@@ -2660,6 +2659,31 @@ table.all-invoices tfoot .links a {
 }
 .new-task{
     position: absolute;
-    width: 100%;
+    width: calc(100% - 20px);
     background-color: brown;
+    padding: 0px 10px 0px 10px;
+    color: white;
+    text-align:center;
+}
+.title {
+    position: relative;
+    height: 20px;
+    width: 100%;
+    float:left;
+}
+
+.desc {
+    position: relative;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    float:left;
+    min-height: 20px;
+}
+
+.time {
+    position: relative;
+    height: 20px;
+    width: 100%;
+    float:left;
 }

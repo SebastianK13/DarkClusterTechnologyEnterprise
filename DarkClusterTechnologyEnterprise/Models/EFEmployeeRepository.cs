@@ -332,7 +332,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         public List<TaskSchedule> GetAllTasks(int eId) => 
             context.TaskSchedules
             .Where(e => (e.EmployeeId == eId) 
-            && e.TaskBegin.Date > DateTime.Now.Date)
+            && e.TaskBegin.Date >= DateTime.Now.Date)
             .ToList();
     }
 }

@@ -94,14 +94,35 @@ function GenerateTasks() {
             var begin = new Date(p.taskBegin);
             var end = new Date(p.taskDeadline);
             var y = ((Math.abs(end - begin)) / 3600000)*44;
-            var top = (begin.getHours() * 2640 + begin.getMinutes())/60;
+            var top = ((begin.getHours() * 60 + begin.getMinutes())/60)*44;
 
             var temp = p.taskBegin;
             var arr = JSON.stringify(temp).split('T');
             var formatedDate = arr[0].toString().replace('"', '');
+            var beginTime = arr[1].toString().replace('"', '');
+
+
+            var temp2 = p.taskDeadline;
+            var arr2 = JSON.stringify(temp2).split('T');
+            var endTime = arr2[1].toString().replace('"', '');
+
             if (formatedDate === d.innerText) {
                 debugger;
                 var newTask = document.createElement("div");
+                var title = document.createElement("div");
+                title.className = "title";
+                title.innerText = p.task;
+                var time = document.createElement("div");
+                time.className = "time"
+                time.innerText = beginTime + " - " + endTime;
+                var desc = document.createElement("div");
+                desc.className = "desc";
+                desc.innerText = p.taskDesc;
+
+                newTask.appendChild(time);
+                newTask.appendChild(title);
+                newTask.appendChild(desc);
+
                 newTask.className = "new-task";
                 newTask.style.top = top+"px";
                 newTask.style.height = y+"px";

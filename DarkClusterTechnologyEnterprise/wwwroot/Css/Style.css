@@ -2736,3 +2736,15 @@ table.all-invoices tfoot .links a {
 .background-fourth {
     background: linear-gradient(40deg, rgba(255, 209,64,1),rgba(251,142,83,1));
 }
+#startTimeUTC{
+    display:none;
+}
+#startDateUTC {
+    display:none;
+}
+#endTimeUTC {
+    display: none;
+}
+#endDateUTC {
+    display: none;
+}

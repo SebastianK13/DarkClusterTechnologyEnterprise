@@ -14,6 +14,40 @@ var days = document.getElementById("days").children;
 var callendarArea = document.getElementById("days");
 var backgrounds = ["background-first", "background-second", "background-third", "background-fourth"];
 var form = document.getElementById("addNewTaskForm");
+//NewTask post validation
+var emptyFields = [true, true, true, true, true, true];
+var task = document.getElementById("Task");
+var taskDesc = document.getElementById("TaskDesc");
+var startTime = document.getElementById("startTime");
+var startDate = document.getElementById("startDate");
+var endTime = document.getElementById("endTime");
+var endDate = document.getElementById("endDate");
+
+task.addEventListener("keyup", function () {
+    debugger;
+    CheckIsEmptyField(null);
+});
+
+taskDesc.addEventListener("keyup", function () {
+    CheckIsEmptyField(null);
+});
+
+startTime.addEventListener("change", function () {
+    CheckIsEmptyField(null);
+});
+
+startDate.addEventListener("change", function () {
+    debugger;
+    CheckIsEmptyField(null);
+});
+
+endTime.addEventListener("change", function () {
+    CheckIsEmptyField(null);
+});
+
+endDate.addEventListener("change", function () {
+    CheckIsEmptyField(null);
+});
 
 callendarArea.addEventListener("mouseenter", function (e) {
     if (e.target.classList.contains("new-task")) {
@@ -33,6 +67,8 @@ callendarArea.addEventListener("mouseleave", function (e) {
 
 newTaskBtn.addEventListener("click", function () {
     cover.classList.remove("display-none");
+    SetNewTaskDate();
+    SetNewTaskTime();
 });
 
 cancell.addEventListener("click", function () {
@@ -157,51 +193,135 @@ function GenerateTasks() {
 form.addEventListener("submit", function (e) {
 
     CheckIsEmptyField(e);
-    //if () {
-
-    //}
 });
 
 function CheckIsEmptyField(e) {
-    var task = document.getElementById("Task");
-    var taskDesc = document.getElementById("TaskDesc");
-    var startTime = document.getElementById("startTime");
-    var startDate = document.getElementById("startDate");
-    var endTime = document.getElementById("endTime");
-    var endDate = document.getElementById("endDate");
     array = [];
     var count = 0;
 
-    var arr = [task, taskDesc, startTime, startDate, endTime, endDate];
+    var arr = [taskDesc, task, startTime, startDate, endTime, endDate];
+
+    var desc = document.getElementById("Desc");
+    var name = document.getElementById("Name");
+    var stime = document.getElementById("sTime");
+    var sdate = document.getElementById("sDate");
+    var etime = document.getElementById("eTime");
+    var edate = document.getElementById("eDate");
 
     for (f of arr) {
-        if (f.innerText === "") {
             switch (f.id) {
-                case "Task":
-                    array[count] = "Task field cannot be empty";
-                    break;
                 case "TaskDesc":
-                    array[count] = "Description field cannot be empty";
+                    if (desc === null && f.value === "") {
+                        array[count] = {
+                            err: "Description field cannot be empty",
+                            id: "Desc"
+                        };
+                        emptyFields[0] = true;
+                        count++;
+                    }
+                    else if (f.value != "") {
+                        if (desc != null)
+                            desc.remove();
+
+                        emptyFields[0] = false;
+                    }
+                    break;
+                case "Task":
+                    if (name === null && f.value === "") {
+                        array[count] = {
+                            err: "Name field cannot be empty",
+                            id: "Name"
+                        };
+                        emptyFields[1] = true;
+                        count++;
+                    }
+                    else if (f.value != "") {
+                        if (name != null)
+                            name.remove();
+
+                        emptyFields[1] = false;
+                    }
+
                     break;
                 case "startTime":
-                    array[count] = "Start time field cannot be empty";
+                    if (stime === null && f.value === "") {
+                        array[count] = {
+                            err: "Start time field cannot be empty",
+                            id: "sTime"
+                        };
+                        emptyFields[2] = true;
+                        count++;
+                    }
+                    else if (f.value != "") {
+                        if (stime != null)
+                            stime.remove();
+
+                        emptyFields[2] = false;
+                    }
+
                     break;
                 case "startDate":
-                    array[count] = "Start date field cannot be empty";
+                    if (sdate === null && f.value === "") {
+                        array[count] = {
+                            err: "Start date field cannot be empty",
+                            id: "sDate"
+                        };
+                        emptyFields[3] = true;
+                        count++;
+                    }
+                    else if (f.value != "") {
+                        if (sdate != null)
+                            sdate.remove();
+
+                        emptyFields[3] = false;
+                    }
+
                     break;
                 case "endTime":
-                    array[count] = "End time field cannot be empty";
+                    if (etime === null && f.value === "") {
+                        array[count] = {
+                            err: "End time field cannot be empty",
+                            id: "eTime"
+                        };
+                        emptyFields[4] = true;
+                        count++;
+                    }
+                    else if (f.value != "") {
+                        if (etime != null)
+                            etime.remove();
+
+                        emptyFields[4] = false;
+                    }
+
                     break;
                 case "endDate":
-                    array[count] = "End date field cannot be empty";
+                    if (edate === null && f.value === "") {
+                        array[count] = {
+                            err: "End date field cannot be empty",
+                            id: "eDate"
+                        };
+                        emptyFields[5] = true;
+                        count++;
+                    }
+                    else if (f.value != "") {
+                        if (edate != null)
+                            edate.remove();
+
+                        emptyFields[5] = false;
+                    }
+
                     break;
             }
-            count++;
-        }
     }
-    debugger;
-    if (array.length > 0) {
+
+    if (e != null && emptyFields.includes(true)) {
         e.preventDefault();
+    }
+    else {
+        SetUTCDates();
+    }
+
+    if (array.length > 0) {
         GenerateEmptyFieldErr(array);
     }
 }
@@ -209,7 +329,80 @@ function GenerateEmptyFieldErr(array) {
     var errSection = document.getElementById("dateErrors");
     for (e of array) {
         var li = document.createElement("li");
-        li.innerText = e;
+        li.innerText = e.err;
+        li.id = e.id;
         errSection.appendChild(li);
     }
+}
+
+function SetNewTaskDate() {
+    var today = new Date();
+
+    var d = modifyDay(today);
+    var m = modifyMonth(today);
+    var y = today.getFullYear();
+
+    var maxVal = new Date(y + '-' + m + '-' + d);
+    maxVal.setDate(maxVal.getDate() + 30);
+
+    var dM = modifyDay(maxVal);
+    var mM = modifyMonth(maxVal);
+    var yM = maxVal.getFullYear();
+
+    startDate.min = y + '-' + m + '-' + d;
+    startDate.value = y + '-' + m + '-' + d;
+    startDate.max = yM + '-' + mM + '-' + dM;
+
+    endDate.min = y + '-' + m + '-' + d;
+    endDate.value = y + '-' + m + '-' + d;
+    endDate.max = yM + '-' + mM + '-' + dM;
+
+}
+function modifyMonth(today) {
+    var m = today.getMonth() + 1;
+    if (m < 10) {
+        m = "0" + m;
+    }
+    return m;
+}
+function modifyDay(today) {
+    var d = today.getDate();
+    if (d < 10) {
+        d = "0" + d;
+    }
+    return d;
+}
+
+function SetNewTaskTime() {
+    var today = new Date();
+    today.setMinutes(today.getMinutes() + 5);
+    var todayEnd = new Date();
+    todayEnd.setMinutes(todayEnd.getMinutes() + 10);
+
+    endTime.value = ModifyTime(todayEnd.getHours()) + ':' + ModifyTime(todayEnd.getMinutes()) + ':' + "00";
+    startTime.value = ModifyTime(today.getHours()) + ':' + ModifyTime(today.getMinutes()) + ':' + "00";
+
+    var todayUTC = new Date();
+    todayUTC = new Date(todayUTC.setMinutes(todayUTC.getMinutes() + 5)).toISOString();
+    var todayEndUTC = new Date();
+    var todayEndUTC = new Date(todayEndUTC.setMinutes(todayEndUTC.getMinutes() + 10)).toISOString();
+    var timeUTC = JSON.stringify(todayUTC).split('T');
+    var timeEndUTC = JSON.stringify(todayEndUTC).split('T');
+    document.getElementById("endTimeUTC").value = timeEndUTC[1].split(':')[0] + ':' + timeEndUTC[1].split(':')[1]+ ':' + "00";
+    document.getElementById("startTimeUTC").value = timeUTC[1].split(':')[0] + ':' + timeUTC[1].split(':')[1] + ':' + "00";
+    debugger;
+    timeEndUTC[0] = timeEndUTC[0].toString().replace('"', '');
+    timeUTC[0] = timeUTC[0].toString().replace('"', '');
+    document.getElementById("endDateUTC").value = timeEndUTC[0];
+    document.getElementById("startDateUTC").value = timeUTC[0];
+}
+function ModifyTime(today) {
+    if (today < 10) {
+        today = "0" + today;
+    }
+    return today;
+}
+
+function SetUTCDates() {
+
 }

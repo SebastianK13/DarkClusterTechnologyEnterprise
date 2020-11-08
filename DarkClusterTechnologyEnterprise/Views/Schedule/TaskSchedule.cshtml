@@ -24,16 +24,16 @@
                         </div>
                         <div class="new-task-start">
                             <div class="desc-label">Duration</div>
-                            <input id="startTime" type="time">
-                            <input id="startDate" type="date">
-                            <input id="startTimeUTC" type="time" name="TaskBeginTime">
-                            <input id="startDateUTC" type="date" name="TaskBeginDate">
+                            <input id="startTime" type="time" name="TaskBeginTime">
+                            <input id="startDate" type="date" name="TaskBeginDate">
+                            <input id="startTimeUTC" type="time" >
+                            <input id="startDateUTC" type="date" >
                         </div>
                         <div class="new-task-end">
-                            <input id="endTime" type="time">
-                            <input id="endDate" type="date">
-                            <input id="endTimeUTC" type="time" name="TaskEndTime">
-                            <input id="endDateUTC" type="date" name="TaskEndDate">
+                            <input id="endTime" type="time" name="TaskEndTime">
+                            <input id="endDate" type="date" name="TaskEndDate">
+                            <input id="endTimeUTC" type="time" >
+                            <input id="endDateUTC" type="date" >
 
                         </div>
                         <div class="tableErrors white-color">
@@ -123,5 +123,6 @@
         SetDates();
         ChangeHeaderDates();
         GenerateTasks();
+        CreateDatesNTime();
     });
 </script>

@@ -31,10 +31,8 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             int eId = await repository.GetEmployeeID(username);
             SingleTask task = new SingleTask(repository.GetAllTasks(eId));
             var tasks = SplitTask(task);
-            DatesUTC datesUTC = new DatesUTC(tasks);
-            repository.ConvertToUTC(ref tasks, eId);
 
-            TaskViewModel model = new TaskViewModel(tasks , month, datesUTC.UTCDates);
+            TaskViewModel model = new TaskViewModel(tasks , month);
 
             return View(model);
         }

@@ -4,6 +4,7 @@ var cancell = document.getElementById("newTaskCancell");
 var save = document.getElementById("newTaskSave");
 var tasksList = null;
 var datesList = null;
+var datesNTime = null;
 var dates = [];
 var actualPage = 0;
 var datesHeader = document.getElementById("headerDates").getElementsByTagName("div");
@@ -23,8 +24,18 @@ var startDate = document.getElementById("startDate");
 var endTime = document.getElementById("endTime");
 var endDate = document.getElementById("endDate");
 
+function CreateDatesNTime() {
+    var fullDatesList = [];
+    for (i = 0; i < tasksList.length; i++) {
+        fullDatesList[i] = {
+            beginDate: new Date(tasksList[i].taskBegin),
+            endDate: new Date(tasksList[i].taskDeadline)
+        };
+    }
+    datesNTime = fullDatesList;
+}
+
 task.addEventListener("keyup", function () {
-    debugger;
     CheckIsEmptyField(null);
 });
 
@@ -141,6 +152,7 @@ function ChangeHeaderDates() {
     }
 }
 function GenerateTasks() {
+    var lastId = null;
     var backgroundIndex = 0;
     for (p of tasksList) {
         var i = 0;
@@ -176,13 +188,20 @@ function GenerateTasks() {
                 newTask.appendChild(title);
                 newTask.appendChild(desc);
                 newTask.classList.add("new-task");
-                newTask.classList.add(backgrounds[backgroundIndex]);
+                debugger;
+                if (lastId === p.taskId) 
+                    newTask.classList.add(backgrounds[backgroundIndex-1]);
+                else
+                    newTask.classList.add(backgrounds[backgroundIndex]);
+
                 newTask.style.top = top + "px";
                 newTask.style.height = y + "px";
                 days[i].appendChild(newTask);
                 backgroundIndex++;;
                 if (backgroundIndex > 3)
                     backgroundIndex = 0;
+
+                lastId = p.taskId;
             }
             i++;
         }
@@ -191,8 +210,15 @@ function GenerateTasks() {
 
 form.addEventListener("submit", function (e) {
 
+    CheckTaskLength();
     CheckIsEmptyField(e);
+    CheckDate();
 });
+
+function CheckTaskLength() {
+    debugger;
+    var difference = new Date(endDate.value) - new Date(startDate.value);
+}
 
 function CheckIsEmptyField(e) {
     array = [];
@@ -208,117 +234,117 @@ function CheckIsEmptyField(e) {
     var edate = document.getElementById("eDate");
 
     for (f of arr) {
-            switch (f.id) {
-                case "TaskDesc":
-                    if (desc === null && f.value === "") {
-                        array[count] = {
-                            err: "Description field cannot be empty",
-                            id: "Desc"
-                        };
-                        emptyFields[0] = true;
-                        count++;
-                    }
-                    else if (f.value != "") {
-                        if (desc != null)
-                            desc.remove();
+        switch (f.id) {
+            case "TaskDesc":
+                if (desc === null && f.value === "") {
+                    array[count] = {
+                        err: "Description field cannot be empty",
+                        id: "Desc"
+                    };
+                    emptyFields[0] = true;
+                    count++;
+                }
+                else if (f.value != "") {
+                    if (desc != null)
+                        desc.remove();
 
-                        emptyFields[0] = false;
-                    }
-                    break;
-                case "Task":
-                    if (name === null && f.value === "") {
-                        array[count] = {
-                            err: "Name field cannot be empty",
-                            id: "Name"
-                        };
-                        emptyFields[1] = true;
-                        count++;
-                    }
-                    else if (f.value != "") {
-                        if (name != null)
-                            name.remove();
+                    emptyFields[0] = false;
+                }
+                break;
+            case "Task":
+                if (name === null && f.value === "") {
+                    array[count] = {
+                        err: "Name field cannot be empty",
+                        id: "Name"
+                    };
+                    emptyFields[1] = true;
+                    count++;
+                }
+                else if (f.value != "") {
+                    if (name != null)
+                        name.remove();
 
-                        emptyFields[1] = false;
-                    }
+                    emptyFields[1] = false;
+                }
 
-                    break;
-                case "startTime":
-                    if (stime === null && f.value === "") {
-                        array[count] = {
-                            err: "Start time field cannot be empty",
-                            id: "sTime"
-                        };
-                        emptyFields[2] = true;
-                        count++;
-                    }
-                    else if (f.value != "") {
-                        if (stime != null)
-                            stime.remove();
+                break;
+            case "startTime":
+                if (stime === null && f.value === "") {
+                    array[count] = {
+                        err: "Start time field cannot be empty",
+                        id: "sTime"
+                    };
+                    emptyFields[2] = true;
+                    count++;
+                }
+                else if (f.value != "") {
+                    if (stime != null)
+                        stime.remove();
 
-                        emptyFields[2] = false;
-                    }
+                    emptyFields[2] = false;
+                }
 
-                    break;
-                case "startDate":
-                    if (sdate === null && f.value === "") {
-                        array[count] = {
-                            err: "Start date field cannot be empty",
-                            id: "sDate"
-                        };
-                        emptyFields[3] = true;
-                        count++;
-                    }
-                    else if (f.value != "") {
-                        if (sdate != null)
-                            sdate.remove();
+                break;
+            case "startDate":
+                if (sdate === null && f.value === "") {
+                    array[count] = {
+                        err: "Start date field cannot be empty",
+                        id: "sDate"
+                    };
+                    emptyFields[3] = true;
+                    count++;
+                }
+                else if (f.value != "") {
+                    if (sdate != null)
+                        sdate.remove();
 
-                        emptyFields[3] = false;
-                    }
+                    emptyFields[3] = false;
+                }
 
-                    break;
-                case "endTime":
-                    if (etime === null && f.value === "") {
-                        array[count] = {
-                            err: "End time field cannot be empty",
-                            id: "eTime"
-                        };
-                        emptyFields[4] = true;
-                        count++;
-                    }
-                    else if (f.value != "") {
-                        if (etime != null)
-                            etime.remove();
+                break;
+            case "endTime":
+                if (etime === null && f.value === "") {
+                    array[count] = {
+                        err: "End time field cannot be empty",
+                        id: "eTime"
+                    };
+                    emptyFields[4] = true;
+                    count++;
+                }
+                else if (f.value != "") {
+                    if (etime != null)
+                        etime.remove();
 
-                        emptyFields[4] = false;
-                    }
+                    emptyFields[4] = false;
+                }
 
-                    break;
-                case "endDate":
-                    if (edate === null && f.value === "") {
-                        array[count] = {
-                            err: "End date field cannot be empty",
-                            id: "eDate"
-                        };
-                        emptyFields[5] = true;
-                        count++;
-                    }
-                    else if (f.value != "") {
-                        if (edate != null)
-                            edate.remove();
+                break;
+            case "endDate":
+                if (edate === null && f.value === "") {
+                    array[count] = {
+                        err: "End date field cannot be empty",
+                        id: "eDate"
+                    };
+                    emptyFields[5] = true;
+                    count++;
+                }
+                else if (f.value != "") {
+                    if (edate != null)
+                        edate.remove();
 
-                        emptyFields[5] = false;
-                    }
+                    emptyFields[5] = false;
+                }
 
-                    break;
-            }
+                break;
+        }
     }
 
     if (e != null && emptyFields.includes(true)) {
         e.preventDefault();
     }
-    else {
-        SetUTCDatesNTimes();
-    }
+    //else {
+    //    SetUTCDatesNTimes();
+    //}
 
     if (array.length > 0) {
         GenerateEmptyFieldErr(array);
@@ -380,19 +406,6 @@ function SetNewTaskTime() {
 
     endTime.value = ModifyTime(todayEnd.getHours()) + ':' + ModifyTime(todayEnd.getMinutes()) + ':' + "00";
     startTime.value = ModifyTime(today.getHours()) + ':' + ModifyTime(today.getMinutes()) + ':' + "00";
-
-    var todayUTC = new Date();
-    todayUTC = new Date(todayUTC.setMinutes(todayUTC.getMinutes() + 5)).toISOString();
-    var todayEndUTC = new Date();
-    var todayEndUTC = new Date(todayEndUTC.setMinutes(todayEndUTC.getMinutes() + 10)).toISOString();
-    var timeUTC = JSON.stringify(todayUTC).split('T');
-    var timeEndUTC = JSON.stringify(todayEndUTC).split('T');
-    document.getElementById("endTimeUTC").value = timeEndUTC[1].split(':')[0] + ':' + timeEndUTC[1].split(':')[1]+ ':' + "00";
-    document.getElementById("startTimeUTC").value = timeUTC[1].split(':')[0] + ':' + timeUTC[1].split(':')[1] + ':' + "00";
-    timeEndUTC[0] = timeEndUTC[0].toString().replace('"', '');
-    timeUTC[0] = timeUTC[0].toString().replace('"', '');
-    document.getElementById("endDateUTC").value = timeEndUTC[0];
-    document.getElementById("startDateUTC").value = timeUTC[0];
 }
 function ModifyTime(today) {
     if (today < 10) {
@@ -400,18 +413,80 @@ function ModifyTime(today) {
     }
     return today;
 }
+function CheckDate() {
+    var newTaskStart = new Date(startDate.value + ' ' + startTime.value);
+    var newTaskEnd = new Date(endDate.value + ' ' + endTime.value);
+    var errors = [];
+    var i = 0;
+    var newTaskDateError = document.getElementById("newTaskDateErr");
+    if (newTaskDateError != null) {
+        newTaskDateError.remove();
+    }
 
-function SetUTCDatesNTimes() {
+    var oneDay = IsDayEqual(newTaskStart, newTaskEnd);
 
-    var todayUTC = new Date(startDate.value + ' ' + startTime.value).toISOString();
-    var todayEndUTC = new Date(endDate.value + ' ' + endTime.value).toISOString();
+    for (c = 0; c < datesNTime.length; c++) {
+        if (oneDay) {
+            debugger;
+            if (IsDayEqual(newTaskStart, datesNTime[c].beginDate)) {
+                if ((newTaskStart > datesNTime[c].beginDate) && (newTaskEnd < datesNTime[c].endDate)) {
+                    errors[i] = {
+                        err: "There is a task in this time period",
+                        id: "newTaskDateErr"
+                    };
+                    c = datesNTime.length;
+                }
+                else if ((newTaskStart > datesNTime[c].beginDate) && (newTaskEnd > datesNTime[c].endDate) && (newTaskStart < datesNTime[c].endDate)) {
 
-    var timeUTC = JSON.stringify(todayUTC).split('T');
-    var timeEndUTC = JSON.stringify(todayEndUTC).split('T');
-    document.getElementById("endTimeUTC").value = timeEndUTC[1].split(':')[0] + ':' + timeEndUTC[1].split(':')[1] + ':' + "00";
-    document.getElementById("startTimeUTC").value = timeUTC[1].split(':')[0] + ':' + timeUTC[1].split(':')[1] + ':' + "00";
-    timeEndUTC[0] = timeEndUTC[0].toString().replace('"', '');
-    timeUTC[0] = timeUTC[0].toString().replace('"', '');
-    document.getElementById("endDateUTC").value = timeEndUTC[0];
-    document.getElementById("startDateUTC").value = timeUTC[0];
+                    errors[i] = {
+                        err: "New task start time must be greater",
+                        id: "newTaskDateErr"
+                    };
+                    i++;
+                    c = datesNTime.length;
+                }
+                else if ((newTaskStart < datesNTime[c].beginDate) && (newTaskEnd < datesNTime[c].endDate) && (datesNTime[c].beginDate < newTaskEnd)) {
+
+                    errors[i] = {
+                        err: "New task end time must be lesser",
+                        id: "newTaskDateErr"
+                    };
+                    i++;
+                    c = datesNTime.length;
+                }
+            }
+        }
+        else {
+            debugger;
+            if ((newTaskStart < datesNTime[c].beginDate) && (newTaskEnd > datesNTime[c].beginDate)) {
+                errors[i] = {
+                    err: "There is a task in this time period",
+                    id: "newTaskDateErr"
+                };
+                c = datesNTime.length;
+            }
+            else if ((newTaskStart > datesNTime[c].beginDate) && (newTaskStart < datesNTime[c].endDate)) {
+                errors[i] = {
+                    err: "There is a task in this time period",
+                    id: "newTaskDateErr"
+                };
+                c = datesNTime.length;
+            }
+        }
+    }
+    debugger;
+    GenerateEmptyFieldErr(errors)
+}
+function IsDayEqual(start, end) {
+    var t1 = start.getFullYear() + '-' + start.getMonth() + '-' + start.getDate();
+    var t2 = end.getFullYear() + '-' + end.getMonth() + '-' + end.getDate();
+    //start = JSON.stringify(start).split('T')[0].toString().replace('"', '');
+    //end = JSON.stringify(end).split('T')[0].toString().replace('"', '');
+    if (t1.localeCompare(t2) === 0) {
+
+        return true;
+    }
+    else {
+        return false;
+    }
 }

@@ -318,7 +318,7 @@ function CheckIsEmptyField(e) {
         e.preventDefault();
     }
     else {
-        SetUTCDates();
+        SetUTCDatesNTimes();
     }
 
     if (array.length > 0) {
@@ -390,7 +390,6 @@ function SetNewTaskTime() {
     var timeEndUTC = JSON.stringify(todayEndUTC).split('T');
     document.getElementById("endTimeUTC").value = timeEndUTC[1].split(':')[0] + ':' + timeEndUTC[1].split(':')[1]+ ':' + "00";
     document.getElementById("startTimeUTC").value = timeUTC[1].split(':')[0] + ':' + timeUTC[1].split(':')[1] + ':' + "00";
-    debugger;
     timeEndUTC[0] = timeEndUTC[0].toString().replace('"', '');
     timeUTC[0] = timeUTC[0].toString().replace('"', '');
     document.getElementById("endDateUTC").value = timeEndUTC[0];
@@ -403,6 +402,18 @@ function ModifyTime(today) {
     return today;
 }
 
-function SetUTCDates() {
+function SetUTCDatesNTimes() {
 
+    var todayUTC = new Date(startDate.value + ' ' + startTime.value).toISOString();
+    var todayEndUTC = new Date(endDate.value + ' ' + endTime.value).toISOString();
+
+    var timeUTC = JSON.stringify(todayUTC).split('T');
+    var timeEndUTC = JSON.stringify(todayEndUTC).split('T');
+    document.getElementById("endTimeUTC").value = timeEndUTC[1].split(':')[0] + ':' + timeEndUTC[1].split(':')[1] + ':' + "00";
+    document.getElementById("startTimeUTC").value = timeUTC[1].split(':')[0] + ':' + timeUTC[1].split(':')[1] + ':' + "00";
+    debugger;
+    timeEndUTC[0] = timeEndUTC[0].toString().replace('"', '');
+    timeUTC[0] = timeUTC[0].toString().replace('"', '');
+    document.getElementById("endDateUTC").value = timeEndUTC[0];
+    document.getElementById("startDateUTC").value = timeUTC[0];
 }

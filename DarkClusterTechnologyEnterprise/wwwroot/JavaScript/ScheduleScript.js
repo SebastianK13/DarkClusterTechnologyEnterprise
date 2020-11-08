@@ -37,7 +37,6 @@ startTime.addEventListener("change", function () {
 });
 
 startDate.addEventListener("change", function () {
-    debugger;
     CheckIsEmptyField(null);
 });
 
@@ -411,7 +410,6 @@ function SetUTCDatesNTimes() {
     var timeEndUTC = JSON.stringify(todayEndUTC).split('T');
     document.getElementById("endTimeUTC").value = timeEndUTC[1].split(':')[0] + ':' + timeEndUTC[1].split(':')[1] + ':' + "00";
     document.getElementById("startTimeUTC").value = timeUTC[1].split(':')[0] + ':' + timeUTC[1].split(':')[1] + ':' + "00";
-    debugger;
     timeEndUTC[0] = timeEndUTC[0].toString().replace('"', '');
     timeUTC[0] = timeUTC[0].toString().replace('"', '');
     document.getElementById("endDateUTC").value = timeEndUTC[0];

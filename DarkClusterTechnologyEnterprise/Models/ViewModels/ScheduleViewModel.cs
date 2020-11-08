@@ -33,13 +33,34 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
     }
     public class TaskViewModel
     {
-        public TaskViewModel(List<SingleTask> tasks, List<DateTime> dates)
+        public TaskViewModel(List<SingleTask> tasks, List<DateTime> dates, List<DatesUTC> datesUTC)
         {
             Tasks = tasks;
             Dates = dates;
+            DatesUTC = datesUTC;
         }
         public List<SingleTask>? Tasks { get; set; }
         public List<DateTime>? Dates { get; set; }
+        public List<DatesUTC> DatesUTC { get; set; }
+    }
+    public class DatesUTC
+    {
+        public DatesUTC() { }
+        public DatesUTC(List<SingleTask> tasks)
+        {
+            UTCDates = new List<DatesUTC>();
+            foreach (var t in tasks)
+            {
+                UTCDates.Add(new DatesUTC
+                {
+                    TaskBeginUTC = t.TaskBegin,
+                    TaskDeadlineUTC = t.TaskDeadline,
+                });
+            }
+        }
+        public DateTime TaskBeginUTC { get; set; }
+        public DateTime TaskDeadlineUTC { get; set; }
+        public List<DatesUTC> UTCDates { get; set; }
     }
     public class SingleTask
     {
@@ -48,9 +69,10 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         {
             Tasks = new List<SingleTask>();
 
-            foreach(var t in tasks)
+            foreach (var t in tasks)
             {
-                Tasks.Add(new SingleTask() { 
+                Tasks.Add(new SingleTask()
+                {
                     Task = t.Task,
                     TaskId = t.TaskId,
                     TaskDesc = t.TaskDesc,

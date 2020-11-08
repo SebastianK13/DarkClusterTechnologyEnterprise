@@ -154,13 +154,15 @@ namespace DarkClusterTechnologyEnterprise.Models
         {
             //var t = DateTime.Now.ToUniversalTime();
 
+            var userTZ = GetUserTimeZone(eId);
+
             var p = context.Presences
                 .Where(b => (b.WorkBegin == true) && (b.WorkEnd == false) && (b.EmployeeId == eId))
                 .ToList();
 
             if (p.Count() == 0)
             {               
-                DateTime workBeg = CheckIfDaylight(eId);
+                DateTime workBeg = CheckIfDaylight(userTZ);
                 Presence presence = new Presence();
                 DateTime time = DateTime.Now.ToUniversalTime();
                 presence.EmployeeId = eId;
@@ -174,12 +176,21 @@ namespace DarkClusterTechnologyEnterprise.Models
         }
         public DateTime CheckIfDaylight(int eId)
         {
-            var user = context.Employees.Where(e => e.EmployeeId == eId).FirstOrDefault();
-            TimeZoneInfo userTZ = TimeZoneInfo.FindSystemTimeZoneById(user.Zone.TimeZoneID);
+            var userTZ = GetUserTimeZone(eId);
+            return CheckIfDaylight(userTZ);
+        }
+
+        private DateTime CheckIfDaylight(TimeZoneInfo userTZ)
+        {
             DateTime time = DateTime.UtcNow;
             DateTime userTime = TimeZoneInfo.ConvertTime(time, userTZ);
 
             return userTime;
+        }
+        private TimeZoneInfo GetUserTimeZone(int eId)
+        {
+            var user = context.Employees.Where(e => e.EmployeeId == eId).FirstOrDefault();
+            return TimeZoneInfo.FindSystemTimeZoneById(user.Zone.TimeZoneID);
         }
         public void TakeBreak(string presenceId)
         {
@@ -187,6 +198,8 @@ namespace DarkClusterTechnologyEnterprise.Models
                 .Where(p => p.PresenceId == presenceId)
                 .Select(i => i.EmployeeId)
                 .SingleOrDefault();
+
+            var userTZ = GetUserTimeZone(eId);
 
             if(presenceId != null)
             {
@@ -196,7 +209,7 @@ namespace DarkClusterTechnologyEnterprise.Models
 
                 if (currentBreak == null)
                 {
-                    DateTime breakBeg = CheckIfDaylight(eId);
+                    DateTime breakBeg = CheckIfDaylight(userTZ);
                     Break newBreak = new Break();
                     newBreak.Break_s = true;
                     newBreak.BreakStart = breakBeg;
@@ -206,7 +219,7 @@ namespace DarkClusterTechnologyEnterprise.Models
                 }
                 else
                 {
-                    DateTime breakEnd = CheckIfDaylight(eId);
+                    DateTime breakEnd = CheckIfDaylight(userTZ);
                     TimeSpan t = breakEnd - currentBreak.BreakStart;
                     RoundToSeconds(ref t);
                     currentBreak.Break_s = false;
@@ -219,7 +232,9 @@ namespace DarkClusterTechnologyEnterprise.Models
         }
         public void WorkEnd(int eId)
         {
-            DateTime time = CheckIfDaylight(eId);
+            var userTZ = GetUserTimeZone(eId);
+
+            DateTime time = CheckIfDaylight(userTZ);
             var end = context.Presences
                 .Where(b => (b.WorkBegin == true) && 
                 (b.WorkEnd == false) && 
@@ -297,11 +312,12 @@ namespace DarkClusterTechnologyEnterprise.Models
         }
         public double GetActiveBreakTime( int eId)
         {
+            var userTZ = GetUserTimeZone(eId);
             var breakStart = context.Breaks.Where(b => b.Break_s == true).FirstOrDefault();
             TimeSpan time = new TimeSpan();
             if(breakStart != null)
             {
-                DateTime d = CheckIfDaylight(eId);
+                DateTime d = CheckIfDaylight(userTZ);
                 time = (d - breakStart.BreakStart);
                 RoundToSeconds(ref time);
             }
@@ -334,5 +350,16 @@ namespace DarkClusterTechnologyEnterprise.Models
             .Where(e => (e.EmployeeId == eId) 
             && e.TaskBegin.Date >= DateTime.Now.Date)
             .ToList();
+
+        public void ConvertToUTC(ref List<SingleTask> tasks, int eId)
+        {
+            var userTZ = GetUserTimeZone(eId);
+            foreach(var t in tasks)
+            {
+                t.TaskBegin = TimeZoneInfo.ConvertTime(t.TaskBegin, userTZ);
+                t.TaskDeadline = TimeZoneInfo.ConvertTime(t.TaskDeadline, userTZ);
+            }
+        }
     }
+    
 }

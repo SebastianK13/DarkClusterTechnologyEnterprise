@@ -2748,3 +2748,22 @@ table.all-invoices tfoot .links a {
 #endDateUTC {
     display: none;
 }
+#subordinateDDL {
+    position: relative;
+    height: 100%;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.employee-DDL:focus {
+    outline: none !important;
+}   
+.employee-DDL {
+    position: relative;
+    border-radius: 0px;
+    border: 1px solid rgba(184,184,184, .8);
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+}

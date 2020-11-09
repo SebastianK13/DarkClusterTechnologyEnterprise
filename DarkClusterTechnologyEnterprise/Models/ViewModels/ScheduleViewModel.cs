@@ -7,15 +7,6 @@ using System.Threading.Tasks;
 
 namespace DarkClusterTechnologyEnterprise.Models.ViewModels
 {
-    public class ScheduleViewModel
-    {
-        public SelectList Hours { get; set; }
-        public SelectList Minutes { get; set; }
-        //public SelectList Days {get;set;}
-        //public SelectList Months {get;set;}
-        //public SelectList Years {get;set;}
-
-    }
     public class NewTask
     {
         [Required(ErrorMessage = "Task name is required")]
@@ -33,13 +24,15 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
     }
     public class TaskViewModel
     {
-        public TaskViewModel(List<SingleTask> tasks, List<DateTime> dates)
+        public TaskViewModel(List<SingleTask> tasks, List<DateTime> dates, List<Subordinate> subordinates)
         {
             Tasks = tasks;
             Dates = dates;
+            Subordinates = subordinates;
         }
         public List<SingleTask>? Tasks { get; set; }
         public List<DateTime>? Dates { get; set; }
+        public List<Subordinate> Subordinates { get; set; }
     }
 
     public class SingleTask
@@ -67,5 +60,27 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public DateTime TaskBegin { get; set; }
         public DateTime TaskDeadline { get; set; }
         public List<SingleTask> Tasks { get; set; }
+    }
+    public class Subordinate
+    {
+        public Subordinate() { }
+        public Subordinate(List<Employee> employees)
+        {
+            Subordinates = new List<Subordinate>();
+            Subordinates.Add(new Subordinate { 
+                Name = "My schedule",
+                ID = 0
+            });
+            foreach(var e in employees)
+            {
+                Subordinates.Add(new Subordinate {
+                    Name = e.Firstname +' '+ e.Surname,
+                    ID = e.EmployeeId
+                });
+            }
+        }
+        public string? Name { get; set; }
+        public int ID { get; set; }
+        public List<Subordinate> Subordinates { get; set; }
     }
 }

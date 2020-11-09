@@ -355,11 +355,19 @@ namespace DarkClusterTechnologyEnterprise.Models
                     .ToList();
         }
 
-
         public DateTime ConvertToLocal(DateTime date, int eId)
         {
             var userTZ = GetUserTimeZone(eId);
             return TimeZoneInfo.ConvertTime(date, userTZ);
+        }
+
+        public List<Subordinate> GetSubordinates(int eId) 
+        {
+           var subordinates = context.Employees
+                .Where(s => s.SuperiorId == eId)
+                .ToList();
+
+            return new Subordinate(subordinates).Subordinates;
         }
 
     }

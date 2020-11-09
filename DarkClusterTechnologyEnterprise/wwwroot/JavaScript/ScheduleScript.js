@@ -235,7 +235,7 @@ function GenerateTasks() {
                 newTask.classList.add("new-task");
 
                 if (lastId === p.taskId) {
-                    newTask.classList.add(backgrounds[backgroundIndex - 1]);
+                    newTask.classList.add(backgrounds[lastIdBckg]);
                     backgroundIndex--;
                 }
                 else {
@@ -246,11 +246,12 @@ function GenerateTasks() {
                 newTask.style.top = top + "px";
                 newTask.style.height = y + "px";
                 days[i].appendChild(newTask);
+                var lastIdBckg = backgroundIndex;
                 backgroundIndex++;;
                 if (backgroundIndex > 3)
                     backgroundIndex = 0;
 
-                lastId = p.taskId;
+                lastId = p.taskId;                
             }
             i++;
         }
@@ -274,6 +275,11 @@ form.addEventListener("submit", function (e) {
         };
         GenerateEmptyFieldErr(error);
     }
+
+    var errorsCount = document.getElementById("dateErrors").childElementCount;
+    debugger;
+    if (errorsCount > 0)
+        e.preventDefault();
 
 });
 
@@ -487,6 +493,9 @@ function CheckDate() {
     var startGreater = document.getElementById("startGreater");
 
     if (newTaskEnd < newTaskStart) {
+        if (document.getElementById("startGreater") !== null)
+            document.getElementById("startGreater").remove();
+
         errors[0] = {
             err: "End time must be greater than start time or equal",
             id: "startGreater"

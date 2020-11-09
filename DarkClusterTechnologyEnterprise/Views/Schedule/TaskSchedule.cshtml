@@ -54,6 +54,11 @@
                 <div class="top-header">
                     <div id="leftArrowCallendar">
                         <div id="leftArrowT" class="display-none"></div>
+                        <div id="subordinateDDL">
+                            <label for="employeeDDL">Employee:</label>
+                            @Html.DropDownListFor(x => Model.Subordinates, new SelectList(Model.Subordinates, "ID", "Name"),
+                            htmlAttributes: new { @class = "employee-DDL", @id = "Employee" })
+                        </div>
                     </div>
                     <div id="dateRangeSection" class="date-range-section"></div>
                     <div id="rightArrowCallendar">

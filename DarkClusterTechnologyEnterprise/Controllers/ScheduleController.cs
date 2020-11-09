@@ -24,19 +24,25 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             repository = repo;
         }
-        public async Task<IActionResult> TaskSchedule()
+        public async Task<IActionResult> TaskSchedule(int employee = 0)
         {
             string? username = User.Identity.Name;
             int eId = await repository.GetEmployeeID(username);
-            createMonth(ref month, eId);
-            SingleTask task = new SingleTask(repository.GetAllTasks(eId));
-            var tasks = SplitTask(task);
+            int employeeId = eId;
 
-            TaskViewModel model = new TaskViewModel(tasks , month);
+            if(employee > 0)
+                employeeId = employee;
+
+            createMonth(ref month, employeeId);
+            SingleTask task = new SingleTask(repository.GetAllTasks(employeeId));
+            var tasks = SplitTask(task);
+            var subordinates = repository.GetSubordinates(eId);
+
+            TaskViewModel model = new TaskViewModel(tasks , month, subordinates);
 
             return View(model);
         }
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> NewTask(NewTask newTask)
         {
             if (ModelState.IsValid)

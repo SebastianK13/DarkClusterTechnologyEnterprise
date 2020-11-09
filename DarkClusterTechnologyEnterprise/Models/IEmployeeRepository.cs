@@ -35,7 +35,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         DateTime CheckIfDaylight(int eId);
         Task<bool> CreateTasks(NewTask task, string username);
         List<TaskSchedule> GetAllTasks(int eId);
-        void ConvertToUTC(ref List<SingleTask> tasks, int eId);
+        DateTime ConvertToLocal(DateTime date, int eId);
         //Profile Controller
     }
 }

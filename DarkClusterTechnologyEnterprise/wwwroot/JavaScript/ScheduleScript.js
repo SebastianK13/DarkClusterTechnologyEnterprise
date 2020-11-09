@@ -96,6 +96,8 @@ leftArrow.addEventListener("click", function () {
         }
         SetIndex();
         ChangeHeaderDates();
+        RemoveAllTasks();
+        GenerateTasks();
     }
 });
 
@@ -110,8 +112,42 @@ rightArrow.addEventListener("click", function () {
         }
         SetIndex();
         ChangeHeaderDates();
+        RemoveAllTasks();
+        GenerateTasks();
     }
 });
+
+function RemoveAllTasks() {
+    callendarArea.innerHTML = '';
+
+    var col1 = document.createElement('div');
+    col1.className = "mon-col";
+    callendarArea.appendChild(col1);
+
+    var col2 = document.createElement('div');
+    col2.className = "tue-col";
+    callendarArea.appendChild(col2);
+
+    var col3 = document.createElement('div');
+    col3.className = "wed-col";
+    callendarArea.appendChild(col3);
+
+    var col4 = document.createElement('div');
+    col4.className = "thu-col";
+    callendarArea.appendChild(col4);
+
+    var col5 = document.createElement('div');
+    col5.className = "fri-col";
+    callendarArea.appendChild(col5);
+
+    var col6 = document.createElement('div');
+    col6.className = "sat-col";
+    callendarArea.appendChild(col6);
+
+    var col7 = document.createElement('div');
+    col7.className = "sun-col";
+    callendarArea.appendChild(col7);
+}
 
 function SetIndex() {
     switch (actualPage) {
@@ -147,6 +183,15 @@ function SetDates() {
     }
 }
 function ChangeHeaderDates() {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    var dateRange = document.getElementById("dateRangeSection");
+    var fSD = new Date(dates[index]);
+    var fED = new Date(dates[index + 6]);
+    var headerDateRange = modifyDay(fSD) + ' ' + months[fSD.getMonth()] + ' ' + fSD.getFullYear()
+        + ' ' + '-' + ' ' + modifyDay(fED) + ' ' + months[fED.getMonth()] + ' ' + fED.getFullYear();
+    dateRange.innerText = headerDateRange;
     for (i = 0; i < 7; i++) {
         datesHeader[i].innerText = dates[index + i];
     }
@@ -188,11 +233,15 @@ function GenerateTasks() {
                 newTask.appendChild(title);
                 newTask.appendChild(desc);
                 newTask.classList.add("new-task");
-                debugger;
-                if (lastId === p.taskId) 
-                    newTask.classList.add(backgrounds[backgroundIndex-1]);
-                else
+
+                if (lastId === p.taskId) {
+                    newTask.classList.add(backgrounds[backgroundIndex - 1]);
+                    backgroundIndex--;
+                }
+                else {
                     newTask.classList.add(backgrounds[backgroundIndex]);
+                }
+
 
                 newTask.style.top = top + "px";
                 newTask.style.height = y + "px";
@@ -209,15 +258,28 @@ function GenerateTasks() {
 }
 
 form.addEventListener("submit", function (e) {
-
-    CheckTaskLength();
     CheckIsEmptyField(e);
-    CheckDate();
+    if (CheckTaskLength() <= 2) {
+        CheckDate();
+        var taskLength = document.getElementById("taskLength");
+        if (taskLength !== null) {
+            taskLength.remove();
+        }
+    }
+    else {
+        var error = [];
+        error[0] = {
+            err: "Maximum task length is 48 hours",
+            id: "taskLength"
+        };
+        GenerateEmptyFieldErr(error);
+    }
+
 });
 
 function CheckTaskLength() {
-    debugger;
-    var difference = new Date(endDate.value) - new Date(startDate.value);
+
+    return ((new Date(endDate.value) - new Date(startDate.value))/3600000)/24;
 }
 
 function CheckIsEmptyField(e) {
@@ -422,55 +484,69 @@ function CheckDate() {
     if (newTaskDateError != null) {
         newTaskDateError.remove();
     }
+    var startGreater = document.getElementById("startGreater");
 
-    var oneDay = IsDayEqual(newTaskStart, newTaskEnd);
+    if (newTaskEnd < newTaskStart) {
+        errors[0] = {
+            err: "End time must be greater than start time or equal",
+            id: "startGreater"
+        };
+    }
+    else {
 
-    for (c = 0; c < datesNTime.length; c++) {
-        if (oneDay) {
-            debugger;
-            if (IsDayEqual(newTaskStart, datesNTime[c].beginDate)) {
-                if ((newTaskStart > datesNTime[c].beginDate) && (newTaskEnd < datesNTime[c].endDate)) {
+        if (startGreater !== null) {
+            startGreater.remove();
+        }
+
+        var oneDay = IsDayEqual(newTaskStart, newTaskEnd);
+
+        for (c = 0; c < datesNTime.length; c++) {
+            if (oneDay) {
+                debugger;
+                if (IsDayEqual(newTaskStart, datesNTime[c].beginDate)) {
+                    if ((newTaskStart > datesNTime[c].beginDate) && (newTaskEnd < datesNTime[c].endDate)) {
+                        errors[i] = {
+                            err: "There is a task in this time period",
+                            id: "newTaskDateErr"
+                        };
+                        c = datesNTime.length;
+                    }
+                    else if ((newTaskStart > datesNTime[c].beginDate) && (newTaskEnd > datesNTime[c].endDate) && (newTaskStart < datesNTime[c].endDate)) {
+
+                        errors[i] = {
+                            err: "New task start time must be greater",
+                            id: "newTaskDateErr"
+                        };
+                        i++;
+                        c = datesNTime.length;
+                    }
+                    else if ((newTaskStart < datesNTime[c].beginDate) && (newTaskEnd < datesNTime[c].endDate) && (datesNTime[c].beginDate < newTaskEnd)) {
+
+                        errors[i] = {
+                            err: "New task end time must be lesser",
+                            id: "newTaskDateErr"
+                        };
+                        i++;
+                        c = datesNTime.length;
+                    }
+                }
+            }
+            else {
+                debugger;
+                if ((newTaskStart < datesNTime[c].beginDate) && (newTaskEnd > datesNTime[c].beginDate)) {
                     errors[i] = {
                         err: "There is a task in this time period",
                         id: "newTaskDateErr"
                     };
                     c = datesNTime.length;
                 }
-                else if ((newTaskStart > datesNTime[c].beginDate) && (newTaskEnd > datesNTime[c].endDate) && (newTaskStart < datesNTime[c].endDate)) {
-
+                else if ((newTaskStart > datesNTime[c].beginDate) && (newTaskStart < datesNTime[c].endDate)) {
                     errors[i] = {
-                        err: "New task start time must be greater",
+                        err: "There is a task in this time period",
                         id: "newTaskDateErr"
                     };
-                    i++;
                     c = datesNTime.length;
                 }
-                else if ((newTaskStart < datesNTime[c].beginDate) && (newTaskEnd < datesNTime[c].endDate) && (datesNTime[c].beginDate < newTaskEnd)) {
-
-                    errors[i] = {
-                        err: "New task end time must be lesser",
-                        id: "newTaskDateErr"
-                    };
-                    i++;
-                    c = datesNTime.length;
-                }
-            }
-        }
-        else {
-            debugger;
-            if ((newTaskStart < datesNTime[c].beginDate) && (newTaskEnd > datesNTime[c].beginDate)) {
-                errors[i] = {
-                    err: "There is a task in this time period",
-                    id: "newTaskDateErr"
-                };
-                c = datesNTime.length;
-            }
-            else if ((newTaskStart > datesNTime[c].beginDate) && (newTaskStart < datesNTime[c].endDate)) {
-                errors[i] = {
-                    err: "There is a task in this time period",
-                    id: "newTaskDateErr"
-                };
-                c = datesNTime.length;
             }
         }
     }

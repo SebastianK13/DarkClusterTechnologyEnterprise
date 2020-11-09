@@ -11,11 +11,11 @@ namespace DarkClusterTechnologyEnterprise.Controllers
     public class ScheduleController : Controller
     {
         List<DateTime> month = new List<DateTime>();
-        private void createMonth(ref List<DateTime> month)
+        private void createMonth(ref List<DateTime> month, int eId)
         {
             for (int i = 0; i <= 30; i++)
             {
-                month.Add(DateTime.Now.ToUniversalTime().AddDays(+i).Date + new TimeSpan(0, 0, 0));
+                month.Add(repository.ConvertToLocal(DateTime.UtcNow.AddDays(+i), eId));
             }
         }
 
@@ -23,12 +23,12 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         public ScheduleController(IEmployeeRepository repo)
         {
             repository = repo;
-            createMonth(ref month);
         }
         public async Task<IActionResult> TaskSchedule()
         {
             string? username = User.Identity.Name;
             int eId = await repository.GetEmployeeID(username);
+            createMonth(ref month, eId);
             SingleTask task = new SingleTask(repository.GetAllTasks(eId));
             var tasks = SplitTask(task);
 

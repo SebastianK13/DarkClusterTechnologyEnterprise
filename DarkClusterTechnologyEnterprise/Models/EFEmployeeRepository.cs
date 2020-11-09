@@ -144,7 +144,7 @@ namespace DarkClusterTechnologyEnterprise.Models
             var model = context.Presences
                 .Where(b => (b.WorkBegin == true)
                 && (b.WorkEnd == true)
-                &&(b.WorkBeginTime.Date >= dateCriteria.Date))
+                && (b.WorkBeginTime.Date >= dateCriteria.Date))
                 .OrderBy(b => b.WorkBeginTime)
                 .ToList();
 
@@ -161,7 +161,7 @@ namespace DarkClusterTechnologyEnterprise.Models
                 .ToList();
 
             if (p.Count() == 0)
-            {               
+            {
                 DateTime workBeg = CheckIfDaylight(userTZ);
                 Presence presence = new Presence();
                 DateTime time = DateTime.Now.ToUniversalTime();
@@ -201,7 +201,7 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             var userTZ = GetUserTimeZone(eId);
 
-            if(presenceId != null)
+            if (presenceId != null)
             {
                 var currentBreak = context.Breaks
                     .Where(i => (i.PresenceId == presenceId) && (i.Break_s == true))
@@ -236,15 +236,15 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             DateTime time = CheckIfDaylight(userTZ);
             var end = context.Presences
-                .Where(b => (b.WorkBegin == true) && 
-                (b.WorkEnd == false) && 
+                .Where(b => (b.WorkBegin == true) &&
+                (b.WorkEnd == false) &&
                 (b.EmployeeId == eId))
                 .FirstOrDefault();
 
             if (end != null)
             {
-                var breakStop = context.Breaks.Where(b => 
-                    (b.Break_s == true) && 
+                var breakStop = context.Breaks.Where(b =>
+                    (b.Break_s == true) &&
                     (b.Presence.EmployeeId == eId))
                     .FirstOrDefault();
                 TimeSpan workTime = time - end.WorkBeginTime;
@@ -252,7 +252,7 @@ namespace DarkClusterTechnologyEnterprise.Models
                 end.WorkTime = workTime.TotalSeconds;
                 end.WorkEnd = true;
                 end.WorkEndTime = time;
-                if(breakStop != null)
+                if (breakStop != null)
                 {
                     breakStop.BreakEnd = time;
                     breakStop.Break_s = false;
@@ -280,11 +280,12 @@ namespace DarkClusterTechnologyEnterprise.Models
         public List<Break> GetAllBreaks(List<string> presencesId)
         {
             List<Break> breaks = new List<Break>();
-            foreach (var p in presencesId) {
+            foreach (var p in presencesId)
+            {
                 var temp = context.Breaks.Where(b => b.PresenceId == p).ToList();
                 if (temp != null)
                     breaks = breaks.Concat(temp).ToList();
-                    //breaks.Add(temp);
+                //breaks.Add(temp);
             }
 
             return breaks;
@@ -302,20 +303,20 @@ namespace DarkClusterTechnologyEnterprise.Models
         public bool FindActiveBreak(int eId)
         {
             DateTime d = DateTime.Now.ToUniversalTime();
-            var breakActive = context.Breaks.Where(e =>( 
-                e.Presence.EmployeeId == eId)&&
-                (e.Break_s == true)&&
+            var breakActive = context.Breaks.Where(e => (
+                e.Presence.EmployeeId == eId) &&
+                (e.Break_s == true) &&
                 (e.BreakStart.Date == d.Date)
                 ).Any();
 
             return breakActive;
         }
-        public double GetActiveBreakTime( int eId)
+        public double GetActiveBreakTime(int eId)
         {
             var userTZ = GetUserTimeZone(eId);
             var breakStart = context.Breaks.Where(b => b.Break_s == true).FirstOrDefault();
             TimeSpan time = new TimeSpan();
-            if(breakStart != null)
+            if (breakStart != null)
             {
                 DateTime d = CheckIfDaylight(userTZ);
                 time = (d - breakStart.BreakStart);
@@ -333,7 +334,7 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             return await context.SaveChangesAsync() > 0;
         }
-        public async Task<int> GetEmployeeID(string username) => 
+        public async Task<int> GetEmployeeID(string username) =>
             FindEmployeeId(await GetUserID(username));
         public int FindEmployeeId(string uId) =>
             context.Employees
@@ -345,21 +346,22 @@ namespace DarkClusterTechnologyEnterprise.Models
             IdentityUser user = await userManager.FindByNameAsync(username);
             return user.Id;
         }
-        public List<TaskSchedule> GetAllTasks(int eId) => 
-            context.TaskSchedules
-            .Where(e => (e.EmployeeId == eId) 
-            && e.TaskBegin.Date >= DateTime.Now.Date)
-            .ToList();
+        public List<TaskSchedule> GetAllTasks(int eId)
+        {
+            var date = ConvertToLocal(DateTime.UtcNow, eId);
+            return context.TaskSchedules
+                    .Where(e => (e.EmployeeId == eId)
+                    && e.TaskBegin.Date >= date.Date)
+                    .ToList();
+        }
 
-        public void ConvertToUTC(ref List<SingleTask> tasks, int eId)
+
+        public DateTime ConvertToLocal(DateTime date, int eId)
         {
             var userTZ = GetUserTimeZone(eId);
-            foreach(var t in tasks)
-            {
-                t.TaskBegin = TimeZoneInfo.ConvertTime(t.TaskBegin, userTZ);
-                t.TaskDeadline = TimeZoneInfo.ConvertTime(t.TaskDeadline, userTZ);
-            }
+            return TimeZoneInfo.ConvertTime(date, userTZ);
         }
+
     }
-    
+
 }

@@ -1,15 +1,142 @@
-﻿
+﻿@model TaskViewModel
 @{
     Layout = "_LoggedUserLayout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ScheduleServiceWorks</title>
-</head>
 <body>
+    <div class="scheduled-section">
+        <div class="schedule-container">
+            <div id="cover" class="new-task-cover display-none">
+                <form id="addNewTaskForm" asp-action="NewTask" asp-controller="Schedule" method="post">
+                    <div class="new-task-window">
+                        <div class="new-task-window-header">New task</div>
+                        <div class="new-task-desc">
+                            <div class="desc-label">Description</div>
+                            <div class="desc-section">
+                                <textarea id="TaskDesc" class="task-desc-field" name="TaskDesc"></textarea>
+                            </div>
+                        </div>
+                        <div class="new-task-name">
+                            <div class="desc-label">Name</div>
+                            <div class="desc-section">
+                                <textarea id="Task" class="task-desc-field" name="Task"></textarea>
+                            </div>
+                        </div>
+                        <div class="new-task-employee">
+                            <div class="ddl-label">Subordinate</div>
+                            <div class="ddl-section">
+                                @Html.DropDownListFor(x => Model.Subordinates, new SelectList(Model.Subordinates, "ID", "Name"),
+                                htmlAttributes: new { @class = "new-task-employee-ddl", @id = "subordinateId" })
+                            </div>
+                        </div>
+                        <div class="new-task-start">
+                            <div class="desc-label">Duration</div>
+                            <input id="startTime" type="time" name="TaskBeginTime">
+                            <input id="startDate" type="date" name="TaskBeginDate">
+                            <input id="startTimeUTC" type="time">
+                            <input id="startDateUTC" type="date">
+                        </div>
+                        <div class="new-task-end">
+                            <input id="endTime" type="time" name="TaskEndTime">
+                            <input id="endDate" type="date" name="TaskEndDate">
+                            <input id="endTimeUTC" type="time">
+                            <input id="endDateUTC" type="date">
+
+                        </div>
+                        <div class="tableErrors white-color">
+                            <ul id="dateErrors"></ul>
+                        </div>
+                        <div class="new-task-btn-section">
+                            <btn id="newTaskCancell">Cancell</btn>
+                            <btn>
+                                Save
+                                <input id="newTaskSave" value="Save" type="submit" />
+                            </btn>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="schedule-header">
+                <div class="schedule-name">Task schedule</div>
+                <div class="top-header">
+                    <div id="leftArrowCallendar">
+                        <div id="leftArrowT" class="display-none"></div>
+                        <div id="subordinateDDL">
+                            <label>Employee:</label>
+                            @Html.DropDownListFor(x => Model.Subordinates, new SelectList(Model.Subordinates, "ID", "Name"),
+                            htmlAttributes: new { @class = "employee-DDL", @id = "Employee" })
+                        </div>
+                    </div>
+                    <div id="dateRangeSection" class="date-range-section"></div>
+                    <div id="rightArrowCallendar">
+                        <div id="rightArrowT"></div>
+                    </div>
+                </div>
+                <div id="headerDates" class="bottom-header-dates">
+                    <div id="monDate"></div>
+                    <div id="tueDate"></div>
+                    <div id="wednDate"></div>
+                    <div id="thuDate"></div>
+                    <div id="friDate"></div>
+                    <div id="satDate"></div>
+                    <div id="sunDate"></div>
+                </div>
+            </div>
+            <div class="schedule-box-shadow">
+                <div id="addNewTask">+</div>
+                <div class="schedule">
+                    <div class="hours">
+                        <div>01:00</div>
+                        <div>02:00</div>
+                        <div>03:00</div>
+                        <div>04:00</div>
+                        <div>05:00</div>
+                        <div>06:00</div>
+                        <div>07:00</div>
+                        <div>08:00</div>
+                        <div>09:00</div>
+                        <div>10:00</div>
+                        <div>11:00</div>
+                        <div>12:00</div>
+                        <div>13:00</div>
+                        <div>14:00</div>
+                        <div>15:00</div>
+                        <div>16:00</div>
+                        <div>17:00</div>
+                        <div>18:00</div>
+                        <div>19:00</div>
+                        <div>20:00</div>
+                        <div>21:00</div>
+                        <div>22:00</div>
+                        <div>23:00</div>
+                        <div>00:00</div>
+                    </div>
+                    <div id="days" class="days">
+                        <div id="xtz" class="mon-col"></div>
+                        <div class="tue-col"></div>
+                        <div class="wed-col"></div>
+                        <div class="thu-col"></div>
+                        <div class="fri-col"></div>
+                        <div class="sat-col"></div>
+                        <div class="sun-col"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
+<script src="~/lib/axios/axios.js"></script>
+<script src="~/JavaScript/ScheduleScript.js"></script>
+<script>
+    var tasks = @Html.Raw(Json.Serialize(Model.Tasks));
+    var dates = @Html.Raw(Json.Serialize(Model.Dates));
+
+    document.addEventListener("DOMContentLoaded", function () {
+        SetTaskModel(tasks, dates);
+        SetDates();
+        ChangeHeaderDates();
+        GenerateTasks();
+        CreateDatesNTime();
+    });
+</script>
+

@@ -105,9 +105,11 @@ callendarArea.addEventListener("mouseleave", function (e) {
 
 newTaskBtn.addEventListener("click", function () {
     cover.classList.remove("display-none");
-    GetDatesAndTasksSubo(subo.value, false);
-    SetNewTaskDate();
-    SetNewTaskTime();
+    if (subo.childElementCount > 0) {
+        GetDatesAndTasksSubo(subo.value, false);
+        SetNewTaskDate();
+        SetNewTaskTime();
+    }
 });
 
 subo.addEventListener("change", function () {

@@ -23,6 +23,9 @@ var startTime = document.getElementById("startTime");
 var startDate = document.getElementById("startDate");
 var endTime = document.getElementById("endTime");
 var endDate = document.getElementById("endDate");
+var employee = document.getElementById("Employee");
+var subo = document.getElementById("subordinateId");
+var userSchedule = null;
 
 function CreateDatesNTime() {
     var fullDatesList = [];
@@ -33,6 +36,31 @@ function CreateDatesNTime() {
         };
     }
     datesNTime = fullDatesList;
+}
+
+employee.addEventListener("change", function () {
+    GetDatesAndTasksSubo(employee.value, true);
+});
+
+function GetDatesAndTasksSubo(eId, updateView) {
+
+    axios.get('/Schedule/SubordinateSchedule', {
+        params: {
+            employeeId: eId
+        }
+    }).then(function (response) {
+        SetTaskModel(response.data.tasks, response.data.dates);
+        if (updateView) {
+            ChangeHeaderDates();
+            RemoveAllTasks();
+            GenerateTasks();
+        }
+        CreateDatesNTime();
+    })
+        .catch(function (error) {
+            alert("ERROR: " + (error.message | error));
+        });
+
 }
 
 task.addEventListener("keyup", function () {
@@ -77,9 +105,24 @@ callendarArea.addEventListener("mouseleave", function (e) {
 
 newTaskBtn.addEventListener("click", function () {
     cover.classList.remove("display-none");
+    GetDatesAndTasksSubo(subo.value, false);
     SetNewTaskDate();
     SetNewTaskTime();
 });
+
+subo.addEventListener("change", function () {
+    GetDatesAndTasksSubo(subo.value, false); 
+    RemoveErrors();
+});
+
+function RemoveUserFromDDL(employee) {
+    var currUser = document.getElementById("subordinateId");
+    for (i = 0; i < currUser.childElementCount; i++) {
+        if (currUser.options[i].text == "My schedule" && currUser.options[i].value == employee.id) {
+            currUser.options[i].remove();
+        }
+    }
+}
 
 cancell.addEventListener("click", function () {
     cover.classList.add("display-none");
@@ -481,15 +524,19 @@ function ModifyTime(today) {
     }
     return today;
 }
+function RemoveErrors() {
+    var errorsCount = document.getElementById("dateErrors");
+
+    if (errorsCount.childElementCount > 0) {
+        errorsCount.innerHTML = '';
+    }
+}
 function CheckDate() {
     var newTaskStart = new Date(startDate.value + ' ' + startTime.value);
     var newTaskEnd = new Date(endDate.value + ' ' + endTime.value);
     var errors = [];
     var i = 0;
-    var newTaskDateError = document.getElementById("newTaskDateErr");
-    if (newTaskDateError != null) {
-        newTaskDateError.remove();
-    }
+
     var startGreater = document.getElementById("startGreater");
 
     if (newTaskEnd < newTaskStart) {

@@ -24,17 +24,21 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             repository = repo;
         }
-        public async Task<IActionResult> TaskSchedule(int employee = 0)
+        public IActionResult SubordinateSchedule(int employeeId = 0)
+        {
+            createMonth(ref month, employeeId);
+            SingleTask task = new SingleTask(repository.GetAllTasks(employeeId));
+            var tasks = SplitTask(task);
+            SubordinateTaskView employeeTasks = new SubordinateTaskView(tasks, month);
+
+            return Ok(employeeTasks);
+        }
+        public async Task<IActionResult> TaskSchedule()
         {
             string? username = User.Identity.Name;
             int eId = await repository.GetEmployeeID(username);
-            int employeeId = eId;
-
-            if(employee > 0)
-                employeeId = employee;
-
-            createMonth(ref month, employeeId);
-            SingleTask task = new SingleTask(repository.GetAllTasks(employeeId));
+            createMonth(ref month, eId);
+            SingleTask task = new SingleTask(repository.GetAllTasks(eId));
             var tasks = SplitTask(task);
             var subordinates = repository.GetSubordinates(eId);
 
@@ -42,13 +46,13 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return View(model);
         }
-        [HttpPost] 
-        public async Task<IActionResult> NewTask(NewTask newTask)
+        [HttpPost]
+        public async Task<IActionResult> NewTask(NewTask newTask, int Subordinates)
         {
             if (ModelState.IsValid)
             {
                 string? username = User.Identity.Name;
-                await repository.CreateTasks(newTask, username);
+                await repository.CreateTasks(newTask, Subordinates);
             }
 
             return RedirectToAction("TaskSchedule");

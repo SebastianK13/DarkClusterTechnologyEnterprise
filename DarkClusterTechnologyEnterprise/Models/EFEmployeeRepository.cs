@@ -326,9 +326,8 @@ namespace DarkClusterTechnologyEnterprise.Models
             return time.TotalSeconds;
         }
 
-        public async Task<bool> CreateTasks(NewTask task, string username)
+        public async Task<bool> CreateTasks(NewTask task, int eId)
         {
-            int eId = await GetEmployeeID(username);
             TaskSchedule newTask = new TaskSchedule(task, eId);
             context.TaskSchedules.Add(newTask);
 
@@ -367,7 +366,7 @@ namespace DarkClusterTechnologyEnterprise.Models
                 .Where(s => s.SuperiorId == eId)
                 .ToList();
 
-            return new Subordinate(subordinates).Subordinates;
+            return new Subordinate(subordinates, eId).Subordinates;
         }
 
     }

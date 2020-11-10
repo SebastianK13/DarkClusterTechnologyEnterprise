@@ -64,12 +64,12 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
     public class Subordinate
     {
         public Subordinate() { }
-        public Subordinate(List<Employee> employees)
+        public Subordinate(List<Employee> employees, int id)
         {
             Subordinates = new List<Subordinate>();
             Subordinates.Add(new Subordinate { 
                 Name = "My schedule",
-                ID = 0
+                ID = id
             });
             foreach(var e in employees)
             {
@@ -83,4 +83,15 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public int ID { get; set; }
         public List<Subordinate> Subordinates { get; set; }
     }
+    public class SubordinateTaskView 
+    {
+        public SubordinateTaskView(List<SingleTask> tasks, List<DateTime> dates)
+        {
+            Tasks = tasks;
+            Dates = dates;
+        }
+        public List<SingleTask>? Tasks { get; set; }
+        public List<DateTime>? Dates { get; set; }
+    }
+
 }

@@ -22,18 +22,25 @@
                                 <textarea id="Task" class="task-desc-field" name="Task"></textarea>
                             </div>
                         </div>
+                        <div class="new-task-employee">
+                            <div class="ddl-label">Subordinate</div>
+                            <div class="ddl-section">
+                                @Html.DropDownListFor(x => Model.Subordinates, new SelectList(Model.Subordinates, "ID", "Name"),
+                                htmlAttributes: new { @class = "new-task-employee-ddl", @id = "subordinateId"})
+                            </div>
+                        </div>
                         <div class="new-task-start">
                             <div class="desc-label">Duration</div>
                             <input id="startTime" type="time" name="TaskBeginTime">
                             <input id="startDate" type="date" name="TaskBeginDate">
-                            <input id="startTimeUTC" type="time" >
-                            <input id="startDateUTC" type="date" >
+                            <input id="startTimeUTC" type="time">
+                            <input id="startDateUTC" type="date">
                         </div>
                         <div class="new-task-end">
                             <input id="endTime" type="time" name="TaskEndTime">
                             <input id="endDate" type="date" name="TaskEndDate">
-                            <input id="endTimeUTC" type="time" >
-                            <input id="endDateUTC" type="date" >
+                            <input id="endTimeUTC" type="time">
+                            <input id="endDateUTC" type="date">
 
                         </div>
                         <div class="tableErrors white-color">
@@ -55,9 +62,9 @@
                     <div id="leftArrowCallendar">
                         <div id="leftArrowT" class="display-none"></div>
                         <div id="subordinateDDL">
-                            <label for="employeeDDL">Employee:</label>
+                            <label>Employee:</label>
                             @Html.DropDownListFor(x => Model.Subordinates, new SelectList(Model.Subordinates, "ID", "Name"),
-                            htmlAttributes: new { @class = "employee-DDL", @id = "Employee" })
+                            htmlAttributes: new { @class = "employee-DDL", @id = "Employee"})
                         </div>
                     </div>
                     <div id="dateRangeSection" class="date-range-section"></div>
@@ -118,13 +125,19 @@
         </div>
     </div>
 </body>
+<script src="~/lib/axios/axios.js"></script>
 <script src="~/JavaScript/ScheduleScript.js"></script>
 <script>
     var tasks = @Html.Raw(Json.Serialize(Model.Tasks));
     var dates = @Html.Raw(Json.Serialize(Model.Dates));
+    var subordinates = @Html.Raw(Json.Serialize(Model.Subordinates));
 
     document.addEventListener("DOMContentLoaded", function () {
         SetTaskModel(tasks, dates);
+
+        if (subordinates.length > 0)
+            RemoveUserFromDDL(subordinates[0]);
+
         SetDates();
         ChangeHeaderDates();
         GenerateTasks();

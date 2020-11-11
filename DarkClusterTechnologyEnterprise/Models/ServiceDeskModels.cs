@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkClusterTechnologyEnterprise.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -39,12 +40,21 @@ namespace DarkClusterTechnologyEnterprise.Models
         }
         public class ScheduledWork
         {
+            public ScheduledWork() { }
+            public ScheduledWork(NewServiceWork newService, int eId)
+            {
+                Name = newService.ServiceWork;
+                Description = newService.ServiceWorkDesc;
+                BeginDate = newService.ServiceBeginDate + newService.ServiceBeginTime;
+                EndDate = newService.ServiceEndDate + newService.ServiceEndTime;
+                ResponsibleEmployee = eId;
+            }
             [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             [Key]
             public int ServiceWorkId { get; set; }
             public string? Name { get; set; }
             public string? Description { get; set; }
-            public string? ResponsibleEmployee { get; set; }
+            public int ResponsibleEmployee { get; set; }
             public DateTime BeginDate { get; set; }
             public DateTime EndDate { get; set; }
         }

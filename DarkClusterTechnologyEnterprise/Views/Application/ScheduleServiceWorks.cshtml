@@ -7,7 +7,7 @@
     <div class="scheduled-section">
         <div class="schedule-container">
             <div id="cover" class="new-task-cover display-none">
-                <form id="addNewTaskForm" asp-action="NewTask" asp-controller="Schedule" method="post">
+                <form id="addNewTaskForm" asp-action="NewServiceWork" asp-controller="Application" method="post">
                     <div class="new-task-window">
                         <div class="new-task-window-header">New task</div>
                         <div class="new-task-desc">
@@ -50,7 +50,7 @@
                 </form>
             </div>
             <div class="schedule-header">
-                <div class="schedule-name">Task schedule</div>
+                <div class="schedule-name">Scheduled service works</div>
                 <div class="top-header">
                     <div id="leftArrowCallendar">
                         <div id="leftArrowT" class="display-none"></div>
@@ -115,6 +115,7 @@
 </body>
 <script src="~/lib/axios/axios.js"></script>
 <script src="~/JavaScript/ScheduleScript.js"></script>
+<script src="~/JavaScript/ServiceWorkSchedule.js"></script>
 <script>
     var tasks = @Html.Raw(Json.Serialize(Model.ServiceWorks));
     var dates = @Html.Raw(Json.Serialize(Model.Dates));

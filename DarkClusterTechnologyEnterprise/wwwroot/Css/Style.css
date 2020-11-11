@@ -2322,6 +2322,7 @@ table.all-invoices tfoot .links a {
     margin-bottom: 5px;
     padding: 0 10px 0 10px;
     float: left;
+    margin-top: 5px;
 }
 
 .new-task-end {
@@ -2771,7 +2772,7 @@ table.all-invoices tfoot .links a {
 .new-task-employee {
     position: relative;
     width: calc(100% - 20px);
-    height: 30px;
+    height: 31px;
     margin-top: 15px;
     margin-bottom: 15px;
     padding: 0 10px 0 10px;

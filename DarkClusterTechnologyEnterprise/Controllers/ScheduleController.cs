@@ -50,10 +50,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         public async Task<IActionResult> NewTask(NewTask newTask, int Subordinates)
         {
             if (ModelState.IsValid)
-            {
-                string? username = User.Identity.Name;
                 await repository.CreateTasks(newTask, Subordinates);
-            }
 
             return RedirectToAction("TaskSchedule");
         }

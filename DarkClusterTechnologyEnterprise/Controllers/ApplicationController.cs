@@ -47,7 +47,19 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             ServiceWorksViewModel model = new ServiceWorksViewModel(serviceWorks, month);
 
             return View(model);
-        }        
+        }      
+        [HttpPost]
+        public async Task<IActionResult> NewServiceWork(NewServiceWork newService)
+        {
+            if (ModelState.IsValid)
+            {
+                string username = User.Identity.Name;
+                int eId = await eRepository.GetEmployeeID(username);
+                await sdRepository.CreateServiceWork(newService, eId);
+            }
+
+            return RedirectToAction("ScheduleServiceWorks");
+        }
         public IActionResult ReportEmergencyCase()
         {
 

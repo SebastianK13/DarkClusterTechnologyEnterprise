@@ -55,7 +55,7 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string? ResponsibleEmployee { get; set; }
+        public int? ResponsibleEmployee { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public List<ServiceWork> ServiceWorks { get; set; }

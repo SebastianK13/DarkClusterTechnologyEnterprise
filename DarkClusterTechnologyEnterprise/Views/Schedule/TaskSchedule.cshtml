@@ -127,6 +127,7 @@
 </body>
 <script src="~/lib/axios/axios.js"></script>
 <script src="~/JavaScript/ScheduleScript.js"></script>
+<script src="~/JavaScript/TaskSchedule.js"></script>
 <script>
     var tasks = @Html.Raw(Json.Serialize(Model.Tasks));
     var dates = @Html.Raw(Json.Serialize(Model.Dates));
@@ -143,12 +144,4 @@
         GenerateTasks();
         CreateDatesNTime();
     });
-    
-employee.addEventListener("change", function () {
-    GetDatesAndTasksSubo(employee.value, true);
-});
-subo.addEventListener("change", function () {
-    GetDatesAndTasksSubo(subo.value, false); 
-    RemoveErrors();
-});
 </script>

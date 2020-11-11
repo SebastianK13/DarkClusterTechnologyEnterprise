@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkClusterTechnologyEnterprise.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,5 +19,11 @@ namespace DarkClusterTechnologyEnterprise.Models
             .Where(d => d.BeginDate.Date >= date.Date)
             .ToList();
 
+        public async Task<bool> CreateServiceWork(NewServiceWork newService, int eId)
+        {
+            ScheduledWork scheduledWork = new ScheduledWork(newService, eId);
+            context.Works.Add(scheduledWork);
+            return await context.SaveChangesAsync() > 0;
+        }
     }
 }

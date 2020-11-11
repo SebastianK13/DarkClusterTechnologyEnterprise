@@ -10,6 +10,12 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 {
     public class ScheduleController : Controller
     {
+        IEmployeeRepository repository;
+        public ScheduleController(IEmployeeRepository repo)
+        {
+            repository = repo;
+        }
+
         List<DateTime> month = new List<DateTime>();
         private void createMonth(ref List<DateTime> month, int eId)
         {
@@ -17,12 +23,6 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             {
                 month.Add(repository.ConvertToLocal(DateTime.UtcNow.AddDays(+i), eId));
             }
-        }
-
-        IEmployeeRepository repository;
-        public ScheduleController(IEmployeeRepository repo)
-        {
-            repository = repo;
         }
         public IActionResult SubordinateSchedule(int employeeId = 0)
         {

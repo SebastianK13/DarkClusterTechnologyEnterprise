@@ -56,7 +56,7 @@ namespace DarkClusterTechnologyEnterprise
                             .AddDefaultTokenProviders();
 
             services.AddTransient<IEmployeeRepository, EFEmployeeRepository>();
-            services.AddTransient<IApplicationRepository, EFApplicationRepository>();
+            services.AddTransient<IServiceDeskRepository, EFServiceDeskRepository>();
             services.AddTransient<ICustomerRepository, EFCustomerRepository>();
 
             //services.AddControllers()

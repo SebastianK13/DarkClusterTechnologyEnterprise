@@ -37,11 +37,6 @@ function CreateDatesNTime() {
     }
     datesNTime = fullDatesList;
 }
-
-employee.addEventListener("change", function () {
-    GetDatesAndTasksSubo(employee.value, true);
-});
-
 function GetDatesAndTasksSubo(eId, updateView) {
 
     axios.get('/Schedule/SubordinateSchedule', {
@@ -110,11 +105,6 @@ newTaskBtn.addEventListener("click", function () {
         SetNewTaskDate();
         SetNewTaskTime();
     }
-});
-
-subo.addEventListener("change", function () {
-    GetDatesAndTasksSubo(subo.value, false); 
-    RemoveErrors();
 });
 
 function RemoveUserFromDDL(employee) {

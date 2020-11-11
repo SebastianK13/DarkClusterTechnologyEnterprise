@@ -143,4 +143,12 @@
         GenerateTasks();
         CreateDatesNTime();
     });
+    
+employee.addEventListener("change", function () {
+    GetDatesAndTasksSubo(employee.value, true);
+});
+subo.addEventListener("change", function () {
+    GetDatesAndTasksSubo(subo.value, false); 
+    RemoveErrors();
+});
 </script>

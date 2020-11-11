@@ -41,12 +41,12 @@ namespace DarkClusterTechnologyEnterprise.Models
         {
             [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             [Key]
-            public int WorkId { get; set; }
-            public string WorkField { get; set; }
-            public string Description { get; set; }
-            //Person responsible for this task
-            public string Responsible { get; set; }
-            public DateTime Date { get; set; }
+            public int ServiceWorkId { get; set; }
+            public string? Name { get; set; }
+            public string? Description { get; set; }
+            public string? ResponsibleEmployee { get; set; }
+            public DateTime BeginDate { get; set; }
+            public DateTime EndDate { get; set; }
         }
     }
 }

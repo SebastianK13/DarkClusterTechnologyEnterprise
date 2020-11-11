@@ -1,4 +1,4 @@
-﻿@model TaskViewModel
+﻿@model ServiceWorksViewModel
 @{
     Layout = "_LoggedUserLayout";
 }
@@ -13,32 +13,25 @@
                         <div class="new-task-desc">
                             <div class="desc-label">Description</div>
                             <div class="desc-section">
-                                <textarea id="TaskDesc" class="task-desc-field" name="TaskDesc"></textarea>
+                                <textarea id="TaskDesc" class="task-desc-field" name="ServiceWorkDesc"></textarea>
                             </div>
                         </div>
                         <div class="new-task-name">
                             <div class="desc-label">Name</div>
                             <div class="desc-section">
-                                <textarea id="Task" class="task-desc-field" name="Task"></textarea>
-                            </div>
-                        </div>
-                        <div class="new-task-employee">
-                            <div class="ddl-label">Subordinate</div>
-                            <div class="ddl-section">
-                                @Html.DropDownListFor(x => Model.Subordinates, new SelectList(Model.Subordinates, "ID", "Name"),
-                                htmlAttributes: new { @class = "new-task-employee-ddl", @id = "subordinateId" })
+                                <textarea id="Task" class="task-desc-field" name="ServiceWork"></textarea>
                             </div>
                         </div>
                         <div class="new-task-start">
                             <div class="desc-label">Duration</div>
-                            <input id="startTime" type="time" name="TaskBeginTime">
-                            <input id="startDate" type="date" name="TaskBeginDate">
+                            <input id="startTime" type="time" name="ServiceBeginTime">
+                            <input id="startDate" type="date" name="ServiceBeginDate">
                             <input id="startTimeUTC" type="time">
                             <input id="startDateUTC" type="date">
                         </div>
                         <div class="new-task-end">
-                            <input id="endTime" type="time" name="TaskEndTime">
-                            <input id="endDate" type="date" name="TaskEndDate">
+                            <input id="endTime" type="time" name="ServiceEndTime">
+                            <input id="endDate" type="date" name="ServiceEndDate">
                             <input id="endTimeUTC" type="time">
                             <input id="endDateUTC" type="date">
 
@@ -61,11 +54,6 @@
                 <div class="top-header">
                     <div id="leftArrowCallendar">
                         <div id="leftArrowT" class="display-none"></div>
-                        <div id="subordinateDDL">
-                            <label>Employee:</label>
-                            @Html.DropDownListFor(x => Model.Subordinates, new SelectList(Model.Subordinates, "ID", "Name"),
-                            htmlAttributes: new { @class = "employee-DDL", @id = "Employee" })
-                        </div>
                     </div>
                     <div id="dateRangeSection" class="date-range-section"></div>
                     <div id="rightArrowCallendar">
@@ -128,7 +116,7 @@
 <script src="~/lib/axios/axios.js"></script>
 <script src="~/JavaScript/ScheduleScript.js"></script>
 <script>
-    var tasks = @Html.Raw(Json.Serialize(Model.Tasks));
+    var tasks = @Html.Raw(Json.Serialize(Model.ServiceWorks));
     var dates = @Html.Raw(Json.Serialize(Model.Dates));
 
     document.addEventListener("DOMContentLoaded", function () {

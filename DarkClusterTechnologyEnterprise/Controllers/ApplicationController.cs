@@ -34,20 +34,38 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
 
             return View();
-        }        
+        }
         public async Task<IActionResult> ScheduleServiceWorks()
         {
             string? username = User.Identity.Name;
             int eId = await eRepository.GetEmployeeID(username);
             createMonth(ref month, eId);
             DateTime date = eRepository.ConvertToLocal(DateTime.UtcNow, eId);
-            ServiceWork serviceWork = new ServiceWork(sdRepository.GetServiceWorks(eId, date));
+            var serviceWork = SetServiceWorksViewModel(eId, date);
             var serviceWorks = SplitServiceWorks(serviceWork);
 
             ServiceWorksViewModel model = new ServiceWorksViewModel(serviceWorks, month);
 
             return View(model);
-        }      
+        }
+        private List<ServiceWork> SetServiceWorksViewModel(int eId, DateTime date)
+        {
+            List<ServiceWork> serviceWorks = new List<ServiceWork>();
+            var scheduledWorks = sdRepository.GetServiceWorks(eId, date);
+            foreach (var w in scheduledWorks)
+            {
+                serviceWorks.Add(new ServiceWork()
+                {
+                    Name = w.Name,
+                    Id = w.ServiceWorkId,
+                    Description = w.Description,
+                    BeginDate = w.BeginDate,
+                    EndDate = w.EndDate,
+                    ResponsibleEmployee = eRepository.GetNameSurname(w.ResponsibleEmployee) 
+                });
+            }
+            return serviceWorks;
+        }
         [HttpPost]
         public async Task<IActionResult> NewServiceWork(NewServiceWork newService)
         {
@@ -65,10 +83,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return View();
         }
-        private List<ServiceWork> SplitServiceWorks(ServiceWork serviceWorks)
+        private List<ServiceWork> SplitServiceWorks(List<ServiceWork> serviceWorks)
         {
             List<ServiceWork> worksSplit = new List<ServiceWork>();
-            foreach (var w in serviceWorks.ServiceWorks)
+            foreach (var w in serviceWorks)
             {
                 double numOfDays = (w.EndDate.Date - w.BeginDate.Date).TotalDays;
                 if (numOfDays <= 1)
@@ -80,7 +98,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
                     else
                     {
                         DateTime midnight = w.BeginDate.Date.AddDays(1).AddSeconds(-1);
-                        DateTime nextDay = w.EndDate.Date.AddDays(1);
+                        DateTime nextDay = w.BeginDate.Date.AddDays(1);
 
                         worksSplit.Add(new ServiceWork
                         {

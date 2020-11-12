@@ -368,7 +368,15 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             return new Subordinate(subordinates, eId).Subordinates;
         }
+        public string GetNameSurname(int eId)
+        {
+           var fullName = context.Employees
+                .Where(i => i.EmployeeId == eId)
+                .Select(n => new { n.Firstname, n.Surname })
+                .FirstOrDefault();
 
+            return fullName.Firstname + " " + fullName.Surname;
+        }
     }
 
 }

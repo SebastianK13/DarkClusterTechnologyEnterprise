@@ -34,30 +34,12 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
     }
     public class ServiceWork
     {
-        public ServiceWork() { }
-        public ServiceWork(List<ScheduledWork> serviceWorks)
-        {
-            ServiceWorks = new List<ServiceWork>();
-
-            foreach (var w in serviceWorks)
-            {
-                ServiceWorks.Add(new ServiceWork()
-                {
-                    Name = w.Name,
-                    Id = w.ServiceWorkId,
-                    Description = w.Description,
-                    BeginDate = w.BeginDate,
-                    EndDate = w.EndDate,
-                    ResponsibleEmployee = w.ResponsibleEmployee
-                });
-            }
-        }
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public int? ResponsibleEmployee { get; set; }
+        public string? ResponsibleEmployee { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<ServiceWork> ServiceWorks { get; set; }
+
     }
 }

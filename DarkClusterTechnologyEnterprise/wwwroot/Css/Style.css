@@ -2271,7 +2271,9 @@ table.all-invoices tfoot .links a {
 .border-none {
     border: none;
 }
-
+.border-bottom-gray {
+    border-bottom: 1px solid rgba(184,184,184, 1);
+}
 .gray-table {
     background-color: rgba(235,235,235, 1);
 }
@@ -2688,12 +2690,16 @@ table.all-invoices tfoot .links a {
 
 .new-task {
     position: absolute;
-    width: calc(100% - 20px);
+    width: calc(100% - 22px);
     background-color: brown;
     padding: 0px 10px 0px 10px;
     color: white;
     text-align: center;
     cursor: pointer;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
 .title {
@@ -2702,7 +2708,12 @@ table.all-invoices tfoot .links a {
     width: 100%;
     float: left;
 }
-
+.responsible-employee {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    float: left;
+}
 .autoHeight {
     height: auto;
 }

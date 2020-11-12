@@ -37,5 +37,6 @@ namespace DarkClusterTechnologyEnterprise.Models
         List<TaskSchedule> GetAllTasks(int eId);
         DateTime ConvertToLocal(DateTime date, int eId);
         List<Subordinate> GetSubordinates(int eId);
+        string GetNameSurname(int eId);
     }
 }

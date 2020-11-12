@@ -48,18 +48,18 @@ function GenerateTasks() {
                 var desc = document.createElement("div");
                 desc.className = "desc";
                 desc.innerText = p.description;
-                var responisbleEmployee = document.createElement("div");
-                responisbleEmployee.className = "title";
-                responisbleEmployee.innerText = "Responsible employee: " + p.responisbleEmployee;
+                var responsibleEmployee = document.createElement("div");
+                responsibleEmployee.className = "responsible-employee";
+                responsibleEmployee.innerText = "Responsible employee: " + p.responsibleEmployee;
 
 
                 newTask.appendChild(time);
                 newTask.appendChild(title);
-                newTask.appendChild(responisbleEmployee);
+                newTask.appendChild(responsibleEmployee);
                 newTask.appendChild(desc);
                 newTask.classList.add("new-task");
 
-                if (lastId === p.Id) {
+                if (lastId === p.id) {
                     newTask.classList.add(backgrounds[lastIdBckg]);
                     backgroundIndex--;
                 }
@@ -76,7 +76,7 @@ function GenerateTasks() {
                 if (backgroundIndex > 3)
                     backgroundIndex = 0;
 
-                lastId = p.Id;
+                lastId = p.id;
             }
             i++;
         }

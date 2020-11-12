@@ -54,8 +54,13 @@ callendarArea.addEventListener("mouseenter", function (e) {
         var height = e.target.offsetHeight;
         var autoH = e.target.scrollHeight;
 
-        if (height < autoH)
+        if (height < autoH) {
             e.target.classList.add("autoHeight");
+            debugger;
+            BottomOverflow(e.target, e.target.parentElement);
+
+        }
+
     }
 }, true);
 
@@ -509,5 +514,14 @@ function IsDayEqual(start, end) {
     }
     else {
         return false;
+    }
+}
+function BottomOverflow(child, parent) {
+    var childArea = child.getBoundingClientRect();
+    var parentArea = parent.getBoundingClientRect();
+
+    if (childArea.bottom > parentArea.bottom) {
+        var scheduleScroll = document.getElementById("scheduleScroll");
+        scheduleScroll.scrollTop = scheduleScroll.scrollHeight;
     }
 }

@@ -4,14 +4,16 @@ using DarkClusterTechnologyEnterprise.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    partial class AppServiceDeskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201112203826_NotificationTableAdded")]
+    partial class NotificationTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,14 +28,12 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Administrator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ApplicationId")
                         .HasColumnType("int");
 
                     b.Property<string>("Message")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MessageDate")
@@ -44,24 +44,6 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.HasIndex("ApplicationId");
 
                     b.ToTable("Conversations");
-                });
-
-            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.ServiceDeskModels+Impact", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("level")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Impacts");
                 });
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.ServiceDeskModels+ScheduledWork", b =>
@@ -109,24 +91,6 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.ServiceDeskModels+Urgency", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("level")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Urgencies");
-                });
-
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.ServiceDeskModels+UserApplication", b =>
                 {
                     b.Property<int>("ApplicationId")
@@ -135,34 +99,27 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Applicant")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ApplicationStatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Critical")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Priority")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Responsible")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Topic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserLocation")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ApplicationId");

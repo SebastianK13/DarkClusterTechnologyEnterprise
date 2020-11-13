@@ -11,5 +11,8 @@ namespace DarkClusterTechnologyEnterprise.Models
     {
         List<ScheduledWork> GetServiceWorks(int eId, DateTime date);
         Task<bool> CreateServiceWork(NewServiceWork newService, int eId);
+        List<ServiceNotification> GetServices();
+        List<Impact> GetImpacts();
+        List<Urgency> GetUrgencies();
     }
 }

@@ -58,5 +58,28 @@ namespace DarkClusterTechnologyEnterprise.Models
             public DateTime BeginDate { get; set; }
             public DateTime EndDate { get; set; }
         }
+        public class ServiceNotification
+        {
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            [Key]
+            public int Id { get; set; }
+            //Incident or Application
+            public string? NotificationType { get; set; }
+            public string? ServiceName { get; set; }
+        }
+        public class Impact
+        {
+            public int Id { get; set; }
+            //max 4 lvl
+            public int level { get; set; }
+            public string? Name { get; set; }
+        }
+        public class Urgency
+        {
+            public int Id { get; set; }
+            //max 3 lvl
+            public int level { get; set; }
+            public string? Name { get; set; }
+        }
     }
 }

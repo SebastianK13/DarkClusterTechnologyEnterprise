@@ -30,10 +30,15 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return View();
         }       
-        public IActionResult MakeOrder()
+        public IActionResult ServiceRequest()
         {
+            string? username = User.Identity.Name;
+            ServiceRequestViewModel viewModel =
+                new ServiceRequestViewModel(username, sdRepository.GetServices(),
+                sdRepository.GetImpacts(), sdRepository.GetUrgencies());
 
-            return View();
+
+            return View(viewModel);
         }
         public async Task<IActionResult> ScheduleServiceWorks()
         {
@@ -71,7 +76,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             if (ModelState.IsValid)
             {
-                string username = User.Identity.Name;
+                string? username = User.Identity.Name;
                 int eId = await eRepository.GetEmployeeID(username);
                 await sdRepository.CreateServiceWork(newService, eId);
             }

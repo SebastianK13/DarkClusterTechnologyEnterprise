@@ -25,5 +25,14 @@ namespace DarkClusterTechnologyEnterprise.Models
             context.Works.Add(scheduledWork);
             return await context.SaveChangesAsync() > 0;
         }
+        public List<ServiceNotification> GetServices() =>
+            context.Services
+            .Where(t => t.NotificationType == "Service request")
+            .ToList();
+
+        public List<Impact> GetImpacts() =>
+            context.Impacts.ToList();
+        public List<Urgency> GetUrgencies() =>
+            context.Urgencies.ToList();
     }
 }

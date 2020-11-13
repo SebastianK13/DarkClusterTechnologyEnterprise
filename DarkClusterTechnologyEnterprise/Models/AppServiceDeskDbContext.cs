@@ -14,5 +14,8 @@ namespace DarkClusterTechnologyEnterprise.Models
         public DbSet<UserApplication> Applications { get; set; }
         public DbSet<ScheduledWork> Works { get; set; }
         public DbSet<ApplicationConversation> Conversations { get; set; }
+        public DbSet<ServiceNotification> Services { get; set; } 
+        public DbSet<Impact> Impacts { get; set; } 
+        public DbSet<Urgency> Urgencies { get; set; } 
     }
 }

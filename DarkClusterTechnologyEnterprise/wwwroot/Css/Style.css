@@ -2809,4 +2809,223 @@ table.all-invoices tfoot .links a {
 }
     .new-task-employee-ddl:focus {
         outline: none !important;
-    }  
+    }
+
+.application-section {
+    position: relative;
+    width: calc(100% - 20px);
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: gray;
+    display: table;
+}
+.topic-app {
+    position: relative;
+    width: calc(100% - 15px);
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin:5px;
+    float:left;
+}
+.app-label {
+    position: relative;
+    min-width: 100px;
+    float:left;
+    height: auto;
+    font-size: 1.1em;
+}
+.topic-app input {
+    position: relative;
+    width: calc(100% - 180px);
+    height: 20px;
+    float: left;
+    border: 1px solid rgba(184,184,184, .8);
+}
+
+.application-type {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: left;
+}
+
+.notification-DDL:focus {
+    outline: none !important;
+}
+
+.notification-DDL {
+    position: relative;
+    border-radius: 0px;
+    border: 1px solid rgba(184,184,184, .8);
+    width: 300px;
+    height: 26px;
+    min-width: 215px;
+}
+.notifier {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: left;
+}
+    .notifier input {
+        position: relative;
+        width: calc(300px - 8px);
+        height: 20px;
+        float: left;
+        min-width:209px;
+        border: 1px solid rgba(184,184,184, .8);
+        background-color: rgba(235,235,235, 1);
+    }
+
+.padding-side{
+    padding:0 50px 0 50px;
+    width: calc(100% - 100px);
+}
+
+.app-description-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 1px 5px 20px 5px;
+    display: block;
+    align-items: center;
+    margin: 5px;
+    float: left;
+}
+
+.app-description {
+    position:relative;
+    height: 300px;
+    width: calc(100% - 180px);
+    background-color: #fff;
+    overflow: auto;
+    resize: none;
+    border: 1px solid rgba(184,184,184, .8);
+    color: rgba(0,0,0,.8);
+    box-sizing: border-box;
+    padding: 4px 0 0 8px;
+    outline: 0 !important;
+    line-height: 20px;
+    font-family: inherit;
+    margin-left: 100px;
+    float:left;
+}
+.app-desc-label {
+    position: relative;
+    width: 100%;
+    float: left;
+    height: 30px;
+    font-size: 1.1em;
+}
+.serviceRequest-section-img {
+    position: relative;
+    float: left;
+    max-height: 35px;
+}
+.basic-info-col2 {
+    position: relative;
+    float: left;
+    width: calc(50% - 70px);
+    min-width: 420px;
+    height: auto;
+    padding-right: 70px;
+}
+.basic-info-col1 {
+    position: relative;
+    float: left;
+    width: 50%;
+    min-width: 420px;
+    height: auto;
+}
+.priority-label {
+    position: relative;
+    min-width: 100px;
+    float: right;
+    height: auto;
+    font-size: 1.1em;
+}
+
+.priority-level {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: right;
+}
+
+.priority-DDL:focus {
+    outline: none !important;
+}
+
+.priority-DDL {
+    position: relative;
+    border-radius: 0px;
+    border: 1px solid rgba(184,184,184, .8);
+    width: 300px;
+    height: 26px;
+    min-width: 200px;
+}
+.SLA-date {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: right;
+}
+
+    .SLA-date input {
+        position: relative;
+        width: calc(300px - 8px);
+        height: 20px;
+        float: right;
+        min-width: 194px;
+        border: 1px solid rgba(184,184,184, .8);
+        background-color: rgba(235,235,235, 1);
+    }
+
+@media only screen and (max-width: 1300px) {
+    .basic-info-col2 {
+        width:100%;
+        float:left;
+    }
+    .SLA-date {
+        width: 100%;
+        float: left;
+    }
+    .priority-level {
+        width: 100%;
+        float: left;
+    }
+}
+@media only screen and (max-width: 1300px) {
+    .SLA-date {
+        min-width: 250px;
+    }
+
+    .priority-level {
+        min-width: 250px;
+    }
+    .basic-info-col2 {
+        min-width: 350px;
+    }
+    .basic-info-col1 {
+        min-width: 350px;
+    }
+}

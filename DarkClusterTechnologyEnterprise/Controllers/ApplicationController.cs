@@ -40,6 +40,19 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return View(viewModel);
         }
+        public IActionResult FindEmployee(string phrase)
+        {
+            SearchResult viewModel = new SearchResult(eRepository.FindEmployeeByPhrase(phrase));
+
+            return Ok(viewModel.Results);
+        }
+        [HttpPost]
+        public IActionResult AddNewServiceRequest()
+        {
+
+
+            return RedirectToAction("ServiceRequest");
+        }
         public async Task<IActionResult> ScheduleServiceWorks()
         {
             string? username = User.Identity.Name;

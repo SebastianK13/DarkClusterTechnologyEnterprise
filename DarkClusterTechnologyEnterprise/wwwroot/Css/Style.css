@@ -2832,10 +2832,10 @@ table.all-invoices tfoot .links a {
 }
 .app-label {
     position: relative;
-    min-width: 100px;
+    min-width: 110px;
     float:left;
     height: auto;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 .topic-app input {
     position: relative;
@@ -2907,7 +2907,7 @@ table.all-invoices tfoot .links a {
 .app-description {
     position:relative;
     height: 300px;
-    width: calc(100% - 180px);
+    width: calc(100% - 190px);
     background-color: #fff;
     overflow: auto;
     resize: none;
@@ -2918,7 +2918,7 @@ table.all-invoices tfoot .links a {
     outline: 0 !important;
     line-height: 20px;
     font-family: inherit;
-    margin-left: 100px;
+    margin-left: 110px;
     float:left;
 }
 .app-desc-label {
@@ -2926,7 +2926,7 @@ table.all-invoices tfoot .links a {
     width: 100%;
     float: left;
     height: 30px;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 .serviceRequest-section-img {
     position: relative;
@@ -2936,10 +2936,10 @@ table.all-invoices tfoot .links a {
 .basic-info-col2 {
     position: relative;
     float: left;
-    width: calc(50% - 70px);
-    min-width: 420px;
+    width: calc(50% - 60px);
+    min-width: 430px;
     height: auto;
-    padding-right: 70px;
+    padding-right: 60px;
 }
 .basic-info-col1 {
     position: relative;
@@ -2950,10 +2950,10 @@ table.all-invoices tfoot .links a {
 }
 .priority-label {
     position: relative;
-    min-width: 100px;
+    min-width: 110px;
     float: right;
     height: auto;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .priority-level {
@@ -3000,7 +3000,71 @@ table.all-invoices tfoot .links a {
         background-color: rgba(235,235,235, 1);
     }
 
-@media only screen and (max-width: 1300px) {
+.contact-person {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: left;
+}
+
+    .contact-person input {
+        position: relative;
+        width: calc(100% - 6px);
+        height: 100%;
+        border: 1px solid rgba(184,184,184, .8);
+    }
+.find-employee-container {
+    position: relative;
+    width: 300px;
+    height: 20px;
+    float: left;
+    min-width: 209px;
+    z-index:2;
+}
+    .find-employee-container a {
+        color: black;
+        padding: 6px 8px;
+        text-decoration: none;
+        display: none;
+        background-color: white;
+        width: calc(100% - 18px);
+        margin: auto;
+        /*border-bottom: 1px solid rgba(184,184,184, .8);*/
+        border-left: 1px solid rgba(184,184,184, .8);
+        border-right: 1px solid rgba(184,184,184, .8);
+    }
+
+        .find-employee-container a:hover {
+            background-color: #f1f1f1
+        }
+.service-request-btns-section {
+    position: relative;
+    width: calc(100% - 80px);
+    height: 30px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 10px 80px 10px 10px;
+    float: left;
+}
+
+    .service-request-btns-section btn {
+        position: relative;
+        width: 80px;
+        height: 30px;
+        background: rgba(255,99,0,.9);
+        float: right;
+        text-align: center;
+        margin-right: 5px;
+        line-height: 30px;
+        color: white;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+/*@media only screen and (max-width: 1300px) {
     .basic-info-col2 {
         width:100%;
         float:left;
@@ -3014,7 +3078,7 @@ table.all-invoices tfoot .links a {
         float: left;
     }
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1310px) {
     .SLA-date {
         min-width: 250px;
     }
@@ -3028,4 +3092,4 @@ table.all-invoices tfoot .links a {
     .basic-info-col1 {
         min-width: 350px;
     }
-}
+}*/

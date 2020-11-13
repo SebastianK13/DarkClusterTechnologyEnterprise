@@ -375,8 +375,14 @@ namespace DarkClusterTechnologyEnterprise.Models
                 .Select(n => new { n.Firstname, n.Surname })
                 .FirstOrDefault();
 
-            return fullName.Firstname + " " + fullName.Surname;
+            return fullName.Firstname + ' ' + fullName.Surname;
         }
+        public List<Employee> FindEmployeeByPhrase(string phrase) =>
+            context.Employees
+            .Where(x => (x.Firstname + ' ' + x.Surname)
+            .Contains(phrase))
+            .Take(5)
+            .ToList();
     }
 
 }

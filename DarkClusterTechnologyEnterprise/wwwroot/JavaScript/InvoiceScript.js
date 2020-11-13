@@ -28,7 +28,7 @@ function filterFunction() {
     })
         .then(function (response) {
             searchResult = response.data;
-            CreateResultsList(searchResult, dropd);
+            CreateResultsList(searchResult, a);
         })
         .catch(function (error) {
             alert("ERROR: " + (error.message | error));
@@ -287,7 +287,7 @@ function CheckCustomerErr() {
 
 }
 
-function CreateResultsList(searchResult, dropd) {
+function CreateResultsList(searchResult, a) {
 
     for (i = 0; i < a.length; i++) {
         if (i < searchResult.length) {

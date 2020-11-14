@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static DarkClusterTechnologyEnterprise.Models.ServiceDeskModels;
 
 namespace DarkClusterTechnologyEnterprise.Models
 {
@@ -11,7 +10,7 @@ namespace DarkClusterTechnologyEnterprise.Models
     {
         List<ScheduledWork> GetServiceWorks(int eId, DateTime date);
         Task<bool> CreateServiceWork(NewServiceWork newService, int eId);
-        List<ServiceNotification> GetServices();
+        List<ApplicationService> GetServices();
         List<Impact> GetImpacts();
         List<Urgency> GetUrgencies();
     }

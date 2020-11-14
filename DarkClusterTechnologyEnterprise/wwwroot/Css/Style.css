@@ -2920,6 +2920,7 @@ table.all-invoices tfoot .links a {
     font-family: inherit;
     margin-left: 110px;
     float:left;
+    font-size: .9em;
 }
 .app-desc-label {
     position: relative;

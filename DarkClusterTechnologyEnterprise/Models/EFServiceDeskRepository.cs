@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static DarkClusterTechnologyEnterprise.Models.ServiceDeskModels;
 
 namespace DarkClusterTechnologyEnterprise.Models
 {
@@ -25,9 +24,9 @@ namespace DarkClusterTechnologyEnterprise.Models
             context.Works.Add(scheduledWork);
             return await context.SaveChangesAsync() > 0;
         }
-        public List<ServiceNotification> GetServices() =>
+        public List<ApplicationService> GetServices() =>
             context.Services
-            .Where(t => t.NotificationType == "Service request")
+            .Where(t => t.Category.CategoryName == "Service request")
             .ToList();
 
         public List<Impact> GetImpacts() =>

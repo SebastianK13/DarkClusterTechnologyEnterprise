@@ -15,7 +15,7 @@
                     <div class="basic-info-col1">
                         <div class="application-type">
                             <div class="app-label">Service: </div>
-                            @Html.DropDownListFor(y => Model.Services, new SelectList(Model.Services, "Id", "ServiceName"),
+                            @Html.DropDownListFor(y => Model.Services, new SelectList(Model.Services, "ServiceId", "ServiceName"),
                             htmlAttributes: new { @class = "notification-DDL", @id = "services" })
                         </div>
                         <div class="notifier">
@@ -25,7 +25,7 @@
                         <div class="contact-person">
                             <div class="app-label">Contact Person: </div>
                             <div id="findEmployeeContainer" class="find-employee-container">
-                                <input value=@Model.Notifier name="Notifier" id="contactPerson" />
+                                <input name="Notifier" id="contactPerson" autocomplete="off" />
                                 <a></a>
                                 <a></a>
                                 <a></a>
@@ -54,8 +54,11 @@
                         <div class="app-desc-label">Description:</div>
                         <textarea id="description" class="app-description"></textarea>
                     </div>
+                    <div class="tableErrors">
+                        <ul id="dateErrors"></ul>
+                    </div>
                     <div class="service-request-btns-section">
-                        <btn id="newTaskCancell">Cancell</btn>
+                        <btn id="newServiceRequestCancell">Cancell</btn>
                         <btn>
                             Save
                             <input id="newTaskSave" value="Save" type="submit" />

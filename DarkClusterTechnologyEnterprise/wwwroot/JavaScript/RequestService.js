@@ -4,6 +4,9 @@ var searchResult = null;
 var form = document.getElementById("addNewServiceRequest");
 var desc = document.getElementById("description");
 var topic = document.getElementById("topic");
+var cancell = document.getElementById("newServiceRequestCancell");
+var errorsSection = document.getElementById("dateErrors");
+var emptyFields = [false, false, false];
 
 contactPerson.addEventListener("keyup", function () {
     var type = document.getElementById("contactPerson").value;
@@ -44,14 +47,24 @@ dropd.addEventListener("click", function (e) {
     if (e.target.tagName == "A") {
         var i = e.target.innerText;
         contactPerson.value = i;
-
         for (i = 0; i < a.length; i++) {
             a[i].style.display = "none";
         }
     }
-
 });
 
+contactPerson.addEventListener("change", function () {
+    CheckContactPerson();
+    AddOrRemoveErrors();
+});
+topic.addEventListener("change", function () {
+    CheckTopic();
+    AddOrRemoveErrors();
+});
+desc.addEventListener("change", function () {
+    CheckDescription();
+    AddOrRemoveErrors();
+});
 form.addEventListener("submit", function (e) {
     if (CheckIfEmpty())
         e.preventDefault();
@@ -59,5 +72,56 @@ form.addEventListener("submit", function (e) {
 
 function CheckIfEmpty() {
 
+    CheckContactPerson();
+    CheckTopic();
+    CheckDescription();
+    AddOrRemoveErrors();
+
     return desc.value == "" || topic.value == "" || contactPerson.value == "";
+}
+function CheckContactPerson() {
+    if (contactPerson.value == "") {
+        contactPerson.style.border = "1px solid rgba(255,0,0, .8)";
+        emptyFields[0] = true;
+    }
+    else {
+        contactPerson.style.border = "";
+        emptyFields[0] = false;
+    }
+}
+function CheckTopic() {
+    if (topic.value == "") {
+        topic.style.border = "1px solid rgba(255,0,0, .8)";
+        emptyFields[1] = true;
+    }
+    else {
+        topic.style.border = "";
+        emptyFields[1] = false;
+    }
+}
+function CheckDescription() {
+    if (desc.value == "") {
+        desc.style.border = "1px solid rgba(255,0,0, .8)";
+        emptyFields[2] = true;
+    }
+    else {
+        desc.style.border = "";
+        emptyFields[2] = false;
+    }
+}
+cancell.addEventListener("click", function () {
+    desc.value = "";
+    topic.value = "";
+    contactPerson.value = "";
+});
+
+function AddOrRemoveErrors() {
+    if (emptyFields.includes(true) && errorsSection.childElementCount < 1) {
+        error = document.createElement('li');
+        error.innerText = "Marked fields are mandatory"
+        errorsSection.appendChild(error);
+    }
+    else if (!emptyFields.includes(true)){
+        errorsSection.innerHTML = "";
+    }
 }

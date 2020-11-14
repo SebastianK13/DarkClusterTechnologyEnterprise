@@ -71,16 +71,6 @@ namespace DarkClusterTechnologyEnterprise.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int Id { get; set; }
-        //Incident or Application
-        [ForeignKey("Service")]
-        public int ServiceId { get; set; }
-        public virtual ApplicationService? Service { get; set; }
-    }
-    public class ApplicationService
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public int ServiceId { get; set; }
         public string? ServiceName { get; set; }
         [ForeignKey("Category")]

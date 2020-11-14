@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    [Migration("20201114183301_DatabaseReorganize")]
-    partial class DatabaseReorganize
+    [Migration("20201114202957_DatabaseInitial")]
+    partial class DatabaseInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,26 +48,6 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.ToTable("Conversations");
                 });
 
-            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.ApplicationService", b =>
-                {
-                    b.Property<int>("ServiceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ServiceName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ServiceId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("ApplicationService");
-                });
-
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.AssigmentGroup", b =>
                 {
                     b.Property<int>("GroupId")
@@ -85,17 +65,20 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Categorization", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ServiceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ServiceId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<string>("ServiceName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("ServiceId");
+                    b.HasKey("ServiceId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Categorizations");
                 });
@@ -303,20 +286,11 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.ApplicationService", b =>
+            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Categorization", b =>
                 {
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Categorization", b =>
-                {
-                    b.HasOne("DarkClusterTechnologyEnterprise.Models.ApplicationService", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

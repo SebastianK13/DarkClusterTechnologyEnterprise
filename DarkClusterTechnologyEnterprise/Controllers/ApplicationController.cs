@@ -30,12 +30,13 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return View();
         }       
-        public IActionResult ServiceRequest()
+        public async Task<IActionResult> ServiceRequest()
         {
             string? username = User.Identity.Name;
+            int eId = await eRepository.GetEmployeeID(username);
             ServiceRequestViewModel viewModel =
                 new ServiceRequestViewModel(username, sdRepository.GetServices(),
-                sdRepository.GetImpacts(), sdRepository.GetUrgencies());
+                sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId);
 
 
             return View(viewModel);
@@ -47,7 +48,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             return Ok(viewModel.Results);
         }
         [HttpPost]
-        public IActionResult AddNewServiceRequest()
+        public IActionResult AddNewServiceRequest(ReceiveServiceRequest receive)
         {
 
 

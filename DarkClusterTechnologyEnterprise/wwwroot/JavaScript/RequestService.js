@@ -7,6 +7,7 @@ var topic = document.getElementById("topic");
 var cancell = document.getElementById("newServiceRequestCancell");
 var errorsSection = document.getElementById("dateErrors");
 var emptyFields = [false, false, false];
+var searchIDs = [];
 
 contactPerson.addEventListener("keyup", function () {
     var type = document.getElementById("contactPerson").value;
@@ -29,10 +30,15 @@ function CreateResultsList(searchResult, a) {
 
     for (i = 0; i < a.length; i++) {
         if (i < searchResult.length) {
+            debugger;
             a[i].style.display = "block";
             a[i].innerText = searchResult[i].fullInfo;
+            a[i].id = "result" + i;
+            searchIDs[i] = {
+                name: a[i].id,
+                id: searchResult[i].employeeId
+            };
             a[i].style.borderBottom = "none";
-            debugger;
             if (i == searchResult.length - 1) {
                 a[i].style.borderBottom = "1px solid rgba(184,184,184, .8)";
             }
@@ -47,6 +53,14 @@ dropd.addEventListener("click", function (e) {
     if (e.target.tagName == "A") {
         var i = e.target.innerText;
         contactPerson.value = i;
+        for (s of searchIDs) {
+            if (s.name == e.target.id) {
+                debugger;
+                document.getElementById("contactPersonField").value = s.id;
+            }
+
+        }
+
         for (i = 0; i < a.length; i++) {
             a[i].style.display = "none";
         }

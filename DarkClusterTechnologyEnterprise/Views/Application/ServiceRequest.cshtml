@@ -21,11 +21,13 @@
                         <div class="notifier">
                             <div class="app-label">Requested By: </div>
                             <input value=@Model.Notifier readonly="readonly" name="Notifier" />
+                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
                         </div>
                         <div class="contact-person">
                             <div class="app-label">Contact Person: </div>
                             <div id="findEmployeeContainer" class="find-employee-container">
                                 <input name="Notifier" id="contactPerson" autocomplete="off" />
+                                <input name="ContactPerson" class="display-none" id="contactPersonField"/>
                                 <a></a>
                                 <a></a>
                                 <a></a>
@@ -52,7 +54,7 @@
                     </div>
                     <div class="app-description-container">
                         <div class="app-desc-label">Description:</div>
-                        <textarea id="description" class="app-description"></textarea>
+                        <textarea id="description" class="app-description" name="description"></textarea>
                     </div>
                     <div class="tableErrors">
                         <ul id="dateErrors"></ul>
@@ -60,7 +62,7 @@
                     <div class="service-request-btns-section">
                         <btn id="newServiceRequestCancell">Cancell</btn>
                         <btn>
-                            Save
+                            Send
                             <input id="newTaskSave" value="Save" type="submit" />
                         </btn>
                     </div>

@@ -6,23 +6,21 @@ using System.Threading.Tasks;
 
 namespace DarkClusterTechnologyEnterprise.Models
 {
-    public class AppServiceDeskDbContext:DbContext
+    public class AppServiceDeskDbContext : DbContext
     {
         public AppServiceDeskDbContext(DbContextOptions<AppServiceDeskDbContext>
-            options) : base(options){ }
+            options) : base(options) { }
         public DbSet<ServiceRequest> Applications { get; set; }
         public DbSet<ScheduledWork> Works { get; set; }
         public DbSet<ApplicationConversation> Conversations { get; set; }
-        public DbSet<ApplicationService> Services { get; set; } 
-        public DbSet<Impact> Impacts { get; set; } 
-        public DbSet<Categorization> Categorizations { get; set; } 
-        public DbSet<Category> Categories { get; set; } 
-        public DbSet<ApplicationService> Areas { get; set; } 
-        public DbSet<Urgency> Urgencies { get; set; } 
-        public DbSet<Priority> Priorities { get; set; } 
-        public DbSet<Status> Statuses { get; set; } 
-        public DbSet<Member> Members { get; set; } 
-        public DbSet<AssigmentGroup> AssigmentGroup { get; set; } 
+        public DbSet<Impact> Impacts { get; set; }
+        public DbSet<Categorization> Categorizations { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Urgency> Urgencies { get; set; }
+        public DbSet<Priority> Priorities { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<AssigmentGroup> AssigmentGroup { get; set; }
 
     }
 }

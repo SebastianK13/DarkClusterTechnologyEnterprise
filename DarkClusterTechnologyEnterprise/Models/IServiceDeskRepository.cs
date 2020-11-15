@@ -13,5 +13,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         List<Categorization> GetServices();
         List<Impact> GetImpacts();
         List<Urgency> GetUrgencies();
+        int SetPriority(int urgency, int impact);
+        Task<bool> CreateNewServiceRequest(ReceiveServiceRequest receive);
     }
 }

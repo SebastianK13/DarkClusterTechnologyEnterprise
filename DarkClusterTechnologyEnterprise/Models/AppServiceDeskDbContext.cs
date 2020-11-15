@@ -21,6 +21,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<AssigmentGroup> AssigmentGroup { get; set; }
+        public DbSet<State> States { get; set; }
 
     }
 }

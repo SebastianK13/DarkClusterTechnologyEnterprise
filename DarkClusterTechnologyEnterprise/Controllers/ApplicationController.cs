@@ -48,9 +48,9 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             return Ok(viewModel.Results);
         }
         [HttpPost]
-        public IActionResult AddNewServiceRequest(ReceiveServiceRequest receive)
+        public async Task<IActionResult> AddNewServiceRequest(ReceiveServiceRequest receive)
         {
-
+            await sdRepository.CreateNewServiceRequest(receive);
 
             return RedirectToAction("ServiceRequest");
         }

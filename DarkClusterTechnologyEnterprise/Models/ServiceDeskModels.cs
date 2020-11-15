@@ -10,6 +10,17 @@ namespace DarkClusterTechnologyEnterprise.Models
 {
     public class ServiceRequest
     {
+        ServiceRequest() { }
+        public ServiceRequest(ReceiveServiceRequest receive)
+        {
+            Topic = receive.Topic;
+            Description = receive.Description;
+            RequestedPerson = receive.RequestedBy;
+            ContactPerson = receive.ContactPerson;
+            ImpactId = receive.Impacts;
+            UrgencyId = receive.Urgencies;
+            CategoryId = receive.Services;
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int RequestId { get; set; }
@@ -33,8 +44,30 @@ namespace DarkClusterTechnologyEnterprise.Models
         public virtual Priority? Priority { get; set; }
         public virtual AssigmentGroup? Group { get; set; }
         public virtual Categorization? Category { get; set; }
+        
     }
-
+    public class TaskRequest
+    {
+        public int TaskId { get; set; }
+        public int RequestedPerson { get; set; }
+        public int ContactPerson { get; set; }
+        [ForeignKey("Impact")]
+        public int ImpactId { get; set; }
+        [ForeignKey("Urgency")]
+        public int UrgencyId { get; set; }
+        [ForeignKey("Priority")]
+        public int PriorityId { get; set; }
+        [ForeignKey("Group")]
+        public int GroupId { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+        public virtual Status? Status { get; set; }
+        public virtual Impact? Impact { get; set; }//
+        public virtual Urgency? Urgency { get; set; }//
+        public virtual Priority? Priority { get; set; }
+        public virtual AssigmentGroup? Group { get; set; }
+        public virtual Categorization? Category { get; set; }
+    }
     public class ApplicationConversation
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -116,11 +149,19 @@ namespace DarkClusterTechnologyEnterprise.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int StatusId { get; set; }
-        public string? Name { get; set; }
+        [ForeignKey("State")]
+        public int StateId { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime Deadline { get; set; }
         public bool Expired { get; set; }
-
+        public virtual State? State { get; set; }
+    }
+    public class State
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int StateId { get; set; }
+        public string? StateName { get; set; }
     }
 
     public class AssigmentGroup

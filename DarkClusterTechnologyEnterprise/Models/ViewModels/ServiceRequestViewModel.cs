@@ -55,5 +55,4 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public string? Topic { get; set; }
         public string? Description { get; set; }
     }
-
 }

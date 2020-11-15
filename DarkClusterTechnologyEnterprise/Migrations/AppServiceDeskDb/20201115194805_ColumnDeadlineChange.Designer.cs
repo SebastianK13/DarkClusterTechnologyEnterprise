@@ -4,14 +4,16 @@ using DarkClusterTechnologyEnterprise.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    partial class AppServiceDeskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115194805_ColumnDeadlineChange")]
+    partial class ColumnDeadlineChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,7 +195,7 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GroupId")
+                    b.Property<int>("GroupId")
                         .HasColumnType("int");
 
                     b.Property<int>("ImpactId")
@@ -358,7 +360,9 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.AssigmentGroup", "Group")
                         .WithMany()
-                        .HasForeignKey("GroupId");
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.Impact", "Impact")
                         .WithMany()

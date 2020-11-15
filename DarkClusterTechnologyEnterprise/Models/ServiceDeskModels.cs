@@ -35,7 +35,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         [ForeignKey("Priority")]
         public int PriorityId { get; set; }
         [ForeignKey("Group")]
-        public int GroupId { get; set; }
+        public int? GroupId { get; set; }
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public virtual Status? Status { get; set; }
@@ -72,13 +72,13 @@ namespace DarkClusterTechnologyEnterprise.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string User { get; set; }
-        public string Administrator { get; set; }
-        public string Message { get; set; }
+        public string? User { get; set; }
+        public string? Administrator { get; set; }
+        public string? Message { get; set; }
         public DateTime MessageDate { get; set; }
         [ForeignKey("ServiceRequest")]
         public int RequestId { get; set; }
-        public virtual ServiceRequest ServiceRequest { get; set; }
+        public virtual ServiceRequest? ServiceRequest { get; set; }
     }
     public class ScheduledWork
     {
@@ -152,10 +152,27 @@ namespace DarkClusterTechnologyEnterprise.Models
         [ForeignKey("State")]
         public int StateId { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime Deadline { get; set; }
+        public DateTime DueTime { get; set; }
         public bool Expired { get; set; }
         public virtual State? State { get; set; }
     }
+
+    public class StatusHistory
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int ChangeId { get; set; }
+        [ForeignKey("Status")]
+        public int? StatusId { get; set; }
+        [ForeignKey("State")]
+        public int? StateId { get; set; }
+        public DateTime Begin { get; set; }
+        public DateTime End { get; set; }
+        public bool Active { get; set; }
+        public virtual State? State { get; set; }
+        public virtual Status? Status { get; set; }
+    }
+
     public class State
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

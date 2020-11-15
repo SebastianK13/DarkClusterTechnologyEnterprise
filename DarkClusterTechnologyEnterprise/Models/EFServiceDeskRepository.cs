@@ -1,4 +1,5 @@
 ﻿using DarkClusterTechnologyEnterprise.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,14 +50,34 @@ namespace DarkClusterTechnologyEnterprise.Models
             request.PriorityId = SetPriority(
                 GetUrgencyLvlById(receive.Urgencies),
                 GetImpactLvlById(receive.Impacts));
+            request.CategoryId = receive.Services;
+            request.Status = await CreateStatus();
 
-            return true;
+            context.Applications.Add(request);
+
+            return await context.SaveChangesAsync() > 0; 
         }
-        //private async Task<Status> CreateStatus()
-        //{
+        private async Task<Status> CreateStatus()
+        {
+            Status status = new Status();
+            status.StateId = await context.States
+                .Where(n => n.StateName == "New")
+                .Select(i => i.StateId)
+                .FirstOrDefaultAsync();
+            status.CreateDate = DateTime.UtcNow;
+            status.Expired = false;
+            status.DueTime = DateTime.UtcNow.AddDays(2);
+            status.StateId = await FindStateId("New");
 
-        //}
+            context.Statuses.Add(status);
+            await context.SaveChangesAsync();
 
+            return status;
+        }
+        private async Task<int> FindStateId(string stateName) =>
+            await context.States
+            .Where(n => n.StateName == stateName)
+            .Select(i => i.StateId).FirstOrDefaultAsync();
         public int SetPriority(int urgency, int impact)
         {
             switch (urgency)

@@ -50,7 +50,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewServiceRequest(ReceiveServiceRequest receive)
         {
-            await sdRepository.CreateNewServiceRequest(receive);
+            if (ModelState.IsValid)
+            {
+                await sdRepository.CreateNewServiceRequest(receive);
+            }
 
             return RedirectToAction("ServiceRequest");
         }

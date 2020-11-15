@@ -2949,6 +2949,14 @@ table.all-invoices tfoot .links a {
     min-width: 420px;
     height: auto;
 }
+.account-info {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: table;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(184,184,184, .8);
+}
 .priority-label {
     position: relative;
     min-width: 110px;

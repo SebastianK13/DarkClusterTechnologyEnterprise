@@ -10,7 +10,7 @@ namespace DarkClusterTechnologyEnterprise.Models
     {
         List<ScheduledWork> GetServiceWorks(int eId, DateTime date);
         Task<bool> CreateServiceWork(NewServiceWork newService, int eId);
-        List<Categorization> GetServices();
+        List<Categorization> GetServices(string category);
         List<Impact> GetImpacts();
         List<Urgency> GetUrgencies();
         int SetPriority(int urgency, int impact);

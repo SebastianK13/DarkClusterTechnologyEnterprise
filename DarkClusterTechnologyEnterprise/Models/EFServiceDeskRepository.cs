@@ -25,9 +25,10 @@ namespace DarkClusterTechnologyEnterprise.Models
             context.Works.Add(scheduledWork);
             return await context.SaveChangesAsync() > 0;
         }
-        public List<Categorization> GetServices() =>
+
+        public List<Categorization> GetServices(string category) =>
             context.Categorizations
-            .Where(t => t.Category.CategoryName == "Service request")
+            .Where(t => t.Category.CategoryName == category)
             .ToList();
 
         public List<Impact> GetImpacts() =>

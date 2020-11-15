@@ -25,19 +25,23 @@ namespace DarkClusterTechnologyEnterprise.Controllers
                 month.Add(eRepository.ConvertToLocal(DateTime.UtcNow.AddDays(+i), eId));
             }
         }
-        public IActionResult ManageEmployeesAccount()
+        public async Task<IActionResult> ManageEmployeesAccount()
         {
+            string? username = User.Identity.Name;
+            int eId = await eRepository.GetEmployeeID(username);
+            ServiceRequestViewModel viewModel =
+                new ServiceRequestViewModel(username, sdRepository.GetServices("Task"),
+                sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId);
 
-            return View();
+            return View(viewModel);
         }       
         public async Task<IActionResult> ServiceRequest()
         {
             string? username = User.Identity.Name;
             int eId = await eRepository.GetEmployeeID(username);
             ServiceRequestViewModel viewModel =
-                new ServiceRequestViewModel(username, sdRepository.GetServices(),
+                new ServiceRequestViewModel(username, sdRepository.GetServices("Service request"),
                 sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId);
-
 
             return View(viewModel);
         }

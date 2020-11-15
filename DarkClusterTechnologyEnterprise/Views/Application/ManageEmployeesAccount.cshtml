@@ -1,15 +1,112 @@
 ﻿
+@model ServiceRequestViewModel
 @{
     Layout = "_LoggedUserLayout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ManageEmployeesAccount</title>
-</head>
 <body>
+    <div class="application-section">
+        <div class="invoice-section-header">
+            <img class="serviceRequest-section-img" src="~/Images/OrderGray.bmp" />
+            <div class="text-invoice">Service request</div>
+        </div>
+        <form id="addNewServiceRequest" asp-action="AddNewServiceRequest" asp-controller="Application" method="post">
+            <div class="invoice-data padding-side">
+                <div class="account-info">
+                    <div class="basic-info-col1">
+                        <div class="application-type">
+                            <div class="app-label">Service: </div>
+                            @Html.DropDownListFor(y => Model.Services, new SelectList(Model.Services, "ServiceId", "ServiceName"),
+                            htmlAttributes: new { @class = "notification-DDL", @id = "services" })
+                        </div>
+                        <div class="notifier">
+                            <div class="app-label">Requested By: </div>
+                            <input value=@Model.Notifier readonly="readonly" name="Notifier" />
+                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
+                        </div>
+                        <div class="contact-person">
+                            <div class="app-label">Contact Person: </div>
+                            <div id="findEmployeeContainer" class="find-employee-container">
+                                <input name="Notifier" id="contactPerson" autocomplete="off" />
+                                <input name="ContactPerson" class="display-none" id="contactPersonField" />
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="basic-info-col2">
+                        <div class="priority-level">
+                            <div class="priority-label">Urgency: </div>
+                            @Html.DropDownListFor(y => Model.Urgencies, new SelectList(Model.Urgencies, "Id", "Name"),
+                            htmlAttributes: new { @class = "priority-DDL", @id = "urgencies" })
+                        </div>
+                        <div class="SLA-date">
+                            <div class="priority-label">Impact: </div>
+                            @Html.DropDownListFor(y => Model.Impacts, new SelectList(Model.Impacts, "Id", "Name"),
+                            htmlAttributes: new { @class = "priority-DDL", @id = "impacts" })
+                        </div>
+                    </div>
+                </div>               
+                <div class="account-info">
+                    <div class="basic-info-col1">
+                        <div class="notifier">
+                            <div class="app-label">Requested By: </div>
+                            <input value=@Model.Notifier readonly="readonly" name="Notifier" />
+                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
+                        </div>
+                        <div class="notifier">
+                            <div class="app-label">Requested By: </div>
+                            <input value=@Model.Notifier readonly="readonly" name="Notifier" />
+                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
+                        </div>
+                        <div class="notifier">
+                            <div class="app-label">Requested By: </div>
+                            <input value=@Model.Notifier readonly="readonly" name="Notifier" />
+                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
+                        </div>
+                    </div>
+                    <div class="basic-info-col2">
+                        <div class="priority-level">
+                            <div class="priority-label">Urgency: </div>
+                            @Html.DropDownListFor(y => Model.Urgencies, new SelectList(Model.Urgencies, "Id", "Name"),
+                            htmlAttributes: new { @class = "priority-DDL", @id = "urgencies" })
+                        </div>
+                        <div class="priority-level">
+                            <div class="priority-label">Urgency: </div>
+                            @Html.DropDownListFor(y => Model.Urgencies, new SelectList(Model.Urgencies, "Id", "Name"),
+                            htmlAttributes: new { @class = "priority-DDL", @id = "urgencies" })
+                        </div>
+                        <div class="priority-level">
+                            <div class="priority-label">Urgency: </div>
+                            @Html.DropDownListFor(y => Model.Urgencies, new SelectList(Model.Urgencies, "Id", "Name"),
+                            htmlAttributes: new { @class = "priority-DDL", @id = "urgencies" })
+                        </div>
+                    </div>
+                </div>                
+                    <div class="topic-app">
+                        <div class="app-label">Topic: </div>
+                        <input id="topic" name="topic" />
+                    </div>
+                    <div class="app-description-container">
+                        <div class="app-desc-label">Description:</div>
+                        <textarea id="description" class="app-description" name="description"></textarea>
+                    </div>
+                    <div class="tableErrors">
+                        <ul id="dateErrors"></ul>
+                    </div>
+                    <div class="service-request-btns-section">
+                        <btn id="newServiceRequestCancell">Cancell</btn>
+                        <btn>
+                            Send
+                            <input id="newTaskSave" value="Save" type="submit" />
+                        </btn>
+                    </div>
+                </div>
+</form>
+    </div>
 </body>
-</html>
+<script src="~/JavaScript/RequestService.js"></script>
+<script src="~/lib/axios/axios.js"></script>

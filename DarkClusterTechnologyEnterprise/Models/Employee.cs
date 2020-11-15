@@ -21,16 +21,19 @@ namespace DarkClusterTechnologyEnterprise.Models
         public string UserId { get; set; }
         [ForeignKey("Superior")]
         public int? SuperiorId { get; set; }
-        public virtual Employee Superior { get; set; }
+        public virtual Employee? Superior { get; set; }
         [ForeignKey("Location")]
         public string LocationId { get; set; }
-        public virtual Location Location { get; set; }
+        public virtual Location? Location { get; set; }
         [ForeignKey("Department")]
         public int? DepartmentId { get; set; }
-        public virtual Department Department { get; set; }
+        public virtual Department? Department { get; set; }
         [ForeignKey("Zone")]
         public int? ZoneId { get; set; }
-        public virtual TimeZonesModel Zone { get; set; }
+        public virtual TimeZonesModel? Zone { get; set; }
+        [ForeignKey("Earnings")]
+        public string? EarningsId { get; set; }
+        public virtual Earnings? Earnings { get; set; }
     }
     public class Earnings
     {
@@ -40,10 +43,6 @@ namespace DarkClusterTechnologyEnterprise.Models
         public decimal? Salary { get; set; }
         public decimal? Premium { get; set; }
         public string? Currency { get; set; }
-        [ForeignKey("Employee")]
-        public int EmployeeId { get; set; }
-        public virtual Employee Employee { get; set; }
-
     }
     public class Department
     {

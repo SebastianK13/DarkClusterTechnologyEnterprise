@@ -247,7 +247,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
                 employees[i].LocationId = repository.GetLastLocation();
                 employees[i].UserId = user.Id;
                 Employee employee = repository.CreateEmployee(employees[i]);
-                earnings[i].EmployeeId = employee.EmployeeId;
+                //earnings[i].EmployeeId = employee.EmployeeId; Database reorganize foreignkey removed from employee table
                 repository.CreateEarnings(earnings[i]);
                 if (employee.Position.Contains("Chief"))
                 {

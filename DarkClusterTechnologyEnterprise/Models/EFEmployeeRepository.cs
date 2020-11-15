@@ -102,28 +102,28 @@ namespace DarkClusterTechnologyEnterprise.Models
         public List<EmployeesEarnings> GetEarnings(List<LoginByID> loginByIDs)
         {
             List<EmployeesEarnings> earningsEmployees = new List<EmployeesEarnings>();
-            var earnings = context.Earnings.OrderBy(i => i.Employee.UserId).ToList();
+            var earnings = context.Employees.OrderBy(i => i.EmployeeId).ToList();
 
             for (int i = 0; i < earnings.Count(); i++)
             {
-                string department = null;
-                if (earnings[i].Employee.Department is null)
+                string? department = null;
+                if (earnings[i].Department is null)
                 {
                     department = "n/a";
                 }
                 else
                 {
-                    department = earnings[i].Employee.Department.DepartmentName;
+                    department = earnings[i].Department?.DepartmentName;
                 }
                 earningsEmployees.Add(new EmployeesEarnings
                 {
                     Login = loginByIDs[i].Login,
-                    Firstname = earnings[i].Employee.Firstname,
-                    Lastname = earnings[i].Employee.Surname,
+                    Firstname = earnings[i].Firstname,
+                    Lastname = earnings[i].Surname,
                     DepartmentName = department,
-                    Salary = earnings[i].Salary,
-                    Premium = earnings[i].Premium,
-                    Currency = earnings[i].Currency
+                    Salary = earnings[i].Earnings?.Salary,
+                    Premium = earnings[i].Earnings?.Premium,
+                    Currency = earnings[i].Earnings?.Currency
                 });
             }
 

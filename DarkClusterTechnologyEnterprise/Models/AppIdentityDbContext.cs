@@ -56,6 +56,6 @@ namespace DarkClusterTechnologyEnterprise.Models
         public DbSet<TaskSchedule> TaskSchedules { get; set; }
         public DbSet<Break> Breaks { get; set; }
         public DbSet<TimeZonesModel> Zone { get; set; }
-
+        public DbSet<Position> Positions { get; set; }
     }
 }

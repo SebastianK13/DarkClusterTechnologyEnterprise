@@ -31,6 +31,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         void WorkEnd(int eId);
         void RoundToSeconds(ref TimeSpan time);
         bool FindActiveBreak(int eId);
+        List<TimeZonesModel> GetTimeZones();
         double GetActiveBreakTime(int eId);
         DateTime CheckIfDaylight(int eId);
         Task<bool> CreateTasks(NewTask task, int eId);

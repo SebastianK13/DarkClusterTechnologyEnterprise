@@ -15,7 +15,6 @@ namespace DarkClusterTechnologyEnterprise.Models
         public string? Firstname { get; set; }
         public string? Surname { get; set; }
         public string? Email { get; set; }
-        public string? Position { get; set; }
         public string? ProfilePicPath { get; set; }
         [Required]
         public string UserId { get; set; }
@@ -34,6 +33,16 @@ namespace DarkClusterTechnologyEnterprise.Models
         [ForeignKey("Earnings")]
         public string? EarningsId { get; set; }
         public virtual Earnings? Earnings { get; set; }
+        [ForeignKey("Positions")]
+        public int? PositionId { get; set; }
+        public virtual Position? Positions { get; set; }
+    }
+    public class Position
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int PositionId { get; set; }
+        public string? PositionName { get; set; }
     }
     public class Earnings
     {

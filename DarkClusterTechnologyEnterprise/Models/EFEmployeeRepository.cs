@@ -71,13 +71,13 @@ namespace DarkClusterTechnologyEnterprise.Models
 
             foreach (var e in employees)
             {
-                if (e.Position.Contains("Chief"))
+                if (e.Positions.PositionName.Contains("Chief"))
                 {
                     e.SuperiorId = chairman.EmployeeId;
                 }
                 else
                 {
-                    if (e.Position != "Chairman")
+                    if (e.Positions.PositionName != "Chairman")
                     {
                         e.SuperiorId = context.Departments
                             .Where(i => i.DepartmentId == e.DepartmentId)
@@ -383,6 +383,8 @@ namespace DarkClusterTechnologyEnterprise.Models
             .Contains(phrase))
             .Take(5)
             .ToList();
-    }
 
+        public List<TimeZonesModel> GetTimeZones() =>
+            context.Zone.ToList();
+    }
 }

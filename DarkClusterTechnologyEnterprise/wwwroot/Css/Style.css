@@ -2955,6 +2955,7 @@ table.all-invoices tfoot .links a {
     height: auto;
     display: table;
     padding-bottom: 30px;
+    padding-top: 30px;
     border-bottom: 1px solid rgba(184,184,184, .8);
 }
 .priority-label {
@@ -3073,32 +3074,85 @@ table.all-invoices tfoot .links a {
         border-radius: 2px;
         cursor: pointer;
     }
-/*@media only screen and (max-width: 1300px) {
-    .basic-info-col2 {
-        width:100%;
-        float:left;
-    }
-    .SLA-date {
-        width: 100%;
-        float: left;
-    }
-    .priority-level {
-        width: 100%;
-        float: left;
-    }
+.search-right {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: right;
 }
-@media only screen and (max-width: 1310px) {
-    .SLA-date {
-        min-width: 250px;
+.input-search-right {
+    position: relative;
+    border-radius: 0px;
+    border: 1px solid rgba(184,184,184, .8);
+    width: 294px;
+    height: 20px;
+    min-width: 200px;
+}
+.duration {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: left;
+}
+    .duration input {
+        position: relative;
+        width: 296px;
+        height: 24px;
+        float: left;
+        min-width: 209px;
+        border: 1px solid rgba(184,184,184, .8);
+    }
+.duration-container {
+    position: relative;
+    width: 300px;
+    height: 20px;
+    float: left;
+    min-width: 209px;
+    z-index: 2;
+}
+
+.employee-fields-left {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: left;
+}
+
+    .employee-fields-left input {
+        position: relative;
+        width: calc(300px - 8px);
+        height: 20px;
+        float: left;
+        min-width: 209px;
+        border: 1px solid rgba(184,184,184, .8);
     }
 
-    .priority-level {
-        min-width: 250px;
+.search-position {
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding: 1px 5px 1px 5px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    float: left;
+}
+
+    .search-position input {
+        position: relative;
+        width: calc(100% - 6px);
+        height: 100%;
+        border: 1px solid rgba(184,184,184, .8);
     }
-    .basic-info-col2 {
-        min-width: 350px;
-    }
-    .basic-info-col1 {
-        min-width: 350px;
-    }
-}*/

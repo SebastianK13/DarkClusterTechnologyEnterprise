@@ -1,5 +1,5 @@
 ﻿
-@model ServiceRequestViewModel
+@model ManageAccountsViewModel
 @{
     Layout = "_LoggedUserLayout";
 }
@@ -36,6 +36,10 @@
                                 <a></a>
                             </div>
                         </div>
+                        <div class="duration">
+                            <div class="app-label">Duration</div>
+                            <input id="startDate" type="date" name="TaskBeginDate">
+                        </div>
                     </div>
                     <div class="basic-info-col2">
                         <div class="priority-level">
@@ -49,64 +53,114 @@
                             htmlAttributes: new { @class = "priority-DDL", @id = "impacts" })
                         </div>
                     </div>
-                </div>               
+                </div>
                 <div class="account-info">
                     <div class="basic-info-col1">
-                        <div class="notifier">
-                            <div class="app-label">Requested By: </div>
-                            <input value=@Model.Notifier readonly="readonly" name="Notifier" />
-                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
+                        <div class="employee-fields-left">
+                            <div class="app-label">Firstname: </div>
+                            <input name="Firstname" autocomplete="off" />
                         </div>
-                        <div class="notifier">
-                            <div class="app-label">Requested By: </div>
-                            <input value=@Model.Notifier readonly="readonly" name="Notifier" />
-                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
+                        <div class="employee-fields-left">
+                            <div class="app-label">Surname: </div>
+                            <input name="Surname" autocomplete="off" />
                         </div>
-                        <div class="notifier">
-                            <div class="app-label">Requested By: </div>
-                            <input value=@Model.Notifier readonly="readonly" name="Notifier" />
-                            <input name="RequestedBy" value=@Model.EmployeeId class="display-none" />
+                        <div class="employee-fields-left">
+                            <div class="app-label">Position: </div>
+                            <input name="Position" autocomplete="off" />
+                        </div>
+                        <div class="search-position">
+                            <div class="app-label">Contact Person: </div>
+                            <div id="findEmployeeContainer" class="find-employee-container">
+                                <input id="position" autocomplete="off" />
+                                <input name="Position" class="display-none" id="positionField" />
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                            </div>
+                        </div>
+                        <div class="employee-fields-left">
+                            <div class="app-label">Email: </div>
+                            <input name="Email" autocomplete="off" />
                         </div>
                     </div>
                     <div class="basic-info-col2">
-                        <div class="priority-level">
-                            <div class="priority-label">Urgency: </div>
-                            @Html.DropDownListFor(y => Model.Urgencies, new SelectList(Model.Urgencies, "Id", "Name"),
-                            htmlAttributes: new { @class = "priority-DDL", @id = "urgencies" })
+                        <div class="search-right">
+                            <div class="app-label">Department: </div>
+                            <div id="findEmployeeContainer" class="find-employee-container">
+                                <input id="department" autocomplete="off" class="input-search-right" />
+                                <input name="Department" class="display-none" id="departmentField" />
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                            </div>
+                        </div>
+                        <div class="search-right">
+                            <div class="app-label">Superior: </div>
+                            <div id="findEmployeeContainer" class="find-employee-container">
+                                <input id="superior" autocomplete="off" class="input-search-right" />
+                                <input name="Superior" class="display-none" id="superiorField" />
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                                <a></a>
+                            </div>
                         </div>
                         <div class="priority-level">
-                            <div class="priority-label">Urgency: </div>
-                            @Html.DropDownListFor(y => Model.Urgencies, new SelectList(Model.Urgencies, "Id", "Name"),
-                            htmlAttributes: new { @class = "priority-DDL", @id = "urgencies" })
+                            <div class="priority-label">Time zone: </div>
+                            @Html.DropDownListFor(y => Model.TimeZones, new SelectList(Model.TimeZones, "ZonId", "TimeZoneName"),
+                            htmlAttributes: new { @class = "priority-DDL", @id = "zone" })
                         </div>
-                        <div class="priority-level">
-                            <div class="priority-label">Urgency: </div>
-                            @Html.DropDownListFor(y => Model.Urgencies, new SelectList(Model.Urgencies, "Id", "Name"),
-                            htmlAttributes: new { @class = "priority-DDL", @id = "urgencies" })
-                        </div>
-                    </div>
-                </div>                
-                    <div class="topic-app">
-                        <div class="app-label">Topic: </div>
-                        <input id="topic" name="topic" />
-                    </div>
-                    <div class="app-description-container">
-                        <div class="app-desc-label">Description:</div>
-                        <textarea id="description" class="app-description" name="description"></textarea>
-                    </div>
-                    <div class="tableErrors">
-                        <ul id="dateErrors"></ul>
-                    </div>
-                    <div class="service-request-btns-section">
-                        <btn id="newServiceRequestCancell">Cancell</btn>
-                        <btn>
-                            Send
-                            <input id="newTaskSave" value="Save" type="submit" />
-                        </btn>
                     </div>
                 </div>
-</form>
+                <div class="account-info">
+                    <div class="basic-info-col1">
+                        <div class="employee-fields-left">
+                            <div class="app-label">Country: </div>
+                            <input name="Country" autocomplete="off" />
+                        </div>
+                        <div class="employee-fields-left">
+                            <div class="app-label">City: </div>
+                            <input name="Surname" autocomplete="off" />
+                        </div>
+                        <div class="employee-fields-left">
+                            <div class="app-label">Address: </div>
+                            <input name="Address" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="basic-info-col2">
+                        <div class="search-right">
+                            <div class="app-label">ZipCode: </div>
+                            <input name="ZipCode" autocomplete="off" class="input-search-right" />
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-app">
+                    <div class="app-label">Topic: </div>
+                    <input id="topic" name="topic" autocomplete="off" />
+                </div>
+                <div class="app-description-container">
+                    <div class="app-desc-label">Description:</div>
+                    <textarea id="description" class="app-description" name="description"></textarea>
+                </div>
+                <div class="tableErrors">
+                    <ul id="dateErrors"></ul>
+                </div>
+                <div class="service-request-btns-section">
+                    <btn id="newServiceRequestCancell">Cancell</btn>
+                    <btn>
+                        Send
+                        <input id="newTaskSave" value="Save" type="submit" />
+                    </btn>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
-<script src="~/JavaScript/RequestService.js"></script>
+<script src="~/JavaScript/Application.js"></script>
+<script src="~/JavaScript/ManageEmployeesAccount.js"></script>
 <script src="~/lib/axios/axios.js"></script>

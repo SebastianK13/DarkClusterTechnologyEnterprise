@@ -29,9 +29,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             string? username = User.Identity.Name;
             int eId = await eRepository.GetEmployeeID(username);
-            ServiceRequestViewModel viewModel =
-                new ServiceRequestViewModel(username, sdRepository.GetServices("Task"),
-                sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId);
+            ManageAccountsViewModel viewModel =
+                new ManageAccountsViewModel(username, sdRepository.GetServices("Task"),
+                sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId,
+                eRepository.GetTimeZones());
 
             return View(viewModel);
         }       

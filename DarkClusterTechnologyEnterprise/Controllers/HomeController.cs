@@ -141,33 +141,33 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             int count = 0;
             List<Employee> employees = new List<Employee>
             {
-                new Employee{ Firstname="Frank", Surname="Maverick", Position="Chairman"},
+                //new Employee{ Firstname="Frank", Surname="Maverick", Position="Chairman"},
 
-                new Employee{ Firstname="Lizette", Surname="Madoline", Position="HR Chief Department"},
-                new Employee{ Firstname="Israel", Surname="Clementine", Position="HR Manager"},
-                new Employee{ Firstname="Elwyn", Surname="Alton", Position="HR Specialist"},
+                //new Employee{ Firstname="Lizette", Surname="Madoline", Position="HR Chief Department"},
+                //new Employee{ Firstname="Israel", Surname="Clementine", Position="HR Manager"},
+                //new Employee{ Firstname="Elwyn", Surname="Alton", Position="HR Specialist"},
 
-                new Employee{ Firstname="Azaela", Surname="Damon", Position="Accounting and Finance Chief Department"},
-                new Employee{ Firstname="Wayland", Surname="Nolan", Position="Accountant"},
+                //new Employee{ Firstname="Azaela", Surname="Damon", Position="Accounting and Finance Chief Department"},
+                //new Employee{ Firstname="Wayland", Surname="Nolan", Position="Accountant"},
 
-                new Employee{ Firstname="Emil", Surname="Calvin", Position="Marketing Chief Department"},
-                new Employee{ Firstname="Roland", Surname="Harper", Position="Marketing Specialist"},
+                //new Employee{ Firstname="Emil", Surname="Calvin", Position="Marketing Chief Department"},
+                //new Employee{ Firstname="Roland", Surname="Harper", Position="Marketing Specialist"},
 
-                new Employee{ Firstname="Ronny", Surname="Cecelia", Position="IT Chief Department"},
-                new Employee{ Firstname="David", Surname="Wilton", Position="IT Specialist"},
-                new Employee{ Firstname="Will", Surname="Thom", Position="IT Specialist"},
+                //new Employee{ Firstname="Ronny", Surname="Cecelia", Position="IT Chief Department"},
+                //new Employee{ Firstname="David", Surname="Wilton", Position="IT Specialist"},
+                //new Employee{ Firstname="Will", Surname="Thom", Position="IT Specialist"},
 
-                new Employee{ Firstname="Peggie", Surname="Adriana", Position="Research and Development Chief Department"},
-                new Employee{ Firstname="Nikolas", Surname="Rodney", Position="Lab. Technician"},
+                //new Employee{ Firstname="Peggie", Surname="Adriana", Position="Research and Development Chief Department"},
+                //new Employee{ Firstname="Nikolas", Surname="Rodney", Position="Lab. Technician"},
 
-                new Employee{ Firstname="Scherilyn", Surname="Linda", Position="Purchasing Chief Department"},
-                new Employee{ Firstname="Brenden", Surname="Wayne", Position="Purchase Specialist"},
+                //new Employee{ Firstname="Scherilyn", Surname="Linda", Position="Purchasing Chief Department"},
+                //new Employee{ Firstname="Brenden", Surname="Wayne", Position="Purchase Specialist"},
 
-                new Employee{ Firstname="Abbie", Surname="Giffard", Position="Controlling Chief Department"},
-                new Employee{ Firstname="Leroy", Surname="Walker", Position="Controller"},
+                //new Employee{ Firstname="Abbie", Surname="Giffard", Position="Controlling Chief Department"},
+                //new Employee{ Firstname="Leroy", Surname="Walker", Position="Controller"},
 
-                new Employee{ Firstname="Boone", Surname="Jake", Position="Engeneering Chief Department"},
-                new Employee{ Firstname="Keegan", Surname="Percival", Position="Engeneer"},
+                //new Employee{ Firstname="Boone", Surname="Jake", Position="Engeneering Chief Department"},
+                //new Employee{ Firstname="Keegan", Surname="Percival", Position="Engeneer"},
 
             };
             List<Department> departments = new List<Department>
@@ -249,7 +249,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
                 Employee employee = repository.CreateEmployee(employees[i]);
                 //earnings[i].EmployeeId = employee.EmployeeId; Database reorganize foreignkey removed from employee table
                 repository.CreateEarnings(earnings[i]);
-                if (employee.Position.Contains("Chief"))
+                if (employee.Positions.PositionName.Contains("Chief"))
                 {
                     repository.SetChief(count, employee.EmployeeId);
                     count++;

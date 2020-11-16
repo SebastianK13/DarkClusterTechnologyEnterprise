@@ -45,6 +45,7 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public string? FullInfo { get; set; }
         public int EmployeeId { get; set; }
         public List<SearchResult> Results { get; set; }
+        public int Id { get; internal set; }
     }
     public class ReceiveServiceRequest
     {

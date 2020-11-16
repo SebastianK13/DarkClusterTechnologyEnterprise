@@ -26,4 +26,44 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public List<Urgency> Urgencies { get; set; }
         public List<TimeZonesModel> TimeZones { get; set; }
     }
+    public class PositionSearchResult
+    {
+        public PositionSearchResult() { }
+        public PositionSearchResult(List<Position> positions)
+        {
+            Results = new List<PositionSearchResult>();
+            foreach (var p in positions)
+            {
+                Results.Add(new PositionSearchResult
+                {
+                    FullInfo = p.PositionName,
+                    Id = p.PositionId
+                });
+            }
+
+        }
+        public string? FullInfo { get; set; }
+        public int Id { get; set; }
+        public List<PositionSearchResult> Results { get; set; }
+    }
+    public class DepartmentSearchResult
+    {
+        public DepartmentSearchResult() { }
+        public DepartmentSearchResult(List<Department> departments)
+        {
+            Results = new List<DepartmentSearchResult>();
+            foreach (var d in departments)
+            {
+                Results.Add(new DepartmentSearchResult
+                {
+                    FullInfo = d.DepartmentName,
+                    Id = d.DepartmentId
+                });
+            }
+
+        }
+        public string? FullInfo { get; set; }
+        public int Id { get; set; }
+        public List<DepartmentSearchResult> Results { get; set; }
+    }
 }

@@ -35,7 +35,19 @@ namespace DarkClusterTechnologyEnterprise.Controllers
                 eRepository.GetTimeZones());
 
             return View(viewModel);
-        }       
+        }
+        public IActionResult FindPosition(string phrase)
+        {
+            PositionSearchResult viewModel = new PositionSearchResult(eRepository.FindPositionByPhrase(phrase));
+
+            return Ok(viewModel.Results);
+        }
+        public IActionResult FindDepartment(string phrase)
+        {
+            DepartmentSearchResult viewModel = new DepartmentSearchResult(eRepository.FindDepartmentByPhrase(phrase));
+
+            return Ok(viewModel.Results);
+        }
         public async Task<IActionResult> ServiceRequest()
         {
             string? username = User.Identity.Name;

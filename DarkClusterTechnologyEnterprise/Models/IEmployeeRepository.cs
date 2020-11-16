@@ -36,9 +36,11 @@ namespace DarkClusterTechnologyEnterprise.Models
         DateTime CheckIfDaylight(int eId);
         Task<bool> CreateTasks(NewTask task, int eId);
         List<TaskSchedule> GetAllTasks(int eId);
+        List<Position> FindPositionByPhrase(string phrase);
         DateTime ConvertToLocal(DateTime date, int eId);
         List<Subordinate> GetSubordinates(int eId);
         string GetNameSurname(int eId);
         List<Employee> FindEmployeeByPhrase(string phrase);
+        List<Department> FindDepartmentByPhrase(string phrase);
     }
 }

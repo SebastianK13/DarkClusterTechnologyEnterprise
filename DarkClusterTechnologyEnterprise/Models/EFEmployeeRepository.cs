@@ -386,5 +386,19 @@ namespace DarkClusterTechnologyEnterprise.Models
 
         public List<TimeZonesModel> GetTimeZones() =>
             context.Zone.ToList();
+
+        public List<Position> FindPositionByPhrase(string phrase) =>
+            context.Positions
+            .Where(x => (x.PositionName)
+            .Contains(phrase))
+            .Take(5)
+            .ToList();
+
+        public List<Department> FindDepartmentByPhrase(string phrase) =>
+            context.Departments
+            .Where(x => (x.DepartmentName)
+            .Contains(phrase))
+            .Take(5)
+            .ToList();
     }
 }

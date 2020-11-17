@@ -3156,3 +3156,29 @@ table.all-invoices tfoot .links a {
         height: 100%;
         border: 1px solid rgba(184,184,184, .8);
     }
+
+.department-container {
+    position: relative;
+    width: 300px;
+    height: 20px;
+    float: left;
+    min-width: 209px;
+    z-index: 3;
+}
+
+    .department-container a {
+        color: black;
+        padding: 6px 8px;
+        text-decoration: none;
+        display: none;
+        background-color: white;
+        width: calc(100% - 18px);
+        margin: auto;
+        /*border-bottom: 1px solid rgba(184,184,184, .8);*/
+        border-left: 1px solid rgba(184,184,184, .8);
+        border-right: 1px solid rgba(184,184,184, .8);
+    }
+
+        .department-container a:hover {
+            background-color: #f1f1f1
+        }

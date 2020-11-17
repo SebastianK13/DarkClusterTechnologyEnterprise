@@ -95,3 +95,117 @@ positionContainer.addEventListener("click", function (e) {
         }
     }
 });
+
+department.addEventListener("keyup", function () {
+    var type = department.value;
+    debugger;
+    a = departmentContainer.getElementsByTagName("a");
+    axios.get("/Application/FindDepartment/", {
+        params: {
+            phrase: type
+        }
+    }).then(function (response) {
+        debugger;
+        var result = response.data;
+        ResultsForDepartment(result, a);
+    }).catch(function (error) {
+        alert("ERROR: " + (error.message | error));
+    });
+});
+
+function ResultsForDepartment(result, a) {
+
+    for (i = 0; i < a.length; i++) {
+        if (i < result.length) {
+            debugger;
+            a[i].style.display = "block";
+            a[i].innerText = result[i].fullInfo;
+            a[i].id = "result" + i;
+            searchDeptIds[i] = {
+                name: a[i].id,
+                id: result[i].Id
+            };
+            a[i].style.borderBottom = "none";
+            if (i == result.length - 1) {
+                a[i].style.borderBottom = "1px solid rgba(184,184,184, .8)";
+            }
+        }
+        else {
+            a[i].style.display = "none";
+        }
+    }
+}
+departmentContainer.addEventListener("click", function (e) {
+
+    if (e.target.tagName == "A") {
+        var i = e.target.innerText;
+        department.value = i;
+        for (s of searchDeptIds) {
+            if (s.name == e.target.id) {
+                debugger;
+                departmentField.value = s.id;
+            }
+        }
+
+        for (i = 0; i < a.length; i++) {
+            a[i].style.display = "none";
+        }
+    }
+});
+
+superior.addEventListener("keyup", function () {
+    var type = superior.value;
+    debugger;
+    a = superiorContainer.getElementsByTagName("a");
+    axios.get("/Application/FindEmployee/", {
+        params: {
+            phrase: type
+        }
+    }).then(function (response) {
+        debugger;
+        var result = response.data;
+        ResultsForSuperior(result, a);
+    }).catch(function (error) {
+        alert("ERROR: " + (error.message | error));
+    });
+});
+
+function ResultsForSuperior(result, a) {
+
+    for (i = 0; i < a.length; i++) {
+        if (i < result.length) {
+            debugger;
+            a[i].style.display = "block";
+            a[i].innerText = result[i].fullInfo;
+            a[i].id = "result" + i;
+            searchSupIds[i] = {
+                name: a[i].id,
+                id: result[i].EmployeeId
+            };
+            a[i].style.borderBottom = "none";
+            if (i == result.length - 1) {
+                a[i].style.borderBottom = "1px solid rgba(184,184,184, .8)";
+            }
+        }
+        else {
+            a[i].style.display = "none";
+        }
+    }
+}
+superiorContainer.addEventListener("click", function (e) {
+
+    if (e.target.tagName == "A") {
+        var i = e.target.innerText;
+        superior.value = i;
+        for (s of searchSupIds) {
+            if (s.name == e.target.id) {
+                debugger;
+                superiorField.value = s.id;
+            }
+        }
+
+        for (i = 0; i < a.length; i++) {
+            a[i].style.display = "none";
+        }
+    }
+});

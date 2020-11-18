@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -65,5 +66,49 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public string? FullInfo { get; set; }
         public int Id { get; set; }
         public List<DepartmentSearchResult> Results { get; set; }
+    }
+    public class ReceiveNewTaskRequest
+    {
+        [Required]
+        public int Services { get; set; }
+        [Required]
+        public int Urgencies { get; set; }
+        [Required]
+        public int Impacts { get; set; }
+        [Required]
+        public int RequestedBy { get; set; }
+        [Required]
+        public int ContactPerson { get; set; }
+        [Required]
+        public string Topic { get; set; }
+        [Required]
+        public string Description { get; set; }
+        [Required]
+        public string Date { get; set; }
+    }
+    public class ReceiveNewAccountForm
+    {
+        [Required]
+        public string? Firstname { get; set; }
+        [Required]
+        public string? Surname { get; set; }
+        [Required]
+        public string? Email { get; set; }
+        [Required]
+        public string? Country { get; set; }
+        [Required]
+        public string? City { get; set; }
+        [Required]
+        public string? Address { get; set; }
+        [Required]
+        public string? ZipCode { get; set; }
+        [Required]
+        public int Position { get; set; }
+        [Required]
+        public int Department { get; set; }
+        [Required]
+        public int Superior { get; set; }
+        [Required]
+        public int TimeZones { get; set; }
     }
 }

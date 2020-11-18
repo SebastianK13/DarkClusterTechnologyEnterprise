@@ -10,7 +10,7 @@
             <img class="serviceRequest-section-img" src="~/Images/OrderGray.bmp" />
             <div class="text-invoice">Service request</div>
         </div>
-        <form id="addNewServiceRequest" asp-action="AddNewServiceRequest" asp-controller="Application" method="post">
+        <form id="addNewServiceRequest" asp-action="AddNewTaskRequest" asp-controller="Application" method="post">
             <div class="invoice-data padding-side">
                 <div class="account-info">
                     <div class="basic-info-col1">
@@ -37,8 +37,8 @@
                             </div>
                         </div>
                         <div class="duration">
-                            <div class="app-label">Duration</div>
-                            <input id="startDate" type="date" name="TaskBeginDate">
+                            <div class="app-label">Expected date: </div>
+                            <input id="startDate" type="date" name="Date">
                         </div>
                     </div>
                     <div class="basic-info-col2">
@@ -58,11 +58,11 @@
                     <div class="basic-info-col1">
                         <div class="employee-fields-left">
                             <div class="app-label">Firstname: </div>
-                            <input name="Firstname" autocomplete="off" />
+                            <input name="Firstname" autocomplete="off" id="firstnameField" />
                         </div>
                         <div class="employee-fields-left">
                             <div class="app-label">Surname: </div>
-                            <input name="Surname" autocomplete="off" />
+                            <input name="Surname" autocomplete="off" id="surnameField" />
                         </div>
                         <div class="search-position">
                             <div class="app-label">Position: </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="employee-fields-left">
                             <div class="app-label">Email: </div>
-                            <input name="Email" autocomplete="off" />
+                            <input name="Email" type="email" autocomplete="off" id="emailField" />
                         </div>
                     </div>
                     <div class="basic-info-col2">
@@ -117,21 +117,21 @@
                     <div class="basic-info-col1">
                         <div class="employee-fields-left">
                             <div class="app-label">Country: </div>
-                            <input name="Country" autocomplete="off" />
+                            <input name="Country" autocomplete="off" id="countryField" />
                         </div>
                         <div class="employee-fields-left">
                             <div class="app-label">City: </div>
-                            <input name="Surname" autocomplete="off" />
+                            <input name="City" autocomplete="off" id="cityField" />
                         </div>
                         <div class="employee-fields-left">
                             <div class="app-label">Address: </div>
-                            <input name="Address" autocomplete="off" />
+                            <input name="Address" autocomplete="off" id="addressField" />
                         </div>
                     </div>
                     <div class="basic-info-col2">
                         <div class="search-right">
                             <div class="app-label">ZipCode: </div>
-                            <input name="ZipCode" autocomplete="off" class="input-search-right" />
+                            <input name="ZipCode" autocomplete="off" class="input-search-right" id="zipCodeField" />
                         </div>
                     </div>
                 </div>
@@ -160,3 +160,8 @@
 <script src="~/JavaScript/Application.js"></script>
 <script src="~/JavaScript/ManageEmployeesAccount.js"></script>
 <script src="~/lib/axios/axios.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        SetMinDate();
+    });
+</script>

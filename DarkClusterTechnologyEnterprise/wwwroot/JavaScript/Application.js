@@ -8,7 +8,6 @@ var desc = document.getElementById("description");
 var topic = document.getElementById("topic");
 var cancell = document.getElementById("newServiceRequestCancell");
 var errorsSection = document.getElementById("dateErrors");
-var emptyFields = [false, false, false];
 var searchIDs = [];
 
 contactPerson.addEventListener("keyup", function () {

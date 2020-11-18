@@ -64,7 +64,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         [ForeignKey("AccountForm")]
-        public int AccountFormId { get; set; }
+        public int? AccountFormId { get; set; }
         public virtual Status? Status { get; set; }
         public virtual Impact? Impact { get; set; }//
         public virtual Urgency? Urgency { get; set; }//
@@ -138,6 +138,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         [Key]
         public int CategoryId { get; set; }
         public string? CategoryName { get; set; }
+        public string? Designation { get; set; }
     }
     public class Impact
     {

@@ -4,14 +4,16 @@ using DarkClusterTechnologyEnterprise.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    partial class AppServiceDeskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118134742_AddDesColumnToCategory")]
+    partial class AddDesColumnToCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,7 +360,7 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AccountFormId")
+                    b.Property<int>("AccountFormId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -508,7 +510,9 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                 {
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.NewAccountForm", "AccountForm")
                         .WithMany()
-                        .HasForeignKey("AccountFormId");
+                        .HasForeignKey("AccountFormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.Categorization", "Category")
                         .WithMany()

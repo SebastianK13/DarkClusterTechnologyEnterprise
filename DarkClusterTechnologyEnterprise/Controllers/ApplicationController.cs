@@ -36,6 +36,12 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return View(viewModel);
         }
+        [HttpPost]
+        public async Task<IActionResult> AddNewTaskRequest(ReceiveNewTaskRequest newTask, ReceiveNewAccountForm account)
+        {
+
+            return RedirectToAction("ManageEmployeesAccount");
+        }
         public IActionResult FindPosition(string phrase)
         {
             PositionSearchResult viewModel = new PositionSearchResult(eRepository.FindPositionByPhrase(phrase));

@@ -1,4 +1,6 @@
-﻿function CheckIfEmpty() {
+﻿var emptyFields = [false, false, false];
+
+function CheckIfEmpty() {
 
     CheckContactPerson();
     CheckTopic();

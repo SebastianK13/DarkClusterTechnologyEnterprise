@@ -45,7 +45,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         {
             if (ModelState.IsValid)
             {
-                string responsibleEmployee = HttpContext.User.Identity.Name;
+                string? responsibleEmployee = HttpContext.User.Identity.Name;
                 repository.CreateCustomer(customer, location, responsibleEmployee);
                 return View();
             }

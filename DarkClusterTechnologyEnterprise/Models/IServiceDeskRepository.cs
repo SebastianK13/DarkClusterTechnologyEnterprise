@@ -15,5 +15,6 @@ namespace DarkClusterTechnologyEnterprise.Models
         List<Urgency> GetUrgencies();
         int SetPriority(int urgency, int impact);
         Task<bool> CreateNewServiceRequest(ReceiveServiceRequest receive);
+        Task CreateNewAccountForm(ReceiveNewAccountForm account, ReceiveNewTaskRequest newTask);
     }
 }

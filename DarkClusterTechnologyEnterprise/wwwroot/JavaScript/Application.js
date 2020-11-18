@@ -81,6 +81,7 @@ desc.addEventListener("change", function () {
     AddOrRemoveErrors();
 });
 form.addEventListener("submit", function (e) {
+    debugger;
     if (CheckIfEmpty())
         e.preventDefault();
 });

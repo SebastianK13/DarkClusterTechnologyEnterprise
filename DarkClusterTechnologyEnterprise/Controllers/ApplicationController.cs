@@ -39,6 +39,10 @@ namespace DarkClusterTechnologyEnterprise.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewTaskRequest(ReceiveNewTaskRequest newTask, ReceiveNewAccountForm account)
         {
+            if (ModelState.IsValid)
+            {
+                await sdRepository.CreateNewAccountForm(account, newTask);
+            }
 
             return RedirectToAction("ManageEmployeesAccount");
         }

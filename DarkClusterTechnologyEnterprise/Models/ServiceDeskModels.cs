@@ -48,9 +48,22 @@ namespace DarkClusterTechnologyEnterprise.Models
     }
     public class TaskRequest
     {
+        public TaskRequest() { }
+        public TaskRequest(ReceiveNewTaskRequest t)
+        {
+            Topic = t.Topic;
+            Description = t.Description;
+            RequestedPerson = t.RequestedBy;
+            ContactPerson = t.ContactPerson;
+            ImpactId = t.Impacts;
+            UrgencyId = t.Urgencies;
+            CategoryId = t.Services;           
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int TaskId { get; set; }
+        public string? Topic { get; set; }
+        public string? Description { get; set; }
         public int RequestedPerson { get; set; }
         public int ContactPerson { get; set; }
         [ForeignKey("Impact")]
@@ -60,7 +73,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         [ForeignKey("Priority")]
         public int PriorityId { get; set; }
         [ForeignKey("Group")]
-        public int GroupId { get; set; }
+        public int? GroupId { get; set; }
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         [ForeignKey("AccountForm")]
@@ -75,6 +88,21 @@ namespace DarkClusterTechnologyEnterprise.Models
     }
     public class NewAccountForm
     {
+        public NewAccountForm() { }
+        public NewAccountForm(ReceiveNewAccountForm a)
+        {
+            Firstname = a.Firstname;
+            Surname = a.Surname;
+            Email = a.Email;
+            Country = a.Country;
+            City = a.City;
+            Address = a.Address;
+            ZipCode = a.ZipCode;
+            PositionId = a.Position;
+            DepartmentId = a.Department;
+            SuperiorId = a.Superior;
+            TimeZoneId = a.TimeZones;
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int AccountRequestId { get; set; }

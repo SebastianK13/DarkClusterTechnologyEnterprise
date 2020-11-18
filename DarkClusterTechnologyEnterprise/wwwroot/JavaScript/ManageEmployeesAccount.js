@@ -223,7 +223,7 @@ function AddOrRemoveErrors() {
     }
     else if (!emptyFields.includes(true)) {
         errorsSection.innerHTML = "";
-        correct = false;
+        incorrect = false;
     }
     return incorrect;
 }
@@ -338,6 +338,6 @@ cancell.addEventListener("click", function () {
         formFieldsArr[i].value = "";
         formFieldsArr[i].style.border = "";
         emptyFields[i] = false;
-        }
     }
-);
+    AddOrRemoveErrors();
+});

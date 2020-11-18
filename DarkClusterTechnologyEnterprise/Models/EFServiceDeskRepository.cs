@@ -122,5 +122,29 @@ namespace DarkClusterTechnologyEnterprise.Models
                 .Where(l => l.level == level)
                 .Select(i=>i.Id)
                 .FirstOrDefault();
+
+        public async Task CreateNewAccountForm(ReceiveNewAccountForm account, ReceiveNewTaskRequest newTask)
+        {
+            NewAccountForm accountForm = new NewAccountForm(account);
+            context.AccountForms.Add(accountForm);
+
+            bool success = await context.SaveChangesAsync() > 0;
+
+            if (success)
+                await CreateNewTaskRequest(accountForm, newTask);
+        }
+
+        private async Task CreateNewTaskRequest(NewAccountForm account, ReceiveNewTaskRequest newTask)
+        {
+            TaskRequest taskRequest = new TaskRequest(newTask);
+            taskRequest.PriorityId = SetPriority(
+                GetUrgencyLvlById(newTask.Urgencies),
+                GetImpactLvlById(newTask.Impacts));
+            taskRequest.Status = await CreateStatus();
+            taskRequest.AccountFormId = account.AccountRequestId;
+
+            context.Tasks.Add(taskRequest);
+            await context.SaveChangesAsync();
+        }
     }
 }

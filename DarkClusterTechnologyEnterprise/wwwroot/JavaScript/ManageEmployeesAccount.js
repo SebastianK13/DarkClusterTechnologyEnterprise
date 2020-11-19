@@ -11,6 +11,7 @@ var email = document.getElementById("emailField");
 var date = document.getElementById("startDate");
 
 var firstname = document.getElementById("firstnameField");
+var services = document.getElementById("services");
 var surname = document.getElementById("surnameField");
 var country = document.getElementById("countryField");
 var city = document.getElementById("cityField");
@@ -340,4 +341,13 @@ cancell.addEventListener("click", function () {
         emptyFields[i] = false;
     }
     AddOrRemoveErrors();
+});
+
+services.addEventListener("change", function () {
+    if (services.value == "Account access closing") {
+        location.href = "Application/AccountClosing";
+    }
+    else if (services.value == "Account access closing") {
+
+    }
 });

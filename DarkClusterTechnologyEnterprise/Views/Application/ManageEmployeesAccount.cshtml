@@ -161,7 +161,9 @@
 <script src="~/JavaScript/ManageEmployeesAccount.js"></script>
 <script src="~/lib/axios/axios.js"></script>
 <script>
+    var servicesModel = @Html.Raw(Json.Serialize(Model.Services));
     document.addEventListener("DOMContentLoaded", function () {
         SetMinDate();
+        SetServicesModel(servicesModel);
     });
 </script>

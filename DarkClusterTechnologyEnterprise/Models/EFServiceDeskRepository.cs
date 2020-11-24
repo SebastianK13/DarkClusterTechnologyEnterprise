@@ -141,7 +141,20 @@ namespace DarkClusterTechnologyEnterprise.Models
                 GetUrgencyLvlById(newTask.Urgencies),
                 GetImpactLvlById(newTask.Impacts));
             taskRequest.Status = await CreateStatus();
-            taskRequest.AccountFormId = account.AccountRequestId;
+            
+            if(!(account is null))
+                taskRequest.AccountFormId = account.AccountRequestId;
+
+            context.Tasks.Add(taskRequest);
+            await context.SaveChangesAsync();
+        }
+        public async Task CreateCloseAccountTask(ReceiveNewTaskRequest newTask)
+        {
+            TaskRequest taskRequest = new TaskRequest(newTask);
+            taskRequest.PriorityId = SetPriority(
+                GetUrgencyLvlById(newTask.Urgencies),
+                GetImpactLvlById(newTask.Impacts));
+            taskRequest.Status = await CreateStatus();
 
             context.Tasks.Add(taskRequest);
             await context.SaveChangesAsync();

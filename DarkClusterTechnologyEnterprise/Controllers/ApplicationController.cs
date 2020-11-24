@@ -25,6 +25,16 @@ namespace DarkClusterTechnologyEnterprise.Controllers
                 month.Add(eRepository.ConvertToLocal(DateTime.UtcNow.AddDays(+i), eId));
             }
         }
+        public async Task<IActionResult> AccountClosing()
+        {
+            string? username = User.Identity.Name;
+            int eId = await eRepository.GetEmployeeID(username);
+            ClosingAccountViewModel viewModel =
+                new ClosingAccountViewModel(username, sdRepository.GetServices("Task"),
+                sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId);
+
+            return View(viewModel);
+        }
         public async Task<IActionResult> ManageEmployeesAccount()
         {
             string? username = User.Identity.Name;
@@ -45,6 +55,16 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             }
 
             return RedirectToAction("ManageEmployeesAccount");
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddCloseAccountTaskRequest(ReceiveNewTaskRequest newTask)
+        {
+                if (ModelState.IsValid)
+                {
+                    await sdRepository.CreateCloseAccountTask(newTask);
+                }
+
+            return RedirectToAction("AccountClosing");
         }
         public IActionResult FindPosition(string phrase)
         {

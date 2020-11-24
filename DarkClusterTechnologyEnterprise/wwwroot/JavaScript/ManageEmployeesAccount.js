@@ -26,6 +26,8 @@ var emptyFields = [false, false, false,
     false, false, false, false, false,
     false, false, false, false, false, false];
 
+var servicesModel = [];
+
 var searchPosIds = [];
 var searchDeptIds = [];
 var searchSupIds = [];
@@ -342,12 +344,23 @@ cancell.addEventListener("click", function () {
     }
     AddOrRemoveErrors();
 });
-
+function SetServicesModel(model) {
+    servicesModel = model;
+}
 services.addEventListener("change", function () {
-    if (services.value == "Account access closing") {
-        location.href = "Application/AccountClosing";
+    currentOpt = services.value;
+    var serviceName = "";
+    for (s of servicesModel) {
+        debugger;
+        if (s.serviceId == currentOpt)
+            serviceName = s.serviceName;
     }
-    else if (services.value == "Account access closing") {
 
+    debugger;
+    if (serviceName == "Account creating for new employee") {
+        location.href = "ManageEmployeesAccount";
+    }
+    else if (serviceName == "Account access closing") {
+        location.href = "AccountClosing";
     }
 });

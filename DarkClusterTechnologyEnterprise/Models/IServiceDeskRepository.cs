@@ -17,5 +17,6 @@ namespace DarkClusterTechnologyEnterprise.Models
         Task<bool> CreateNewServiceRequest(ReceiveServiceRequest receive);
         Task CreateNewAccountForm(ReceiveNewAccountForm account, ReceiveNewTaskRequest newTask);
         Task CreateCloseAccountTask(ReceiveNewTaskRequest newTask);
+        Task CreateNewIncident(RecivedIncident report);
     }
 }

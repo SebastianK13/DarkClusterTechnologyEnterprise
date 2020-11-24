@@ -147,10 +147,25 @@ namespace DarkClusterTechnologyEnterprise.Controllers
 
             return RedirectToAction("ScheduleServiceWorks");
         }
-        public IActionResult ReportEmergencyCase()
+        public async Task<IActionResult> ReportEmergencyCase()
         {
+            string? username = User.Identity.Name;
+            int eId = await eRepository.GetEmployeeID(username);
+            IncidentViewModel viewModel =
+                new IncidentViewModel(username, sdRepository.GetServices("Incident"),
+                sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId);
 
-            return View();
+            return View(viewModel);
+        }        
+        [HttpPost]
+        public async Task<IActionResult> ReportEmergencyCase(RecivedIncident report)
+        {
+            if(ModelState.IsValid)
+            {
+                await sdRepository.CreateNewIncident(report);
+            }
+
+            return RedirectToAction("ReportEmergencyCase");
         }
         private List<ServiceWork> SplitServiceWorks(List<ServiceWork> serviceWorks)
         {

@@ -103,7 +103,7 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         [Required]
         public string Description { get; set; }
         [Required]
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
     }
     public class ReceiveNewAccountForm
     {

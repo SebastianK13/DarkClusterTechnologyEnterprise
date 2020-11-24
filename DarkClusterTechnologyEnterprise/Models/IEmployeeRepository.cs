@@ -9,7 +9,7 @@ namespace DarkClusterTechnologyEnterprise.Models
 {
     public interface IEmployeeRepository
     {
-        Task<int> GetEmployeeID(string username);
+        Task<int> GetEmployeeID(string? username);
         int GetLastEmployeeId();
         Employee CreateEmployee(Employee employee);
         void CreateEarnings(Earnings earnings);

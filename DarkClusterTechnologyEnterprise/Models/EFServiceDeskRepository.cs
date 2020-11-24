@@ -52,22 +52,22 @@ namespace DarkClusterTechnologyEnterprise.Models
                 GetUrgencyLvlById(receive.Urgencies),
                 GetImpactLvlById(receive.Impacts));
             request.CategoryId = receive.Services;
-            request.Status = await CreateStatus();
+            request.Status = await CreateStatus(DateTime.UtcNow);
 
             context.Applications.Add(request);
 
             return await context.SaveChangesAsync() > 0; 
         }
-        private async Task<Status> CreateStatus()
+        private async Task<Status> CreateStatus(DateTime dateTime)
         {
             Status status = new Status();
             status.StateId = await context.States
                 .Where(n => n.StateName == "New")
                 .Select(i => i.StateId)
                 .FirstOrDefaultAsync();
-            status.CreateDate = DateTime.UtcNow;
+            status.CreateDate = dateTime.ToUniversalTime();
             status.Expired = false;
-            status.DueTime = DateTime.UtcNow.AddDays(2);
+            status.DueTime = dateTime.AddDays(2);
             status.StateId = await FindStateId("New");
 
             context.Statuses.Add(status);
@@ -140,10 +140,8 @@ namespace DarkClusterTechnologyEnterprise.Models
             taskRequest.PriorityId = SetPriority(
                 GetUrgencyLvlById(newTask.Urgencies),
                 GetImpactLvlById(newTask.Impacts));
-            taskRequest.Status = await CreateStatus();
-            
-            if(!(account is null))
-                taskRequest.AccountFormId = account.AccountRequestId;
+            taskRequest.Status = await CreateStatus(newTask.Date);
+            taskRequest.AccountFormId = account.AccountRequestId;
 
             context.Tasks.Add(taskRequest);
             await context.SaveChangesAsync();
@@ -154,9 +152,21 @@ namespace DarkClusterTechnologyEnterprise.Models
             taskRequest.PriorityId = SetPriority(
                 GetUrgencyLvlById(newTask.Urgencies),
                 GetImpactLvlById(newTask.Impacts));
-            taskRequest.Status = await CreateStatus();
+            taskRequest.Status = await CreateStatus(newTask.Date);
 
             context.Tasks.Add(taskRequest);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task CreateNewIncident(RecivedIncident report)
+        {
+            Incident im = new Incident(report);
+            im.PriorityId = SetPriority(
+                GetUrgencyLvlById(report.Urgencies),
+                GetImpactLvlById(report.Impacts));
+            im.Status = await CreateStatus(report.Date);
+
+            context.Incidents.Add(im);
             await context.SaveChangesAsync();
         }
     }

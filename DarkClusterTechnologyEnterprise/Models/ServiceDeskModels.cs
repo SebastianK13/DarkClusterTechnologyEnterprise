@@ -86,6 +86,43 @@ namespace DarkClusterTechnologyEnterprise.Models
         public virtual Categorization? Category { get; set; }
         public virtual NewAccountForm? AccountForm { get; set; }
     }
+    public class Incident
+    {
+        Incident() { }
+        public Incident(RecivedIncident received)
+        {
+            Topic = received.Topic;
+            Description = received.Description;
+            RequestedPerson = received.RequestedBy;
+            ContactPerson = received.ContactPerson;
+            ImpactId = received.Impacts;
+            UrgencyId = received.Urgencies;
+            CategoryId = received.Services;
+        }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int IncidentId { get; set; }
+        public string? Topic { get; set; }
+        public string? Description { get; set; }
+        public int RequestedPerson { get; set; }
+        public int ContactPerson { get; set; }
+        [ForeignKey("Impact")]
+        public int ImpactId { get; set; }
+        [ForeignKey("Urgency")]
+        public int UrgencyId { get; set; }
+        [ForeignKey("Priority")]
+        public int PriorityId { get; set; }
+        [ForeignKey("Group")]
+        public int? GroupId { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+        public virtual Status? Status { get; set; }
+        public virtual Impact? Impact { get; set; }
+        public virtual Urgency? Urgency { get; set; }
+        public virtual Priority? Priority { get; set; }
+        public virtual AssigmentGroup? Group { get; set; }
+        public virtual Categorization? Category { get; set; }
+    }
     public class NewAccountForm
     {
         public NewAccountForm() { }

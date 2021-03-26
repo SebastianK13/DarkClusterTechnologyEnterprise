@@ -26,5 +26,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         public DbSet<TaskRequest> Tasks { get; set; }
         public DbSet<NewAccountForm> AccountForms { get; set; }
         public DbSet<Incident> Incidents { get; set; }
+        public DbSet<CloserDue> CloserDues { get; set; }
+
     }
 }

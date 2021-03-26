@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    [Migration("20201115194023_StatusColumnNameChange")]
-    partial class StatusColumnNameChange
+    [Migration("20210326204639_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,9 +91,27 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Designation")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.CloserDue", b =>
+                {
+                    b.Property<int>("CloserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Due")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CloserId");
+
+                    b.ToTable("CloserDues");
                 });
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Impact", b =>
@@ -114,6 +132,63 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.ToTable("Impacts");
                 });
 
+            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Incident", b =>
+                {
+                    b.Property<int>("IncidentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Assignee")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContactPerson")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HistoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ImpactId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PriorityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequestedPerson")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UrgencyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IncidentId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("HistoryId");
+
+                    b.HasIndex("ImpactId");
+
+                    b.HasIndex("PriorityId");
+
+                    b.HasIndex("UrgencyId");
+
+                    b.ToTable("Incidents");
+                });
+
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Member", b =>
                 {
                     b.Property<int>("MemberId")
@@ -124,14 +199,60 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Username")
-                        .HasColumnType("int");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MemberId");
 
                     b.HasIndex("GroupId");
 
                     b.ToTable("Members");
+                });
+
+            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.NewAccountForm", b =>
+                {
+                    b.Property<int>("AccountRequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SuperiorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TimeZoneId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AccountRequestId");
+
+                    b.ToTable("AccountForms");
                 });
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Priority", b =>
@@ -186,6 +307,9 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Assignee")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -195,7 +319,10 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupId")
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HistoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("ImpactId")
@@ -205,9 +332,6 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasColumnType("int");
 
                     b.Property<int>("RequestedPerson")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("Topic")
@@ -222,11 +346,11 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
                     b.HasIndex("GroupId");
 
+                    b.HasIndex("HistoryId");
+
                     b.HasIndex("ImpactId");
 
                     b.HasIndex("PriorityId");
-
-                    b.HasIndex("StatusId");
 
                     b.HasIndex("UrgencyId");
 
@@ -258,18 +382,23 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DueTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Expired")
                         .HasColumnType("bit");
 
                     b.Property<int>("StateId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("XYZ")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("StatusId");
 
                     b.HasIndex("StateId");
+
+                    b.HasIndex("Status");
 
                     b.ToTable("Statuses");
                 });
@@ -281,28 +410,84 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Begin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("End")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("StateId")
+                    b.Property<int?>("CloserId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Solution")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("ChangeId");
 
-                    b.HasIndex("StateId");
+                    b.HasIndex("CloserId");
 
                     b.HasIndex("StatusId");
 
                     b.ToTable("StatusHistory");
+                });
+
+            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.TaskRequest", b =>
+                {
+                    b.Property<int>("TaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AccountFormId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Assignee")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContactPerson")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HistoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ImpactId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PriorityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequestedPerson")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UrgencyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TaskId");
+
+                    b.HasIndex("AccountFormId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("HistoryId");
+
+                    b.HasIndex("ImpactId");
+
+                    b.HasIndex("PriorityId");
+
+                    b.HasIndex("UrgencyId");
+
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Urgency", b =>
@@ -341,6 +526,43 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Incident", b =>
+                {
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Categorization", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.AssigmentGroup", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", "History")
+                        .WithMany()
+                        .HasForeignKey("HistoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Impact", "Impact")
+                        .WithMany()
+                        .HasForeignKey("ImpactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Priority", "Priority")
+                        .WithMany()
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Urgency", "Urgency")
+                        .WithMany()
+                        .HasForeignKey("UrgencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Member", b =>
                 {
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.AssigmentGroup", "Group")
@@ -360,7 +582,11 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.AssigmentGroup", "Group")
                         .WithMany()
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("GroupId");
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", "History")
+                        .WithMany()
+                        .HasForeignKey("HistoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -376,10 +602,6 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId");
-
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.Urgency", "Urgency")
                         .WithMany()
                         .HasForeignKey("UrgencyId")
@@ -394,17 +616,62 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", null)
+                        .WithMany("Status")
+                        .HasForeignKey("Status");
                 });
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.StatusHistory", b =>
                 {
-                    b.HasOne("DarkClusterTechnologyEnterprise.Models.State", "State")
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.CloserDue", "CloserDue")
                         .WithMany()
-                        .HasForeignKey("StateId");
+                        .HasForeignKey("CloserId");
 
-                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Status", "Status")
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Status", "ActiveStatus")
                         .WithMany()
                         .HasForeignKey("StatusId");
+                });
+
+            modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.TaskRequest", b =>
+                {
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.NewAccountForm", "AccountForm")
+                        .WithMany()
+                        .HasForeignKey("AccountFormId");
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Categorization", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.AssigmentGroup", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", "History")
+                        .WithMany()
+                        .HasForeignKey("HistoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Impact", "Impact")
+                        .WithMany()
+                        .HasForeignKey("ImpactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Priority", "Priority")
+                        .WithMany()
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.Urgency", "Urgency")
+                        .WithMany()
+                        .HasForeignKey("UrgencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

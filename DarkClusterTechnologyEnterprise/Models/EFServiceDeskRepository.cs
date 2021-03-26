@@ -52,11 +52,23 @@ namespace DarkClusterTechnologyEnterprise.Models
                 GetUrgencyLvlById(receive.Urgencies),
                 GetImpactLvlById(receive.Impacts));
             request.CategoryId = receive.Services;
-            request.Status = await CreateStatus(DateTime.UtcNow);
+            Status status = await CreateStatus(DateTime.UtcNow);
+            request.History = await CreateStatusHistory(status);
 
             context.Applications.Add(request);
 
             return await context.SaveChangesAsync() > 0; 
+        }
+        private async Task<StatusHistory> CreateStatusHistory(Status status)
+        {
+            StatusHistory sH = new StatusHistory();
+            sH.Status.Add(status);
+            sH.ActiveStatus = status;
+
+            context.StatusHistory.Add(sH);
+            await context.SaveChangesAsync();
+
+            return sH;
         }
         private async Task<Status> CreateStatus(DateTime dateTime)
         {
@@ -140,7 +152,9 @@ namespace DarkClusterTechnologyEnterprise.Models
             taskRequest.PriorityId = SetPriority(
                 GetUrgencyLvlById(newTask.Urgencies),
                 GetImpactLvlById(newTask.Impacts));
-            taskRequest.Status = await CreateStatus(newTask.Date);
+
+            Status status = await CreateStatus(newTask.Date);
+            taskRequest.History = await CreateStatusHistory(status);
             taskRequest.AccountFormId = account.AccountRequestId;
 
             context.Tasks.Add(taskRequest);
@@ -152,7 +166,9 @@ namespace DarkClusterTechnologyEnterprise.Models
             taskRequest.PriorityId = SetPriority(
                 GetUrgencyLvlById(newTask.Urgencies),
                 GetImpactLvlById(newTask.Impacts));
-            taskRequest.Status = await CreateStatus(newTask.Date);
+
+            Status status = await CreateStatus(newTask.Date);
+            taskRequest.History = await CreateStatusHistory(status);
 
             context.Tasks.Add(taskRequest);
             await context.SaveChangesAsync();
@@ -164,7 +180,9 @@ namespace DarkClusterTechnologyEnterprise.Models
             im.PriorityId = SetPriority(
                 GetUrgencyLvlById(report.Urgencies),
                 GetImpactLvlById(report.Impacts));
-            im.Status = await CreateStatus(report.Date);
+
+            Status status = await CreateStatus(report.Date);
+            im.History = await CreateStatusHistory(status);
 
             context.Incidents.Add(im);
             await context.SaveChangesAsync();

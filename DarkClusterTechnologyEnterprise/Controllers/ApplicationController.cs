@@ -83,7 +83,7 @@ namespace DarkClusterTechnologyEnterprise.Controllers
             string? username = User.Identity.Name;
             int eId = await eRepository.GetEmployeeID(username);
             ServiceRequestViewModel viewModel =
-                new ServiceRequestViewModel(username, sdRepository.GetServices("Service request"),
+                new ServiceRequestViewModel(username, sdRepository.GetServices("Change"),
                 sdRepository.GetImpacts(), sdRepository.GetUrgencies(), eId);
 
             return View(viewModel);

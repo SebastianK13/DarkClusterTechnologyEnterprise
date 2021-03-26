@@ -34,17 +34,20 @@ namespace DarkClusterTechnologyEnterprise.Models
         public int UrgencyId { get; set; }
         [ForeignKey("Priority")]
         public int PriorityId { get; set; }
+        public string? Assignee { get; set; }
         [ForeignKey("Group")]
         public int? GroupId { get; set; }
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
-        public virtual Status? Status { get; set; }
+        [ForeignKey("History")]
+        public int HistoryId { get; set; }
+        public virtual StatusHistory? History { get; set; }
         public virtual Impact? Impact { get; set; }//
         public virtual Urgency? Urgency { get; set; }//
         public virtual Priority? Priority { get; set; }
         public virtual AssigmentGroup? Group { get; set; }
         public virtual Categorization? Category { get; set; }
-        
+
     }
     public class TaskRequest
     {
@@ -57,7 +60,7 @@ namespace DarkClusterTechnologyEnterprise.Models
             ContactPerson = t.ContactPerson;
             ImpactId = t.Impacts;
             UrgencyId = t.Urgencies;
-            CategoryId = t.Services;           
+            CategoryId = t.Services;
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -76,9 +79,12 @@ namespace DarkClusterTechnologyEnterprise.Models
         public int? GroupId { get; set; }
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
+        public string? Assignee { get; set; }
         [ForeignKey("AccountForm")]
         public int? AccountFormId { get; set; }
-        public virtual Status? Status { get; set; }
+        [ForeignKey("History")]
+        public int HistoryId { get; set; }
+        public virtual StatusHistory? History { get; set; }
         public virtual Impact? Impact { get; set; }//
         public virtual Urgency? Urgency { get; set; }//
         public virtual Priority? Priority { get; set; }
@@ -114,9 +120,12 @@ namespace DarkClusterTechnologyEnterprise.Models
         public int PriorityId { get; set; }
         [ForeignKey("Group")]
         public int? GroupId { get; set; }
+        public string? Assignee { get; set; }
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
-        public virtual Status? Status { get; set; }
+        [ForeignKey("History")]
+        public int HistoryId { get; set; }
+        public virtual StatusHistory? History { get; set; }
         public virtual Impact? Impact { get; set; }
         public virtual Urgency? Urgency { get; set; }
         public virtual Priority? Priority { get; set; }
@@ -247,20 +256,30 @@ namespace DarkClusterTechnologyEnterprise.Models
 
     public class StatusHistory
     {
+        public StatusHistory()
+        {
+            this.Status = new HashSet<Status>();
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ChangeId { get; set; }
-        [ForeignKey("Status")]
+        public string? Solution { get; set; }
+        [ForeignKey("CloserDue")]
+        public int? CloserId { get; set; }
+        public virtual CloserDue? CloserDue { get; set; }
+        [ForeignKey("ActiveStatus")]
         public int? StatusId { get; set; }
-        [ForeignKey("State")]
-        public int? StateId { get; set; }
-        public DateTime Begin { get; set; }
-        public DateTime End { get; set; }
-        public bool Active { get; set; }
-        public virtual State? State { get; set; }
-        public virtual Status? Status { get; set; }
+        public virtual Status? ActiveStatus { get; set; }
+        [ForeignKey("Status")]
+        public virtual ICollection<Status>? Status { get; set; }
     }
-
+    public class CloserDue
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int CloserId { get; set; }
+        public string? Due { get; set; }
+    }
     public class State
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -282,7 +301,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int MemberId { get; set; }
-        public int Username { get; set; }
+        public string Username { get; set; }
         [ForeignKey("Group")]
         public int GroupId { get; set; }
         public virtual AssigmentGroup? Group { get; set; }

@@ -94,7 +94,10 @@ namespace DarkClusterTechnologyEnterprise.Models
     }
     public class Incident
     {
-        Incident() { }
+        Incident() 
+        {
+            this.AffectedIncidents = new HashSet<Incident>();
+        }
         public Incident(RecivedIncident received)
         {
             Topic = received.Topic;
@@ -104,6 +107,7 @@ namespace DarkClusterTechnologyEnterprise.Models
             ImpactId = received.Impacts;
             UrgencyId = received.Urgencies;
             CategoryId = received.Services;
+            this.AffectedIncidents = new HashSet<Incident>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -131,6 +135,8 @@ namespace DarkClusterTechnologyEnterprise.Models
         public virtual Priority? Priority { get; set; }
         public virtual AssigmentGroup? Group { get; set; }
         public virtual Categorization? Category { get; set; }
+        [ForeignKey("AffectedIM")]
+        public virtual ICollection<Incident> AffectedIncidents { get; set; }
     }
     public class NewAccountForm
     {
@@ -251,6 +257,8 @@ namespace DarkClusterTechnologyEnterprise.Models
         public DateTime CreateDate { get; set; }
         public DateTime DueTime { get; set; }
         public bool Expired { get; set; }
+        public string? CreatedBy { get; set; }
+        public string? Message { get; set; }
         public virtual State? State { get; set; }
     }
 

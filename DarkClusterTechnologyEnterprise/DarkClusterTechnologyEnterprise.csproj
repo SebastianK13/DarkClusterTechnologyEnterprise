@@ -28,9 +28,5 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0-preview1-19509-03" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Migrations\AppServiceDeskDb\" />
-  </ItemGroup>
 
 </Project>

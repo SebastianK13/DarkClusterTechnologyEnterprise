@@ -129,6 +129,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         public int CategoryId { get; set; }
         [ForeignKey("History")]
         public int HistoryId { get; set; }
+        public bool IsAssociated { get; set; }
         public virtual StatusHistory? History { get; set; }
         public virtual Impact? Impact { get; set; }
         public virtual Urgency? Urgency { get; set; }

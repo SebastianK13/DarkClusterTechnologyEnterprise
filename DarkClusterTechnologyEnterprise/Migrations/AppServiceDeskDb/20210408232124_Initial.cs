@@ -326,11 +326,19 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     GroupId = table.Column<int>(nullable: true),
                     Assignee = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
-                    HistoryId = table.Column<int>(nullable: false)
+                    HistoryId = table.Column<int>(nullable: false),
+                    IsAssociated = table.Column<bool>(nullable: false),
+                    AffectedIM = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Incidents", x => x.IncidentId);
+                    table.ForeignKey(
+                        name: "FK_Incidents_Incidents_AffectedIM",
+                        column: x => x.AffectedIM,
+                        principalTable: "Incidents",
+                        principalColumn: "IncidentId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Incidents_Categorizations_CategoryId",
                         column: x => x.CategoryId,
@@ -394,23 +402,25 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     CreateDate = table.Column<DateTime>(nullable: false),
                     DueTime = table.Column<DateTime>(nullable: false),
                     Expired = table.Column<bool>(nullable: false),
-                    Status = table.Column<int>(nullable: true)
+                    CreatedBy = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    HistoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Statuses", x => x.StatusId);
+                    table.ForeignKey(
+                        name: "FK_Statuses_StatusHistory_HistoryId",
+                        column: x => x.HistoryId,
+                        principalTable: "StatusHistory",
+                        principalColumn: "ChangeId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Statuses_States_StateId",
                         column: x => x.StateId,
                         principalTable: "States",
                         principalColumn: "StateId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Statuses_StatusHistory_Status",
-                        column: x => x.Status,
-                        principalTable: "StatusHistory",
-                        principalColumn: "ChangeId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -454,6 +464,11 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                 column: "RequestId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Incidents_AffectedIM",
+                table: "Incidents",
+                column: "AffectedIM");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Incidents_CategoryId",
                 table: "Incidents",
                 column: "CategoryId");
@@ -489,14 +504,14 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Statuses_HistoryId",
+                table: "Statuses",
+                column: "HistoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Statuses_StateId",
                 table: "Statuses",
                 column: "StateId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Statuses_Status",
-                table: "Statuses",
-                column: "Status");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StatusHistory_CloserId",
@@ -587,7 +602,7 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Statuses_StatusHistory_Status",
+                name: "FK_Statuses_StatusHistory_HistoryId",
                 table: "Statuses");
 
             migrationBuilder.DropTable(

@@ -259,8 +259,13 @@ namespace DarkClusterTechnologyEnterprise.Models
         public DateTime DueTime { get; set; }
         public bool Expired { get; set; }
         public string? CreatedBy { get; set; }
+        public string? AssignedTo { get; set; }
         public string? Message { get; set; }
+        public int? HistoryId { get; set; }
+        [ForeignKey("Group")]
+        public int? GroupId { get; set; }
         public virtual State? State { get; set; }
+        public virtual AssigmentGroup? Group { get; set; }
     }
 
     public class StatusHistory
@@ -279,7 +284,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         [ForeignKey("ActiveStatus")]
         public int? StatusId { get; set; }
         public virtual Status? ActiveStatus { get; set; }
-        [ForeignKey("Status")]
+        [ForeignKey("HistoryId")]
         public virtual ICollection<Status>? Status { get; set; }
     }
     public class CloserDue

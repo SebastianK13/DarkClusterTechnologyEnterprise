@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    [Migration("20210403121123_IncidentTableModification")]
-    partial class IncidentTableModification
+    [Migration("20210421190741_StatusModification2")]
+    partial class StatusModification2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -387,6 +387,9 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AssignedTo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -399,20 +402,25 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<bool>("Expired")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HistoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StateId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("StatusId");
 
-                    b.HasIndex("StateId");
+                    b.HasIndex("GroupId");
 
-                    b.HasIndex("Status");
+                    b.HasIndex("HistoryId");
+
+                    b.HasIndex("StateId");
 
                     b.ToTable("Statuses");
                 });
@@ -629,15 +637,19 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Status", b =>
                 {
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.AssigmentGroup", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", null)
+                        .WithMany("Status")
+                        .HasForeignKey("HistoryId");
+
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", null)
-                        .WithMany("Status")
-                        .HasForeignKey("Status");
                 });
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.StatusHistory", b =>

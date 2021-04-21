@@ -2,22 +2,21 @@
 
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
-    public partial class IncidentTableModification : Migration
+    public partial class StatusModified : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsAssociated",
-                table: "Incidents",
-                nullable: false,
-                defaultValue: false);
+            migrationBuilder.AddColumn<string>(
+                name: "AssignedTo",
+                table: "Statuses",
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsAssociated",
-                table: "Incidents");
+                name: "AssignedTo",
+                table: "Statuses");
         }
     }
 }

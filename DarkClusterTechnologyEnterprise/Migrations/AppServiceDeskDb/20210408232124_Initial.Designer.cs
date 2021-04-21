@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    [Migration("20210402110712_StatusModified")]
-    partial class StatusModified
+    [Migration("20210408232124_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -162,6 +162,9 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
                     b.Property<int>("ImpactId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsAssociated")
+                        .HasColumnType("bit");
 
                     b.Property<int>("PriorityId")
                         .HasColumnType("int");
@@ -396,20 +399,20 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<bool>("Expired")
                         .HasColumnType("bit");
 
+                    b.Property<int>("HistoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StateId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("StatusId");
 
-                    b.HasIndex("StateId");
+                    b.HasIndex("HistoryId");
 
-                    b.HasIndex("Status");
+                    b.HasIndex("StateId");
 
                     b.ToTable("Statuses");
                 });
@@ -626,15 +629,17 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.Status", b =>
                 {
+                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", null)
+                        .WithMany("Status")
+                        .HasForeignKey("HistoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DarkClusterTechnologyEnterprise.Models.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DarkClusterTechnologyEnterprise.Models.StatusHistory", null)
-                        .WithMany("Status")
-                        .HasForeignKey("Status");
                 });
 
             modelBuilder.Entity("DarkClusterTechnologyEnterprise.Models.StatusHistory", b =>

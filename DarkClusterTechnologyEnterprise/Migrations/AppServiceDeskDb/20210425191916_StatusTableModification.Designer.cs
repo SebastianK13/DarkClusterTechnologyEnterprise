@@ -4,14 +4,16 @@ using DarkClusterTechnologyEnterprise.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    partial class AppServiceDeskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210425191916_StatusTableModification")]
+    partial class StatusTableModification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -406,11 +408,11 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
                     b.Property<int?>("HistoryId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsNotification")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("NotNotification")
-                        .HasColumnType("bit");
 
                     b.Property<int>("StateId")
                         .HasColumnType("int");

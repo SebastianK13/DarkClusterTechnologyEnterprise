@@ -264,6 +264,7 @@ namespace DarkClusterTechnologyEnterprise.Models
         public int? HistoryId { get; set; }
         [ForeignKey("Group")]
         public int? GroupId { get; set; }
+        public bool NotNotification { get; set; }
         public virtual State? State { get; set; }
         public virtual AssigmentGroup? Group { get; set; }
     }

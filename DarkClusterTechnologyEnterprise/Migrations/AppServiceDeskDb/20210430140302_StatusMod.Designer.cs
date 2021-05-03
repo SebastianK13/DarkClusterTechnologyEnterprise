@@ -4,14 +4,16 @@ using DarkClusterTechnologyEnterprise.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 {
     [DbContext(typeof(AppServiceDeskDbContext))]
-    partial class AppServiceDeskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210430140302_StatusMod")]
+    partial class StatusMod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -414,9 +416,6 @@ namespace DarkClusterTechnologyEnterprise.Migrations.AppServiceDeskDb
 
                     b.Property<string>("Notification")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OpensAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("StateId")
                         .HasColumnType("int");

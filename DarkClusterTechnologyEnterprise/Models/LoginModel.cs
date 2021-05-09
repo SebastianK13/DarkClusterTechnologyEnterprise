@@ -8,9 +8,9 @@ namespace DarkClusterTechnologyEnterprise.Models
 {
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage = "The username field is required")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The password field is required")]
         [UIHint("password")]
         public string Password { get; set; }
     }

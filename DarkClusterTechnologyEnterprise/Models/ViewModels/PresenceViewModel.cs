@@ -19,7 +19,6 @@ namespace DarkClusterTechnologyEnterprise.Models.ViewModels
         public double Seconds { get; set; }
         public double BreakLength { get; set; }
         public bool BreakActive { get; set; }
-        //public bool WorkActive { get; set; }
         public List<GraphViewModel> DataModel { get; set; }
     }
     public class GraphViewModel 

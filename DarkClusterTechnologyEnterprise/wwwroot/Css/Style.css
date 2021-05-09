@@ -28,7 +28,7 @@ body {
     background-position: center;
     animation: move_dots 600s linear infinite;
     z-index: 0;
-    opacity: .8;
+    background-color: black;
 }
 
 @keyframes move_dots {
@@ -369,12 +369,122 @@ body {
     height: 100%;
     background-color: rgba(0,0,0,.95);
     z-index: 1;
-    border-radius: 3px;
+    border-radius: 13px;
+    border: 1px solid rgba(255,255,255,0.5);
 }
-/* @keyframes move_noises{
-  100%{background-position: 0 0;}
-  100%{background-position: 0 10000px;}
-} */
+
+.login-error-container {
+    width: 100%;
+    position: absolute;
+    height: auto;
+    display: block;
+    border-top: 2px solid white;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .login-error-container ul {
+        width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+        color: red;
+    }
+
+.small-tile {
+    position:relative;
+    width: 180px;
+    height: 380px;
+    background-color: rgba(27, 38, 44, 1);
+    float: left;
+    margin: 10px;
+    border-radius: 3px;
+    color: dimgray;
+    text-align: center;
+    padding:10px;
+}
+.small-tile img {
+    position: absolute;
+    max-width: 180px;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+    .medium-tile {
+        width: 280px;
+        height: 380px;
+        float: left;
+        margin: 10px;
+        border-radius: 3px;
+        color: dimgray;
+        text-align: center;
+        background-color: rgba(27, 38, 44, 1);
+        padding: 10px;
+    }
+
+.large-tile {
+    width: 380px;
+    height: 380px;
+    background-color: rgba(27, 38, 44, 1);
+    float: left;
+    margin: 10px;
+    border-radius: 3px;
+    color: dimgray;
+    text-align: center;
+    padding:10px
+}
+
+.medium-tile:hover {
+    background-color: rgba(0, 0, 0, .9);
+    color: white;
+}
+
+.small-tile:hover {
+    background-color: rgba(0, 0, 0, .9);
+    color: white;
+}
+.large-tile:hover {
+    background-color: rgba(0, 0, 0, .9);
+    color: white;
+}
+
+.tile-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.tile-container-bckg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.tile-title{
+    font-size:30px;
+}
+.logo-text {
+    font-size: 25px;
+    color: rgb(105,105,105);
+    text-align: center;
+    display: inline-block;
+}
+
+.main-logo-conatiner {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 @keyframes type {
     from {
         width: 0;
@@ -1235,7 +1345,153 @@ table.redTable {
     background-size: contain;
     background-repeat: no-repeat;
 }
+.break-timer {
+    padding: 30px 5px 30px 5px;
+    font-size: 45px;
+}
+.work-timer {
+    padding: 30px 5px 60px 5px;
+    font-size: 45px;
+    border-bottom: 2px solid rgb(105,105,105);
+    margin-bottom: 30px;
+}
+.break-tile-title {
+    font-size: 30px;
+    padding: 30px;
+}
+.small-graph-section {
+    width: 280px;
+    height: calc(350px - 35px);
+    position: relative;
+    margin: auto;
+    margin-top: 40px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
+.small-graph {
+    position: absolute;
+    left: 8px;
+    top: -2px;
+    width: 250px;
+    height: 300px;
+    background-image: url(../Images/axisGray.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+.small-graph-measure {
+    position: absolute;
+    width: calc(100% - 50px);
+    height: 276.49px;
+    bottom: 30.51px;
+    right: 15px;
+}
+
+.small-graph-lines {
+    position: absolute;
+    width: calc(100% - 60px);
+    height: calc(100% - 36.5px);
+    top: 8px;
+    left: 30px;
+}
+
+.small-lines-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .small-lines-list li {
+        height: 22.1px;
+        line-height: 0;
+        text-align: right;
+        border-top: 1px solid rgb(105,105,105);
+    }
+
+.small-measures-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+    .small-measures-list li {
+        display: inline-block;
+        width: 20px;
+        margin: 0;
+        float: left;
+        position: relative;
+        height: 100%;
+        margin-left: 8.5px !important;
+        text-align: center;
+    }
+.medium-graph-section {
+    width: 400px;
+    height: 350px;
+    position: relative;
+    margin: auto;
+    margin-top: 40px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.medium-graph {
+    position: absolute;
+    left: 8px;
+    top: -2px;
+    width: 350px;
+    height: 300px;
+    background-image: url(../Images/axisGray.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+.medium-graph-measure {
+    position: absolute;
+    width: calc(100% - 50px);
+    height: 276.49px;
+    bottom: 13.51px;
+    right: 15px;
+}
+.medium-graph-lines {
+    position: absolute;
+    width: calc(100% - 80px);
+    height: calc(100% - 36.5px);
+    top: 8px;
+    left: 30px;
+}
+.medium-lines-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.medium-lines-list li {
+    height: 22.1px;
+    line-height: 0;
+    text-align: right;
+    border-top: 1px solid rgb(105,105,105);
+}
+.medium-measures-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.medium-measures-list li {
+    display: inline-block;
+    width: 20px;
+    margin: 0;
+    float: left;
+    position: relative;
+    height: 100%;
+    margin-left: 8.5px !important;
+    text-align: center;
+}
 .graph-section {
     width: 650px;
     height: 350px;
@@ -2271,9 +2527,11 @@ table.all-invoices tfoot .links a {
 .border-none {
     border: none;
 }
+
 .border-bottom-gray {
     border-bottom: 1px solid rgba(184,184,184, 1);
 }
+
 .gray-table {
     background-color: rgba(235,235,235, 1);
 }
@@ -2336,9 +2594,11 @@ table.all-invoices tfoot .links a {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.white-color{
+
+.white-color {
     background-color: white;
 }
+
 .new-task-btn-section {
     position: relative;
     width: calc(100% - 20px);
@@ -2346,8 +2606,9 @@ table.all-invoices tfoot .links a {
     margin-bottom: 5px;
     margin-top: 5px;
     padding: 10px 10px 10px 10px;
-    float:left;
+    float: left;
 }
+
     .new-task-btn-section btn {
         position: relative;
         width: 80px;
@@ -2708,12 +2969,14 @@ table.all-invoices tfoot .links a {
     width: 100%;
     float: left;
 }
+
 .responsible-employee {
     position: relative;
     height: 50px;
     width: 100%;
     float: left;
 }
+
 .autoHeight {
     height: auto;
 }
@@ -2749,18 +3012,23 @@ table.all-invoices tfoot .links a {
 .background-fourth {
     background: linear-gradient(40deg, rgba(255, 209,64,1),rgba(251,142,83,1));
 }
-#startTimeUTC{
-    display:none;
+
+#startTimeUTC {
+    display: none;
 }
+
 #startDateUTC {
-    display:none;
+    display: none;
 }
+
 #endTimeUTC {
     display: none;
 }
+
 #endDateUTC {
     display: none;
 }
+
 #subordinateDDL {
     position: relative;
     height: 100%;
@@ -2769,9 +3037,11 @@ table.all-invoices tfoot .links a {
     justify-content: center;
     align-items: center;
 }
+
 .employee-DDL:focus {
     outline: none !important;
-}   
+}
+
 .employee-DDL {
     position: relative;
     border-radius: 0px;
@@ -2780,6 +3050,7 @@ table.all-invoices tfoot .links a {
     height: 30px;
     margin: 5px;
 }
+
 .new-task-employee {
     position: relative;
     width: calc(100% - 20px);
@@ -2788,18 +3059,21 @@ table.all-invoices tfoot .links a {
     margin-bottom: 15px;
     padding: 0 10px 0 10px;
 }
+
 .ddl-label {
     position: relative;
     width: 110px;
     height: 100%;
     float: left;
 }
+
 .ddl-section {
     position: relative;
     width: calc(100% - 112px);
     height: 100%;
     float: left;
 }
+
 .new-task-employee-ddl {
     position: relative;
     border-radius: 0px;
@@ -2807,6 +3081,7 @@ table.all-invoices tfoot .links a {
     width: 100px;
     height: 30px;
 }
+
     .new-task-employee-ddl:focus {
         outline: none !important;
     }
@@ -2820,6 +3095,7 @@ table.all-invoices tfoot .links a {
     color: gray;
     display: table;
 }
+
 .topic-app {
     position: relative;
     width: calc(100% - 15px);
@@ -2827,16 +3103,18 @@ table.all-invoices tfoot .links a {
     padding: 1px 5px 1px 5px;
     display: flex;
     align-items: center;
-    margin:5px;
-    float:left;
+    margin: 5px;
+    float: left;
 }
+
 .app-label {
     position: relative;
     min-width: 110px;
-    float:left;
+    float: left;
     height: auto;
     font-size: 1em;
 }
+
 .topic-app input {
     position: relative;
     width: calc(100% - 180px);
@@ -2868,6 +3146,7 @@ table.all-invoices tfoot .links a {
     height: 26px;
     min-width: 215px;
 }
+
 .notifier {
     position: relative;
     width: auto;
@@ -2878,18 +3157,19 @@ table.all-invoices tfoot .links a {
     margin: 5px;
     float: left;
 }
+
     .notifier input {
         position: relative;
         width: calc(300px - 8px);
         height: 20px;
         float: left;
-        min-width:209px;
+        min-width: 209px;
         border: 1px solid rgba(184,184,184, .8);
         background-color: rgba(235,235,235, 1);
     }
 
-.padding-side{
-    padding:0 50px 0 50px;
+.padding-side {
+    padding: 0 50px 0 50px;
     width: calc(100% - 100px);
 }
 
@@ -2905,7 +3185,7 @@ table.all-invoices tfoot .links a {
 }
 
 .app-description {
-    position:relative;
+    position: relative;
     height: 300px;
     width: calc(100% - 190px);
     background-color: #fff;
@@ -2919,9 +3199,10 @@ table.all-invoices tfoot .links a {
     line-height: 20px;
     font-family: inherit;
     margin-left: 110px;
-    float:left;
+    float: left;
     font-size: .9em;
 }
+
 .app-desc-label {
     position: relative;
     width: 100%;
@@ -2929,11 +3210,13 @@ table.all-invoices tfoot .links a {
     height: 30px;
     font-size: 1em;
 }
+
 .serviceRequest-section-img {
     position: relative;
     float: left;
     max-height: 35px;
 }
+
 .basic-info-col2 {
     position: relative;
     float: left;
@@ -2942,6 +3225,7 @@ table.all-invoices tfoot .links a {
     height: auto;
     padding-right: 60px;
 }
+
 .basic-info-col1 {
     position: relative;
     float: left;
@@ -2949,6 +3233,7 @@ table.all-invoices tfoot .links a {
     min-width: 420px;
     height: auto;
 }
+
 .account-info {
     position: relative;
     width: 100%;
@@ -2958,6 +3243,7 @@ table.all-invoices tfoot .links a {
     padding-top: 30px;
     border-bottom: 1px solid rgba(184,184,184, .8);
 }
+
 .priority-label {
     position: relative;
     min-width: 110px;
@@ -2989,6 +3275,7 @@ table.all-invoices tfoot .links a {
     height: 26px;
     min-width: 200px;
 }
+
 .SLA-date {
     position: relative;
     width: auto;
@@ -3027,14 +3314,16 @@ table.all-invoices tfoot .links a {
         height: 100%;
         border: 1px solid rgba(184,184,184, .8);
     }
+
 .find-employee-container {
     position: relative;
     width: 300px;
     height: 20px;
     float: left;
     min-width: 209px;
-    z-index:2;
+    z-index: 2;
 }
+
     .find-employee-container a {
         color: black;
         padding: 6px 8px;
@@ -3051,6 +3340,7 @@ table.all-invoices tfoot .links a {
         .find-employee-container a:hover {
             background-color: #f1f1f1
         }
+
 .service-request-btns-section {
     position: relative;
     width: calc(100% - 80px);
@@ -3074,6 +3364,7 @@ table.all-invoices tfoot .links a {
         border-radius: 2px;
         cursor: pointer;
     }
+
 .search-right {
     position: relative;
     width: auto;
@@ -3084,6 +3375,7 @@ table.all-invoices tfoot .links a {
     margin: 5px;
     float: right;
 }
+
 .input-search-right {
     position: relative;
     border-radius: 0px;
@@ -3092,6 +3384,7 @@ table.all-invoices tfoot .links a {
     height: 20px;
     min-width: 200px;
 }
+
 .duration {
     position: relative;
     width: auto;
@@ -3102,6 +3395,7 @@ table.all-invoices tfoot .links a {
     margin: 5px;
     float: left;
 }
+
     .duration input {
         position: relative;
         width: 296px;
@@ -3110,6 +3404,7 @@ table.all-invoices tfoot .links a {
         min-width: 209px;
         border: 1px solid rgba(184,184,184, .8);
     }
+
 .duration-container {
     position: relative;
     width: 300px;

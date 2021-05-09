@@ -1,6 +1,7 @@
 ﻿@model LoginModel
 @{
     Layout = "_UnloggedUserLayout";
+
 }
 <head>
     <meta charset="utf-8">
@@ -20,7 +21,7 @@
                 <form asp-action="Login" asp-controller="Account" method="post">
                     <div class="username">
                         <label class="nameL">Username:</label>
-                        <input asp-for="Name" class="nameI" autocomplete="off" spellcheck="false"/>
+                        <input asp-for="Name" class="nameI" autocomplete="off" spellcheck="false" />
                     </div>
                     <div class="password">
                         <label class="passwordL">Password:</label>
@@ -31,6 +32,7 @@
                     </div>
                 </form>
             </div>
+            <div class="login-error-container" asp-validation-summary="All"></div>
         </div>
     </div>
 </body>

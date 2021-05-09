@@ -1,10 +1,410 @@
-﻿@model CreateModel
+﻿@model List<PresenceViewModel>
 
 @{
     Layout = "_LoggedUserLayout";
 }
 
-@*<form asp-action="Create" asp-controller="RoleAdmin" method="post">
-    <input asp-for="Name" />
-    <button type="submit">Create</button>
-</form>*@
+<div class="tile-container-bckg">
+</div>
+<div class="tile-container">
+    <div id="about" class="large-tile">
+        <text class="tile-title">About Application</text>
+        <div class="main-logo-conatiner">
+            <img id="aboutLogo" src="~/Images/largeLogoBlackWhite.png" />
+            <text id="aboutText" class="logo-text">D.C.G. Internet Application</text>
+            <img id="aboutUnderline" style="width:390px" src="~/Images/underlineGray.png" />
+        </div>
+    </div>
+    <div id="invoiceTile" class="small-tile">
+        <text class="tile-title">Invoices</text>
+        <img id="invTileImg" src="~/Images/tile-invoice.png" />
+    </div>
+    <div id="timerTile" class="medium-tile">
+        <text class="tile-title">Work Time</text>
+        <div id="workTimer" class="work-timer"></div>
+        <text class="break-tile-title">Break Time</text>
+        <div id="breakTimer" class="break-timer"></div>
+    </div>
+    <div id="newInvoiceTile" class="small-tile">
+        <text class="tile-title">Create Invoice</text>
+        <img id="newInvImg" src="~/Images/tileNewInvoice.png" />
+    </div>
+    <div class="medium-tile">
+        <text class="tile-title">Presence (yesterday)</text>
+        <div class="small-graph-section">
+            <div class="yaxis">
+                <ul class="yaxis-list">
+                    <li>24</li>
+                    <li>22</li>
+                    <li>20</li>
+                    <li>18</li>
+                    <li>16</li>
+                    <li>14</li>
+                    <li>12</li>
+                    <li>10</li>
+                    <li>8</li>
+                    <li>6</li>
+                    <li>4</li>
+                    <li>2</li>
+                    <li>0</li>
+                </ul>
+            </div>
+            <div class="small-graph-lines">
+                <ul class="small-lines-list">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="small-graph"></div>
+            <div class="xaxis">
+                <ul id="xaxis" class="xaxis-list">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="arrows">
+                <input type="hidden" value="0" />
+                <div class="left-arr"></div>
+                <div class="right-arr"></div>
+            </div>
+            <div class="small-graph-measure">
+                <ul class="small-measures-list">
+                    <li>
+                        <div id="a">
+                        </div>
+                        <div id="a-avg"></div>
+                    </li>
+                    <li>
+                        <div id="b"></div>
+                        <div id="b-avg"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="large-tile">
+        <text class="tile-title">Presence (7 days)</text>
+        <div class="medium-graph-section">
+            <div class="yaxis">
+                <ul class="yaxis-list">
+                    <li>24</li>
+                    <li>22</li>
+                    <li>20</li>
+                    <li>18</li>
+                    <li>16</li>
+                    <li>14</li>
+                    <li>12</li>
+                    <li>10</li>
+                    <li>8</li>
+                    <li>6</li>
+                    <li>4</li>
+                    <li>2</li>
+                    <li>0</li>
+                </ul>
+            </div>
+            <div class="medium-graph-lines">
+                <ul class="medium-lines-list">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="medium-graph"></div>
+            <div class="xaxis">
+                <ul id="xaxis" class="xaxis-list">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="arrows">
+                <input type="hidden" value="0" />
+                <div class="left-arr"></div>
+                <div class="right-arr"></div>
+            </div>
+            <div class="medium-graph-measure">
+                <ul class="medium-measures-list">
+                    <li>
+                        <div id="a">
+                        </div>
+                        <div id="a-avg"></div>
+                    </li>
+                    <li>
+                        <div id="b"></div>
+                        <div id="b-avg"></div>
+                    </li>
+                    <li>
+                        <div id="c"></div>
+                        <div id="c-avg"></div>
+                    </li>
+                    <li>
+                        <div id="d"></div>
+                        <div id="d-avg"></div>
+                    </li>
+                    <li>
+                        <div id="e"></div>
+                        <div id="e-avg"></div>
+                    </li>
+                    <li>
+                        <div id="f"></div>
+                        <div id="f-avg"></div>
+                    </li>
+                    <li>
+                        <div id="g"></div>
+                        <div id="g-avg"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="large-tile">
+        <text class="tile-title">Presence (30 days)</text>
+        <div class="medium-graph-section">
+            <div class="yaxis">
+                <ul class="yaxis-list">
+                    <li>24</li>
+                    <li>22</li>
+                    <li>20</li>
+                    <li>18</li>
+                    <li>16</li>
+                    <li>14</li>
+                    <li>12</li>
+                    <li>10</li>
+                    <li>8</li>
+                    <li>6</li>
+                    <li>4</li>
+                    <li>2</li>
+                    <li>0</li>
+                </ul>
+            </div>
+            <div class="medium-graph-lines">
+                <ul class="medium-lines-list">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="medium-graph"></div>
+            <div class="xaxis">
+                <ul id="xaxis" class="xaxis-list">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="arrows">
+                <input type="hidden" value="0" />
+                <div class="left-arr"></div>
+                <div class="right-arr"></div>
+            </div>
+            <div class="medium-graph-measure">
+                <ul class="medium-measures-list">
+                    <li>
+                        <div id="a">
+                        </div>
+                        <div id="a-avg"></div>
+                    </li>
+                    <li>
+                        <div id="b"></div>
+                        <div id="b-avg"></div>
+                    </li>
+                    <li>
+                        <div id="c"></div>
+                        <div id="c-avg"></div>
+                    </li>
+                    <li>
+                        <div id="d"></div>
+                        <div id="d-avg"></div>
+                    </li>
+                    <li>
+                        <div id="e"></div>
+                        <div id="e-avg"></div>
+                    </li>
+                    <li>
+                        <div id="f"></div>
+                        <div id="f-avg"></div>
+                    </li>
+                    <li>
+                        <div id="g"></div>
+                        <div id="g-avg"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var timerTile = document.getElementById("timerTile")
+    var inv = document.getElementById("invoiceTile");
+    var invImg = document.getElementById("invTileImg");
+    var newInv = document.getElementById("newInvoiceTile");
+    var about = document.getElementById("about");
+    var aboutL = document.getElementById("aboutLogo");
+    var aboutT = document.getElementById("aboutText");
+    var aboutU = document.getElementById("aboutUnderline");
+    var worktime = JSON.parse('@Html.Raw(Json.Serialize(Model[0].Seconds))');
+    var breakActive = JSON.parse('@Html.Raw(Json.Serialize(Model[0].BreakActive))');
+    var totalSeconds = worktime;
+    var breakSeconds = JSON.parse('@Html.Raw(Json.Serialize(Model[0].BreakLength))');
+    var workTimer = document.getElementById("workTimer");
+
+    timerTile.addEventListener("mouseover", ChangeTimerTileColor, false);
+    timerTile.addEventListener("mouseleave", ChangeTimerTileColorToGrey, false);
+
+    inv.addEventListener("mouseover", ChangeInvColor, false);
+    inv.addEventListener("mouseleave", ChangeInvColorToGrey, false);
+
+    newInv.addEventListener("mouseover", ChangeNInvColor, false);
+    newInv.addEventListener("mouseleave", ChangeNInvColorToGrey, false);
+
+    about.addEventListener("mouseover", ChangeAboutColor, false);
+    about.addEventListener("mouseleave", ChangeAboutColorToGrey, false);
+
+    function ChangeTimerTileColor() {
+        workTimer.style.borderBottom = "2px solid rgb(221,214,0)"
+    }
+    function ChangeTimerTileColorToGrey() {
+        workTimer.style.borderBottom  = "2px solid rgb(105,105,105)"
+    }
+
+    function ChangeInvColor() {
+        invImg.src = "/Images/tileInvoiceWhite.png"
+    }
+    function ChangeInvColorToGrey() {
+        invImg.src = "/Images/tile-invoice.png"
+    }
+    function ChangeNInvColor() {
+        newInvImg.src = "/Images/tileNewInvoiceWhite.png"
+    }
+    function ChangeNInvColorToGrey() {
+        newInvImg.src = "/Images/tileNewInvoice.png"
+    }
+
+    function ChangeAboutColor() {
+        aboutL.src = "/Images/largeLogo.png"
+        aboutT.style.color = "#0094FF";
+        aboutU.src = "/Images/underlineBlue.png"
+    }
+    function ChangeAboutColorToGrey() {
+        aboutL.src = "/Images/largeLogoBlackWhite.png"
+        aboutT.style.color = "#696969";
+        aboutU.src = "/Images/underlineGray.png"
+    }
+
+    window.onload = function () {
+        debugger;
+        if (worktime > -1) {
+            if (breakActive) {
+                setInterval(BreakTimer, 1000);
+            }
+            else {
+                DivideSeconds();
+                document.getElementById("workTimer").innerHTML = "00" + ":" + "00" + ":" + "00";
+            }
+            setInterval(WorkTimer, 1000);
+        }
+        else {
+            document.getElementById("workTimer").innerHTML = "00" + ":" + "00" + ":" + "00";
+            document.getElementById("breakTimer").innerHTML = "00" + ":" + "00" + ":" + "00";
+        }
+
+        //if (option != 2) {
+        //    UpdateGraph();
+        //    range = dates.length;
+        //    BarCreator();
+        //}
+        //else {
+        //    UpdateGraph();
+        //    range = 1;
+        //    BarCreator();
+        //}
+
+        //if (option == 1) {
+        //    document.getElementById("right-arrow").style.display = "block";
+        //}
+
+    };
+    function WorkTimer() {
+        ++totalSeconds;
+        var hour = Math.floor(totalSeconds /3600);
+        var minute = Math.floor((totalSeconds - hour*3600)/60);
+        var seconds = totalSeconds - (hour*3600 + minute*60);
+        if(hour < 10)
+           hour = "0"+hour;
+        if(minute < 10)
+           minute = "0"+minute;
+        if(seconds < 10)
+           seconds = "0"+seconds;
+        document.getElementById("workTimer").innerHTML = hour + ":" + minute + ":" + seconds;
+    }
+    function BreakTimer() {
+        ++breakSeconds;
+        var hour = Math.floor(breakSeconds /3600);
+        var minute = Math.floor((breakSeconds - hour * 3600) / 60);
+        var seconds = breakSeconds - (hour * 3600 + minute * 60);
+        if(hour < 10)
+           hour = "0"+hour;
+        if(minute < 10)
+           minute = "0"+minute;
+        if(seconds < 10)
+           seconds = "0"+seconds;
+        document.getElementById("breakTimer").innerHTML = hour + ":" + minute + ":" + seconds;
+    }
+    function DivideSeconds() {
+        var hour = Math.floor(breakSeconds /3600);
+        var minute = Math.floor((breakSeconds - hour * 3600) / 60);
+        var seconds = breakSeconds - (hour * 3600 + minute * 60);
+        if(hour < 10)
+           hour = "0"+hour;
+        if(minute < 10)
+           minute = "0"+minute;
+        if(seconds < 10)
+           seconds = "0"+seconds;
+        document.getElementById("breakTimer").innerHTML = hour + ":" + minute + ":" + seconds;
+    }
+
+</script>

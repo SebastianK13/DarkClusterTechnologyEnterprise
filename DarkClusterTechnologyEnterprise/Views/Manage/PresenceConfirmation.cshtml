@@ -6,14 +6,6 @@
 }
 
 <body>
-    @*<div class="presence-navigation">
-            <div class="navigation">
-                Statistics
-            </div>
-            <div>
-                Break
-            </div>
-        </div>*@
     <div class="presence-section">
         <div class="timer">
             <div id="timer"></div>
@@ -33,33 +25,6 @@
             </div>
         </form>
     </div>
-    @*<div class="presence-navigation-section">
-            <div class="navigation">
-                <ul class="presence-menu">
-                    <li id="lw-btn" class="odd">
-                        Last 7 days
-                        <div id="lw" class="expand">
-                            @Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 0, category = "work" }, new { @class = "defaultActionLink" })
-                            @Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 0, category = "break" }, new { @class = "defaultActionLink" })
-                        </div>
-                    </li>
-                    <li id="lm-btn" class="odd">
-                        Last 30 days
-                        <div id="lm" class="expand">
-                            @Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 1, category = "work" }, new { @class = "defaultActionLink" })
-                            @Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 1, category = "break" }, new { @class = "defaultActionLink" })
-                        </div>
-                    </li>
-                    <li id="yesterday-btn" class="even">
-                        Yesterday
-                        <div id="yesterday" class="expand">
-                            @Html.ActionLink("Work time", "PresenceConfirmation", "Manage", new { opt = 2, category = "work" }, new { @class = "defaultActionLink" })
-                            @Html.ActionLink("Break time", "PresenceConfirmation", "Manage", new { opt = 2, category = "break" }, new { @class = "defaultActionLink" })
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>*@
     <div id="graph" class="graph-section">
         <div class="yaxis">
             <ul class="yaxis-list">
@@ -212,8 +177,6 @@
 
     };
 
-
-
     function ExpandCategory() {
         debugger;
         presenceDiv.classList = ("sub-menu-open autoHeight");
@@ -240,23 +203,10 @@
         presenceDiv.children.item(1).className = "lwLi2 lwLiA2 autoHeight";
     }
 
-    //document.getElementById("blockerId").addEventListener("click", shit);
-
-    //document.addEventListener('click', function (e) {
-    //    debugger;
-        //if (e.target.className === 'blocker') {
-        //    e.stopPropagation();
-        //}
-        //else {
-            
-    //    }
-    //}, false);
-
     var iPart = document.getElementById("data-part");
     var numberOfParts = parseInt(iPart.getAttribute("value"));
     var lArr = document.getElementById("left-arrow");
     var rArr = document.getElementById("right-arrow");
-    //var todayBtn = document.getElementById("today-btn");
     var a = document.getElementById("a");
     var aAvg = document.getElementById("a-avg");
     var b = document.getElementById("b");
@@ -594,26 +544,6 @@
             BarCreator();
         }
     };
-
-    //todayBtn.onmouseenter = function ExpandLiMenu() {
-    //    var li = document.getElementById("today").style.display = "block";
-    //};
-
-    //lmBtn.onmouseleave = function CloseMenuLi() {
-    //    var li = document.getElementById("lm").style.display = "none";
-    //};
-
-    //lwBtn.onmouseleave = function CloseMenuLi() {
-    //    var li = document.getElementById("lw").style.display = "none";
-    //};
-
-    //yesterdayBtn.onmouseleave = function CloseMenuLi() {
-    //    var li = document.getElementById("yesterday").style.display = "none";
-    //};
-
-    //todayBtn.onmouseleave = function CloseMenuLi() {
-    //    var li = document.getElementById("today").style.display = "none";
-    //};
 
     function BarCreator() {
         CountPart();

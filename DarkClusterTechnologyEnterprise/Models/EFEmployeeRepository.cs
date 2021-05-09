@@ -313,17 +313,32 @@ namespace DarkClusterTechnologyEnterprise.Models
         }
         public double GetActiveBreakTime(int eId)
         {
+            double totalTime = 0;
+            var presenceId = context.Presences
+                .Where(i => i.EmployeeId == eId && !i.WorkEnd)
+                .Select(i=>i.PresenceId)
+                .FirstOrDefault();
             var userTZ = GetUserTimeZone(eId);
-            var breakStart = context.Breaks.Where(b => b.Break_s == true).FirstOrDefault();
+            var breaks = context.Breaks
+                .Where(b => b.PresenceId == presenceId)
+                .ToList();
             TimeSpan time = new TimeSpan();
-            if (breakStart != null)
+            foreach (var b in breaks)
             {
-                DateTime d = CheckIfDaylight(userTZ);
-                time = (d - breakStart.BreakStart);
-                RoundToSeconds(ref time);
+                if (b.Break_s)
+                {
+                    DateTime d = CheckIfDaylight(userTZ);
+                    time = (d - b.BreakStart);
+                    RoundToSeconds(ref time);
+                    totalTime += time.TotalSeconds;
+                }
+                else
+                {
+                    totalTime += b.BreakTime;
+                }
             }
 
-            return time.TotalSeconds;
+            return totalTime;
         }
 
         public async Task<bool> CreateTasks(NewTask task, int eId)

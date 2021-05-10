@@ -15,21 +15,21 @@
             <img id="aboutUnderline" style="width:390px" src="~/Images/underlineGray.png" />
         </div>
     </div>
-    <div id="invoiceTile" class="small-tile">
+    <a id="invoiceTile" class="small-tile" href="/Customer/MyInvoices">
         <text class="tile-title">Invoices</text>
         <img id="invTileImg" src="~/Images/tile-invoice.png" />
-    </div>
-    <div id="timerTile" class="medium-tile">
+    </a>
+    <a id="timerTile" class="medium-tile" href="/Manage/PresenceConfirmation">
         <text class="tile-title">Work Time</text>
         <div id="workTimer" class="work-timer"></div>
         <text class="break-tile-title">Break Time</text>
         <div id="breakTimer" class="break-timer"></div>
-    </div>
-    <div id="newInvoiceTile" class="small-tile">
+    </a>
+    <a id="newInvoiceTile" class="small-tile" href="/Customer/Invoice">
         <text class="tile-title">Create Invoice</text>
         <img id="newInvImg" src="~/Images/tileNewInvoice.png" />
-    </div>
-    <div id="yesterdayTile" class="medium-tile">
+    </a>
+    <a id="yesterdayTile" class="medium-tile" href="/Manage/PresenceConfirmation?opt=2&category=work">
         <text class="tile-title">Presence (yesterday)</text>
         <div class="small-graph-section">
             <div class="yaxis">
@@ -88,8 +88,8 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <div id="weekTile" class="large-tile">
+    </a>
+    <a id="weekTile" class="large-tile" href="/Manage/PresenceConfirmation?opt=0&category=work">
         <text class="tile-title">Presence (7 days)</text>
         <div class="medium-graph-section">
             <div class="yaxis">
@@ -172,7 +172,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </a>
     <div id="monthTile" class="large-tile">
         <text class="tile-title">Presence (30 days)</text>
         <div class="medium-graph-section">
@@ -321,6 +321,12 @@
 
     mTile.addEventListener("mouseover", ChangeMTileColor, false);
     mTile.addEventListener("mouseleave", ChangeMTileColorToGrey, false);
+    mTile.addEventListener('click', function(e){
+        if (!e.target.matches('.board-right-arr') &&
+            !e.target.matches('.board-left-arr')) {
+            location.href = "/Manage/PresenceConfirmation?opt=1&category=work";
+        }
+    });
 
     function ChangeYTileColor() {
         document.getElementById("yGraph").src = "/Images/axisWhite.png"
@@ -437,7 +443,6 @@
     }
 
     window.onload = function () {
-        debugger;
         if (worktime > -1) {
             if (breakActive) {
                 setInterval(BreakTimer, 1000);

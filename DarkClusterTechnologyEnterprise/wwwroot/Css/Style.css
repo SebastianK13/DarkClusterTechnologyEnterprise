@@ -402,6 +402,7 @@ body {
     color: dimgray;
     text-align: center;
     padding:10px;
+    text-decoration:none;
 }
 .small-tile img {
     position: absolute;
@@ -411,17 +412,18 @@ body {
     right: 0;
     margin: auto;
 }
-    .medium-tile {
-        width: 280px;
-        height: 380px;
-        float: left;
-        margin: 10px;
-        border-radius: 3px;
-        color: dimgray;
-        text-align: center;
-        background-color: rgba(27, 38, 44, 1);
-        padding: 10px;
-    }
+.medium-tile {
+    width: 280px;
+    height: 380px;
+    float: left;
+    margin: 10px;
+    border-radius: 3px;
+    color: dimgray;
+    text-align: center;
+    background-color: rgba(27, 38, 44, 1);
+    padding: 10px;
+    text-decoration: none;
+}
 
 .large-tile {
     width: 380px;
@@ -432,7 +434,9 @@ body {
     border-radius: 3px;
     color: dimgray;
     text-align: center;
-    padding:10px
+    padding: 10px;
+    text-decoration:none;
+    cursor: pointer;
 }
 
 .medium-tile:hover {

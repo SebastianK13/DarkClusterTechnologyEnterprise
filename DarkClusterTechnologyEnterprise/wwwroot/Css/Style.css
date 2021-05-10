@@ -1361,7 +1361,7 @@ table.redTable {
 }
 .small-graph-section {
     width: 280px;
-    height: calc(350px - 35px);
+    height: 299px;
     position: relative;
     margin: auto;
     margin-top: 40px;
@@ -1386,8 +1386,8 @@ table.redTable {
 .small-graph-measure {
     position: absolute;
     width: calc(100% - 50px);
-    height: 276.49px;
-    bottom: 30.51px;
+    height: 299px;
+    bottom: 13px;
     right: 15px;
 }
 
@@ -1421,7 +1421,7 @@ table.redTable {
 
     .small-measures-list li {
         display: inline-block;
-        width: 20px;
+        width: 36px;
         margin: 0;
         float: left;
         position: relative;
@@ -1431,7 +1431,7 @@ table.redTable {
     }
 .medium-graph-section {
     width: 400px;
-    height: 350px;
+    height: 299px;
     position: relative;
     margin: auto;
     margin-top: 40px;
@@ -1484,7 +1484,7 @@ table.redTable {
 }
 .medium-measures-list li {
     display: inline-block;
-    width: 20px;
+    width: 36px;
     margin: 0;
     float: left;
     position: relative;
@@ -1505,12 +1505,20 @@ table.redTable {
     user-select: none;
 }
 
-.xaxis {
+.xaxisY {
     position: absolute;
     width: calc(100% - 100px);
-    height: 50px;
-    bottom: 16px;
-    right: 65px;
+    height: 25px;
+    bottom: -10px;
+    left: 20px;
+}
+
+.xaxisW {
+    position: absolute;
+    width: calc(100% - 100px);
+    height: 25px;
+    bottom: -10px;
+    left: 20px;
 }
 
 .arrows {
@@ -1519,6 +1527,14 @@ table.redTable {
     height: 50px;
     bottom: 11px;
     right: 55px;
+}
+
+.small-arrows {
+    position: absolute;
+    width: calc(100% - 60px);
+    height: 25px;
+    bottom: -15px;
+    left: 25px;
 }
 
 .left-arr {
@@ -1539,6 +1555,32 @@ table.redTable {
     background-size: cover;
     cursor: pointer;
     display: none;
+}
+
+.board-left-arr {
+    float: left;
+    background-image: url(../Images/graph-arr-l.png);
+    width: 13px;
+    height: 13px;
+    background-size: cover;
+    cursor: pointer;
+    display: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.board-right-arr {
+    float: right;
+    background-image: url(../Images/graph-arr-r.png);
+    width: 13px;
+    height: 13px;
+    background-size: cover;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .yaxis {
@@ -1623,7 +1665,13 @@ table.redTable {
     height: 50px;
     z-index: 3;
 }
-
+.xaxis {
+    position: absolute;
+    width: calc(100% - 100px);
+    height: 50px;
+    bottom: 16px;
+    right: 65px;
+}
 .xaxis-list {
     list-style-type: none;
     margin: 0;
@@ -1639,43 +1687,35 @@ table.redTable {
         text-align: center;
         font-size: 10pt;
     }
-/*.a {
-    position: relative;
-    height: 100%;
-    margin-left: 8.5px !important;
-}
-.b {
-    position: relative;
-    height: 100%;
-    margin-left: 8.5px !important;
-}
-.c {
-    position: relative;
-    height: 100%;
-    margin-left: 8.5px !important;
-}
-.d {
-    position: relative;
-    height: 100%;
-    margin-left: 8.5px !important;
-}
-.e {
-    position: relative;
-    height: 100%;
-    margin-left: 8.5px !important;
-}
-.f {
-    position: relative;
-    height: 100%;
-    margin-left: 8.5px !important;
-}
-.g {
-    position: relative;
-    height: 100%;
-    margin-left: 8.5px !important;
-}*/
 
+.small-xaxis {
+    position: absolute;
+    width: calc(100% - 84.5px);
+    height: 25px;
+    bottom: -15px;
+    left: 36px;
+}
 
+.small-xaxis-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .small-xaxis-list li {
+        display: inline-block;
+        width: 45px;
+        margin: 0;
+        float: left;
+        line-height: 25px;
+        text-align: center;
+        font-size: 10pt;
+    }
+.rotate-text {
+    color: whitesmoke;
+    writing-mode: vertical-lr;
+    line-height: 0px;
+}
 
 #a {
     position: absolute;
@@ -1685,12 +1725,6 @@ table.redTable {
     text-align: center;
     align-content: center;
     height: 0;
-}
-
-.rotate-text {
-    color: whitesmoke;
-    writing-mode: vertical-lr;
-    line-height: 0px;
 }
 
 #a-avg {
@@ -1804,6 +1838,279 @@ table.redTable {
 #g-avg {
     position: absolute;
     background-color: chocolate;
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#aM {
+    position: absolute;
+    background-color: rgb(169,169,169);
+    width: 45%;
+    bottom: 0;
+    text-align: center;
+    align-content: center;
+    height: 0;
+}
+
+#a-avgM {
+    position: absolute;
+    background-color: rgb(169,169,169);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#bM {
+    position: absolute;
+    background-color: rgb(145,145,145);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#b-avgM {
+    position: absolute;
+    background-color: rgb(145,145,145);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#cM {
+    position: absolute;
+    background-color: rgb(192,192,192);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#c-avgM {
+    position: absolute;
+    background-color: rgb(192,192,192);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#dM {
+    position: absolute;
+    background-color: rgb(105,105,105);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#d-avgM {
+    position: absolute;
+    background-color: rgb(105,105,105);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#eM {
+    position: absolute;
+    background-color: rgb(128,128,128);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#e-avgM {
+    position: absolute;
+    background-color: rgb(128,128,128);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#fM {
+    position: absolute;
+    background-color: rgb(52,52,52);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#f-avgM {
+    position: absolute;
+    background-color: rgb(52,52,52);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#gM {
+    position: absolute;
+    background-color: rgb(119,119,119);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#g-avgM {
+    position: absolute;
+    background-color: rgb(119,119,119);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#aY {
+    position: absolute;
+    background-color: rgb(169,169,169);
+    width: 45%;
+    bottom: 0;
+    text-align: center;
+    align-content: center;
+    height: 0;
+}
+
+#a-avgY {
+    position: absolute;
+    background-color: rgb(169,169,169);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#aW {
+    position: absolute;
+    background-color: rgb(169,169,169);
+    width: 45%;
+    bottom: 0;
+    text-align: center;
+    align-content: center;
+    height: 0;
+}
+
+#a-avgW {
+    position: absolute;
+    background-color: rgb(169,169,169);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#bW {
+    position: absolute;
+    background-color: rgb(145,145,145);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#b-avgW {
+    position: absolute;
+    background-color: rgb(145,145,145);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#cW {
+    position: absolute;
+    background-color: rgb(192,192,192);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#c-avgW {
+    position: absolute;
+    background-color: rgb(192,192,192);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#dW {
+    position: absolute;
+    background-color: rgb(105,105,105);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#d-avgW {
+    position: absolute;
+    background-color: rgb(105,105,105);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#eW {
+    position: absolute;
+    background-color: rgb(128,128,128);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#e-avgW {
+    position: absolute;
+    background-color: rgb(128,128,128);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#fW {
+    position: absolute;
+    background-color: rgb(52,52,52);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#f-avgW {
+    position: absolute;
+    background-color: rgb(52,52,52);
+    width: 45%;
+    bottom: 0;
+    margin-left: 50%;
+    height: 0;
+}
+
+#gW {
+    position: absolute;
+    background-color: rgb(119,119,119);
+    width: 45%;
+    bottom: 0;
+    margin-right: 5%;
+    height: 0;
+}
+
+#g-avgW {
+    position: absolute;
+    background-color: rgb(119,119,119);
     width: 45%;
     bottom: 0;
     margin-left: 50%;

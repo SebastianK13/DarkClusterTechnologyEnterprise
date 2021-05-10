@@ -29,7 +29,7 @@
         <text class="tile-title">Create Invoice</text>
         <img id="newInvImg" src="~/Images/tileNewInvoice.png" />
     </div>
-    <div class="medium-tile">
+    <div id="yesterdayTile" class="medium-tile">
         <text class="tile-title">Presence (yesterday)</text>
         <div class="small-graph-section">
             <div class="yaxis">
@@ -66,9 +66,9 @@
                     <li></li>
                 </ul>
             </div>
-            <div class="small-graph"></div>
-            <div class="xaxis">
-                <ul id="xaxis" class="xaxis-list">
+            <div id="yGraph" class="small-graph"></div>
+            <div class="small-xaxis">
+                <ul id="xaxisY" class="small-xaxis-list">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -78,27 +78,18 @@
                     <li></li>
                 </ul>
             </div>
-            <div class="arrows">
-                <input type="hidden" value="0" />
-                <div class="left-arr"></div>
-                <div class="right-arr"></div>
-            </div>
             <div class="small-graph-measure">
                 <ul class="small-measures-list">
                     <li>
-                        <div id="a">
+                        <div id="aY">
                         </div>
-                        <div id="a-avg"></div>
-                    </li>
-                    <li>
-                        <div id="b"></div>
-                        <div id="b-avg"></div>
+                        <div id="a-avgY"></div>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="large-tile">
+    <div id="weekTile" class="large-tile">
         <text class="tile-title">Presence (7 days)</text>
         <div class="medium-graph-section">
             <div class="yaxis">
@@ -135,9 +126,9 @@
                     <li></li>
                 </ul>
             </div>
-            <div class="medium-graph"></div>
-            <div class="xaxis">
-                <ul id="xaxis" class="xaxis-list">
+            <div id="wGraph" class="medium-graph"></div>
+            <div class="small-xaxis">
+                <ul id="xaxisW" class="small-xaxis-list">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -147,47 +138,42 @@
                     <li></li>
                 </ul>
             </div>
-            <div class="arrows">
-                <input type="hidden" value="0" />
-                <div class="left-arr"></div>
-                <div class="right-arr"></div>
-            </div>
             <div class="medium-graph-measure">
                 <ul class="medium-measures-list">
                     <li>
-                        <div id="a">
+                        <div id="aW">
                         </div>
-                        <div id="a-avg"></div>
+                        <div id="a-avgW"></div>
                     </li>
                     <li>
-                        <div id="b"></div>
-                        <div id="b-avg"></div>
+                        <div id="bW"></div>
+                        <div id="b-avgW"></div>
                     </li>
                     <li>
-                        <div id="c"></div>
-                        <div id="c-avg"></div>
+                        <div id="cW"></div>
+                        <div id="c-avgW"></div>
                     </li>
                     <li>
-                        <div id="d"></div>
-                        <div id="d-avg"></div>
+                        <div id="dW"></div>
+                        <div id="d-avgW"></div>
                     </li>
                     <li>
-                        <div id="e"></div>
-                        <div id="e-avg"></div>
+                        <div id="eW"></div>
+                        <div id="e-avgW"></div>
                     </li>
                     <li>
-                        <div id="f"></div>
-                        <div id="f-avg"></div>
+                        <div id="fW"></div>
+                        <div id="f-avgW"></div>
                     </li>
                     <li>
-                        <div id="g"></div>
-                        <div id="g-avg"></div>
+                        <div id="gW"></div>
+                        <div id="g-avgW"></div>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="large-tile">
+    <div id="monthTile" class="large-tile">
         <text class="tile-title">Presence (30 days)</text>
         <div class="medium-graph-section">
             <div class="yaxis">
@@ -224,9 +210,9 @@
                     <li></li>
                 </ul>
             </div>
-            <div class="medium-graph"></div>
-            <div class="xaxis">
-                <ul id="xaxis" class="xaxis-list">
+            <div id="mGraph" class="medium-graph"></div>
+            <div class="small-xaxis">
+                <ul id="xaxis" class="small-xaxis-list">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -236,41 +222,41 @@
                     <li></li>
                 </ul>
             </div>
-            <div class="arrows">
-                <input type="hidden" value="0" />
-                <div class="left-arr"></div>
-                <div class="right-arr"></div>
+            <div class="small-arrows">
+                <input id="data-part" type="hidden" value="0" />
+                <div id="left-arrow" class="board-left-arr"></div>
+                <div id="right-arrow" class="board-right-arr"></div>
             </div>
             <div class="medium-graph-measure">
                 <ul class="medium-measures-list">
                     <li>
-                        <div id="a">
+                        <div id="aM">
                         </div>
-                        <div id="a-avg"></div>
+                        <div id="a-avgM"></div>
                     </li>
                     <li>
-                        <div id="b"></div>
-                        <div id="b-avg"></div>
+                        <div id="bM"></div>
+                        <div id="b-avgM"></div>
                     </li>
                     <li>
-                        <div id="c"></div>
-                        <div id="c-avg"></div>
+                        <div id="cM"></div>
+                        <div id="c-avgM"></div>
                     </li>
                     <li>
-                        <div id="d"></div>
-                        <div id="d-avg"></div>
+                        <div id="dM"></div>
+                        <div id="d-avgM"></div>
                     </li>
                     <li>
-                        <div id="e"></div>
-                        <div id="e-avg"></div>
+                        <div id="eM"></div>
+                        <div id="e-avgM"></div>
                     </li>
                     <li>
-                        <div id="f"></div>
-                        <div id="f-avg"></div>
+                        <div id="fM"></div>
+                        <div id="f-avgM"></div>
                     </li>
                     <li>
-                        <div id="g"></div>
-                        <div id="g-avg"></div>
+                        <div id="gM"></div>
+                        <div id="g-avgM"></div>
                     </li>
                 </ul>
             </div>
@@ -278,6 +264,7 @@
     </div>
 </div>
 <script>
+    var presenceModel = @Html.Raw(Json.Serialize(Model));
     var timerTile = document.getElementById("timerTile")
     var inv = document.getElementById("invoiceTile");
     var invImg = document.getElementById("invTileImg");
@@ -291,6 +278,28 @@
     var totalSeconds = worktime;
     var breakSeconds = JSON.parse('@Html.Raw(Json.Serialize(Model[0].BreakLength))');
     var workTimer = document.getElementById("workTimer");
+    var dates = [];
+    var durations = [];
+    var index = 0;
+    var numberOfParts = 0;
+    var range = 0;
+    var currentPresence = null;
+    var currentAvgPresence = null;
+    var lArr = document.getElementById("left-arrow");
+    var rArr = document.getElementById("right-arrow");
+    var iPart = document.getElementById("data-part");
+    var yTile = document.getElementById("yesterdayTile");
+    var wTile = document.getElementById("weekTile");
+    var mTile = document.getElementById("monthTile");
+
+    var ids = ["aM", "bM", "cM", "dM", "eM", "fM", "gM"];
+    var idsAvg = ["a-avgM", "b-avgM", "c-avgM", "d-avgM", "e-avgM", "f-avgM", "g-avgM"];
+
+    var idsW = ["aW", "bW", "cW", "dW", "eW", "fW", "gW"];
+    var idsAvgW = ["a-avgW", "b-avgW", "c-avgW", "d-avgW", "e-avgW", "f-avgW", "g-avgW"];
+
+    var idsY = ["aY"];
+    var idsAvgY = ["a-avgY"];
 
     timerTile.addEventListener("mouseover", ChangeTimerTileColor, false);
     timerTile.addEventListener("mouseleave", ChangeTimerTileColorToGrey, false);
@@ -303,6 +312,98 @@
 
     about.addEventListener("mouseover", ChangeAboutColor, false);
     about.addEventListener("mouseleave", ChangeAboutColorToGrey, false);
+
+    yTile.addEventListener("mouseover", ChangeYTileColor, false);
+    yTile.addEventListener("mouseleave", ChangeYTileColorToGrey, false);
+
+    wTile.addEventListener("mouseover", ChangeWTileColor, false);
+    wTile.addEventListener("mouseleave", ChangeWTileColorToGrey, false);
+
+    mTile.addEventListener("mouseover", ChangeMTileColor, false);
+    mTile.addEventListener("mouseleave", ChangeMTileColorToGrey, false);
+
+    function ChangeYTileColor() {
+        document.getElementById("yGraph").src = "/Images/axisWhite.png"
+        document.getElementById("aY").style.backgroundColor = "red";
+        document.getElementById("a-avgY").style.backgroundColor = "red";
+    }
+    function ChangeYTileColorToGrey() {
+        document.getElementById("yGraph").src = "/Images/axisGray.png"
+        document.getElementById("aY").style.backgroundColor = "";
+        document.getElementById("a-avgY").style.backgroundColor = "";
+    }
+
+    function ChangeWTileColor() {
+        debugger;
+        document.getElementById("wGraph").src = "/Images/axisWhite.png"
+        document.getElementById("aW").style.backgroundColor = "red";
+        document.getElementById("a-avgW").style.backgroundColor = "red";
+        document.getElementById("bW").style.backgroundColor = "green";
+        document.getElementById("b-avgW").style.backgroundColor = "green";
+        document.getElementById("cW").style.backgroundColor = "orange";
+        document.getElementById("c-avgW").style.backgroundColor = "orange";
+        document.getElementById("dW").style.backgroundColor = "aquamarine";
+        document.getElementById("d-avgW").style.backgroundColor = "aquamarine";
+        document.getElementById("eW").style.backgroundColor = "deepskyblue";
+        document.getElementById("e-avgW").style.backgroundColor = "deepskyblue";
+        document.getElementById("fW").style.backgroundColor = "darkslategray";
+        document.getElementById("f-avgW").style.backgroundColor = "darkslategray";
+        document.getElementById("gW").style.backgroundColor = "chocolate";
+        document.getElementById("g-avgW").style.backgroundColor = "chocolate";
+    }
+    function ChangeWTileColorToGrey() {
+        document.getElementById("wGraph").src = "/Images/axisGray.png"
+        document.getElementById("aW").style.backgroundColor = "";
+        document.getElementById("a-avgW").style.backgroundColor = "";
+        document.getElementById("bW").style.backgroundColor = "";
+        document.getElementById("b-avgW").style.backgroundColor = "";
+        document.getElementById("cW").style.backgroundColor = "";
+        document.getElementById("c-avgW").style.backgroundColor = "";
+        document.getElementById("dW").style.backgroundColor = "";
+        document.getElementById("d-avgW").style.backgroundColor = "";
+        document.getElementById("eW").style.backgroundColor = "";
+        document.getElementById("e-avgW").style.backgroundColor = "";
+        document.getElementById("fW").style.backgroundColor = "";
+        document.getElementById("f-avgW").style.backgroundColor = "";
+        document.getElementById("gW").style.backgroundColor = "";
+        document.getElementById("g-avgW").style.backgroundColor = "";
+    }
+
+    function ChangeMTileColor() {
+        document.getElementById("mGraph").src = "/Images/axisWhite.png"
+        document.getElementById("aM").style.backgroundColor = "red";
+        document.getElementById("a-avgM").style.backgroundColor = "red";
+        document.getElementById("bM").style.backgroundColor = "green";
+        document.getElementById("b-avgM").style.backgroundColor = "green";
+        document.getElementById("cM").style.backgroundColor = "orange";
+        document.getElementById("c-avgM").style.backgroundColor = "orange";
+        document.getElementById("dM").style.backgroundColor = "aquamarine";
+        document.getElementById("d-avgM").style.backgroundColor = "aquamarine";
+        document.getElementById("eM").style.backgroundColor = "deepskyblue";
+        document.getElementById("e-avgM").style.backgroundColor = "deepskyblue";
+        document.getElementById("fM").style.backgroundColor = "darkslategray";
+        document.getElementById("f-avgM").style.backgroundColor = "darkslategray";
+        document.getElementById("gM").style.backgroundColor = "chocolate";
+        document.getElementById("g-avgM").style.backgroundColor = "chocolate";
+    }
+    function ChangeMTileColorToGrey() {
+        document.getElementById("mGraph").src = "/Images/axisGray.png"
+        document.getElementById("aM").style.backgroundColor = "";
+        document.getElementById("a-avgM").style.backgroundColor = "";
+        document.getElementById("bM").style.backgroundColor = "";
+        document.getElementById("b-avgM").style.backgroundColor = "";
+        document.getElementById("cM").style.backgroundColor = "";
+        document.getElementById("c-avgM").style.backgroundColor = "";
+        document.getElementById("dM").style.backgroundColor = "";
+        document.getElementById("d-avgM").style.backgroundColor = "";
+        document.getElementById("eM").style.backgroundColor = "";
+        document.getElementById("e-avgM").style.backgroundColor = "";
+        document.getElementById("fM").style.backgroundColor = "";
+        document.getElementById("f-avgM").style.backgroundColor = "";
+        document.getElementById("gM").style.backgroundColor = "";
+        document.getElementById("g-avgM").style.backgroundColor = "";
+    }
+
 
     function ChangeTimerTileColor() {
         workTimer.style.borderBottom = "2px solid rgb(221,214,0)"
@@ -352,22 +453,121 @@
             document.getElementById("breakTimer").innerHTML = "00" + ":" + "00" + ":" + "00";
         }
 
-        //if (option != 2) {
-        //    UpdateGraph();
-        //    range = dates.length;
-        //    BarCreator();
-        //}
-        //else {
-        //    UpdateGraph();
-        //    range = 1;
-        //    BarCreator();
-        //}
-
-        //if (option == 1) {
-        //    document.getElementById("right-arrow").style.display = "block";
-        //}
-
+        CountPart();
+        UpdateGraph(presenceModel[0]);
+        currentPresence = presenceModel[0].dataModel;
+        currentAvgPresence = presenceModel[0].avgPresences;
+        range = 1;
+        var axis = document.getElementById("xaxisY");
+        CreateWorkTimeBars(idsY, idsAvgY, axis);
+        UpdateGraph(presenceModel[1]);
+        currentPresence = presenceModel[1].dataModel;
+        currentAvgPresence = presenceModel[1].avgPresences;
+        range = currentPresence.length;
+        var axis = document.getElementById("xaxisW");
+        CreateWorkTimeBars(idsW, idsAvgW, axis);
+        UpdateMonthGraph();
     };
+
+    function UpdateMonthGraph() {
+        CountPart();
+        UpdateGraph(presenceModel[2]);
+        currentPresence = presenceModel[2].dataModel;
+        currentAvgPresence = presenceModel[2].avgPresences;
+        range = currentPresence.length;
+        var axis = document.getElementById("xaxis");
+        CreateWorkTimeBars(ids, idsAvg, xaxis);
+    }
+        lArr.onclick = function PrevoiusPart() {
+        if (numberOfParts > 0) {
+            numberOfParts -= 1;
+            iPart.setAttribute("value", numberOfParts);
+            if (numberOfParts >= 0) {
+                rArr.style.display = "block";
+            }
+            if (numberOfParts <= 0) {
+                lArr.style.display = "none";
+            }
+            UpdateMonthGraph();
+        }
+    };
+
+    rArr.onclick = function NextPart() {
+        if (numberOfParts < 4) {
+            numberOfParts += 1;
+            iPart.setAttribute("value", numberOfParts);
+            if (numberOfParts >= 4) {
+                rArr.style.display = "none";
+            }
+            if (numberOfParts >= 0) {
+                lArr.style.display = "block";
+            }
+            UpdateMonthGraph();
+        }
+    };
+
+    function UpdateGraph(presence, presenceType) {
+        var i = 0;
+        for (var p of presence.dataModel) {
+            var hour = Math.floor(p.workTime /3600);
+            var minute = Math.floor((p.workTime - hour * 3600) / 60);
+            var time = hour+"h"+minute+"m";
+            var date = p.workBeginTime;
+            var arr = JSON.stringify(date).split('T');
+            dates[i] = arr[0].toString().replace('"', '').substring(6);
+            durations[i] = time;
+            i++;
+        }
+    }
+
+    function CreateWorkTimeBars(ids, idsAvg, axis) {
+
+        if (range > 6)
+            range = 7;
+        for (i = 0; i < range; i++) {
+            var heightBar = (currentPresence[i + index].workTime) / 864;
+            var heightBarAvg = (currentAvgPresence[i + index].avgTime) / 864;
+            axis.children.item(i).textContent = dates[i + index];
+            if (heightBar <= 0 || heightBar > 100) {
+                var nodeXBars = document.getElementById(ids[i]).style.height = "1px";
+            }
+            else
+            {
+                document.getElementById(ids[i]).style.transition = "1s height";
+                document.getElementById(ids[i]).style.height = heightBar + "%";
+                document.getElementById(ids[i]).textContent = "";
+            }
+            if (heightBarAvg <= 0 || heightBarAvg > 100) {
+                document.getElementById(idsAvg[i]).style.height = "1px";
+            }
+            else {
+                document.getElementById(idsAvg[i]).style.transition = "1s height";
+                document.getElementById(idsAvg[i]).style.height = heightBarAvg + "%";
+                document.getElementById(idsAvg[i]).textContent = "";
+            }
+        }
+    }
+
+    function CountPart() {
+        switch (numberOfParts) {
+            case 0:
+                index = 1;
+                break;
+            case 1:
+                index = 8;
+                break;
+            case 2:
+                index = 15;
+                break;
+            case 3:
+                index = 22;
+                break;
+            case 4:
+                index = 24;
+                break;
+        }
+    }
+
     function WorkTimer() {
         ++totalSeconds;
         var hour = Math.floor(totalSeconds /3600);
